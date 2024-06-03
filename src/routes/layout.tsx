@@ -1,5 +1,5 @@
-import { component$, Slot } from "@builder.io/qwik";
-import type { RequestHandler } from "@builder.io/qwik-city";
+import { component$, Slot } from '@builder.io/qwik';
+import type { DocumentHead, RequestHandler } from '@builder.io/qwik-city';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -10,6 +10,16 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
     // Max once every 5 seconds, revalidate on the server to get a fresh version of this page
     maxAge: 5,
   });
+};
+
+export const head: DocumentHead = {
+  title: 'Canva',
+  meta: [
+    {
+      name: 'description',
+      content: 'App for make your own drawings',
+    },
+  ],
 };
 
 export default component$(() => {
