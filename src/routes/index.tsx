@@ -6,7 +6,7 @@ import {
   useStylesScoped$,
   useTask$,
 } from '@builder.io/qwik';
-import Logo from '@/components/icons/logo';
+import Logo from '@/presentation/icons/logo';
 import { PortalAPI, PortalCloseAPIContextId } from '@/portal-provider';
 import { useLocation } from '@builder.io/qwik-city';
 import CSS from './styles.css?inline';
