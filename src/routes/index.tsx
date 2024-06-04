@@ -2,7 +2,7 @@ import { $, component$, useContext, useTask$ } from '@builder.io/qwik';
 import { Link, useLocation } from '@builder.io/qwik-city';
 import { PortalAPI } from '@/presentation/contexts/portal-api';
 import Logo from '@/presentation/icons/logo';
-import Modal from '@/presentation/ui/modal/modal';
+import Modal from '@/presentation/ui/modal/route-model/modal';
 
 export default component$(() => {
   const location = useLocation();
