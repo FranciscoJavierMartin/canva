@@ -5,7 +5,8 @@ import {
 } from '@builder.io/qwik';
 import type { ContextPair } from '@/interfaces/portal.interface';
 
-export const WrapJsxInContext = component$<{
+// WrapJsxInContext
+export default component$<{
   jsx: JSXOutput;
   contexts: Array<ContextPair<any>>;
 }>(({ jsx, contexts }) => {

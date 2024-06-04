@@ -1,6 +1,6 @@
 import { component$, useContext } from '@builder.io/qwik';
 import { PortalsContextId } from '@/presentation/contexts/portal';
-import { WrapJsxInContext } from '@/presentation/ui/portal/wrapper';
+import WrapJsxInContext from '@/presentation/ui/portal/wrapper';
 
 /**
  * IMPORTANT: In order for the <Portal> to correctly render in SSR, it needs
@@ -8,7 +8,7 @@ import { WrapJsxInContext } from '@/presentation/ui/portal/wrapper';
  * AFTER the portal is rendered can't be done in SSR, because it is not possible
  * to return back to the <Portal/> after it has been streamed to the client.)
  */
-export const Portal = component$<{ name: string }>(({ name }) => {
+export default component$<{ name: string }>(({ name }) => {
   const portals = useContext(PortalsContextId);
   // useStylesScoped$(CSS);
   const myPortals = portals.value.filter((portal) => portal.name === name);
