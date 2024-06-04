@@ -1,6 +1,7 @@
 import { $, Slot, component$, useContext, useOnWindow } from '@builder.io/qwik';
-import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
 import { Link } from '@builder.io/qwik-city';
+import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
+import XMark from '@/presentation/icons/x-mark';
 
 export default component$(() => {
   const portalClose = useContext(PortalCloseAPIContextId);
@@ -20,7 +21,9 @@ export default component$(() => {
         <Link
           href='..'
           class='absolute right-4 top-4 cursor-pointer text-xl text-white'
-        ></Link>
+        >
+          <XMark />
+        </Link>
         <Slot />
       </div>
     </div>
