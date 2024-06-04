@@ -1,7 +1,27 @@
-import { component$ } from '@builder.io/qwik';
+import {
+  $,
+  component$,
+  useContext,
+  useStylesScoped$,
+  useTask$,
+} from '@builder.io/qwik';
 import Logo from '@/components/icons/logo';
+import { PortalAPI, PortalCloseAPIContextId } from '@/portal-provider';
+import { useLocation } from '@builder.io/qwik-city';
+import CSS from './styles.css?inline';
 
 export default component$(() => {
+  const portal = useContext(PortalAPI);
+  const openModal = $(() => portal('modal', <PopupExample name='World' />));
+
+  const location = useLocation();
+
+  useTask$(() => {
+    if (location.url.searchParams.get('modal')) {
+      openModal();
+    }
+  });
+
   return (
     <div class='min-h-screen w-full bg-black'>
       <div class='bg-mid-black shadow-md'>
@@ -11,10 +31,13 @@ export default component$(() => {
               <Logo />
             </div>
             <div class='flex gap-4'>
-              <button class='bg-teal-700 text-white hover:bg-teal-500 w-[80px] rounded-[5px] py-2 text-center font-medium transition-all'>
+              <button class='text-white' onClick$={openModal}>
+                Open
+              </button>
+              <button class='w-[80px] rounded-[5px] bg-teal-700 py-2 text-center font-medium text-white transition-all hover:bg-teal-500'>
                 Sign In
               </button>
-              <button class='bg-purple-700 text-white hover:bg-purple-500 w-[80px] rounded-[5px] py-2 text-center font-medium transition-all'>
+              <button class='w-[80px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'>
                 Sign Up
               </button>
             </div>
@@ -30,11 +53,24 @@ export default component$(() => {
           <span class='text-2xl font-medium text-mid-gray'>
             Canva makes it easy to create and share professional designs,
           </span>
-          <button class='bg-purple-700 text-white hover:bg-purple-500 w-[200px] rounded-[5px] py-2 text-center font-medium transition-all'>
+          <button class='w-[200px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'>
             Sign Up for Free
           </button>
         </div>
       </div>
+    </div>
+  );
+});
+
+export const PopupExample = component$<{ name: string }>(({ name }) => {
+  useStylesScoped$(CSS);
+  const portalClose = useContext(PortalCloseAPIContextId);
+
+  return (
+    <div class='popup-example text-white'>
+      <h1>Modal</h1>
+      <p>Hello {name}</p>
+      <button onClick$={() => portalClose()}>X</button>
     </div>
   );
 });
