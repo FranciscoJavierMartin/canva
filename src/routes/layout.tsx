@@ -29,6 +29,7 @@ export default component$(() => {
     <PortalProvider>
       <Slot />
       <Portal name='modal' />
+      <Portal name='toast' />
     </PortalProvider>
   );
 });
