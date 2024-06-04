@@ -1,5 +1,5 @@
 import { $, component$, useContext, useTask$ } from '@builder.io/qwik';
-import { useLocation } from '@builder.io/qwik-city';
+import { Link, useLocation } from '@builder.io/qwik-city';
 import { PortalAPI } from '@/presentation/contexts/portal-api';
 import Logo from '@/presentation/icons/logo';
 import Modal from '@/presentation/ui/modal/modal';
@@ -34,13 +34,17 @@ export default component$(() => {
               <Logo />
             </div>
             <div class='flex gap-4'>
-              <button class='text-white' onClick$={openModal}>
-                Open
-              </button>
-              <button class='w-[80px] rounded-[5px] bg-teal-700 py-2 text-center font-medium text-white transition-all hover:bg-teal-500'>
+              <Link
+                href='?modal=true'
+                onClick$={openModal}
+                class='w-[80px] rounded-[5px] bg-teal-700 py-2 text-center font-medium text-white transition-all hover:bg-teal-500'
+              >
                 Sign In
-              </button>
-              <button class='w-[80px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'>
+              </Link>
+              <button
+                onClick$={openModal}
+                class='w-[80px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'
+              >
                 Sign Up
               </button>
             </div>
