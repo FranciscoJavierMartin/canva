@@ -78,18 +78,11 @@ export const PopupExample = component$<{ name: string }>(({ name }) => {
   );
 
   return (
-    <dialog class='popup-example flex flex-col text-white' id='favDialog'>
-      <h1>Modal</h1>
-      <p>Hello {name}</p>
-      <button autoFocus onClick$={() => portalClose()}>
-        X
-      </button>
-      <button value='cancel' formMethod='dialog'>
-        Cancel
-      </button>
-      <form method='dialog'>
-        <button>OK</button>
-      </form>
-    </dialog>
+    <div class='fixed left-0 top-0 flex h-screen w-screen items-center justify-center bg-[#252627ad] transition-all duration-500'>
+      <div class='popup-example1 relative m-auto w-[350px] rounded-md bg-[#323335] px-6 py-4'>
+        <div class='absolute right-4 top-4 cursor-pointer text-xl text-white'></div>
+        <h1 class='text-white'>Modal</h1>
+      </div>
+    </div>
   );
 });
