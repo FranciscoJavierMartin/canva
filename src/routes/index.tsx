@@ -2,6 +2,7 @@ import {
   $,
   component$,
   useContext,
+  useOnWindow,
   useStylesScoped$,
   useTask$,
 } from '@builder.io/qwik';
@@ -66,11 +67,28 @@ export const PopupExample = component$<{ name: string }>(({ name }) => {
   useStylesScoped$(CSS);
   const portalClose = useContext(PortalCloseAPIContextId);
 
+  useOnWindow(
+    'keydown',
+    $((event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        portalClose();
+      }
+    }),
+  );
+
   return (
-    <div class='popup-example text-white'>
+    <dialog class='popup-example flex flex-col text-white' id='favDialog'>
       <h1>Modal</h1>
       <p>Hello {name}</p>
-      <button onClick$={() => portalClose()}>X</button>
-    </div>
+      <button autoFocus onClick$={() => portalClose()}>
+        X
+      </button>
+      <button value='cancel' formMethod='dialog'>
+        Cancel
+      </button>
+      <form method='dialog'>
+        <button>OK</button>
+      </form>
+    </dialog>
   );
 });
