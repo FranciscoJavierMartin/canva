@@ -13,23 +13,23 @@ import XMark from '@/presentation/icons/x-mark';
 
 export default component$(() => {
   const location = useLocation();
-  const portalClose = useContext(PortalCloseAPIContextId);
+  const closePortal = useContext(PortalCloseAPIContextId);
   let CrossComponent: Component;
 
   useOnWindow(
     'keydown',
     $((event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        portalClose();
+        closePortal();
       }
     }),
   );
 
   useTask$(({ track }) => {
-    track(() => location.url.search);
-    console.log('Track', location.url.search);
-    if (location.url.searchParams.get('modal')) {
-      // openModal();
+    track(() => location.url.searchParams.get('modal'));
+
+    if (!location.url.searchParams.get('modal')) {
+      closePortal();
     }
   });
 
