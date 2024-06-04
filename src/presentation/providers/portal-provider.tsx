@@ -11,7 +11,7 @@ import { PortalsContextId } from '@/presentation/contexts/portal';
 import { PortalAPI } from '@/presentation/contexts/portal-api';
 import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
 
-export const PortalProvider = component$(() => {
+export default component$(() => {
   const portals = useSignal<Portal[]>([]);
   useContextProvider(PortalsContextId, portals);
 
