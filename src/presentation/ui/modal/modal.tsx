@@ -1,7 +1,7 @@
 import { $, component$, useContext, useOnWindow } from '@builder.io/qwik';
 import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
 
-export const Modal = component$(() => {
+export default component$(() => {
   const portalClose = useContext(PortalCloseAPIContextId);
 
   useOnWindow(
