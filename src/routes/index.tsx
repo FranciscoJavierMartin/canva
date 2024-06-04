@@ -41,12 +41,12 @@ export default component$(() => {
               >
                 Sign In
               </Link>
-              <button
-                onClick$={openModal}
+              <Link
+                href='?modal=true'
                 class='w-[80px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'
               >
                 Sign Up
-              </button>
+              </Link>
             </div>
           </div>
         </div>

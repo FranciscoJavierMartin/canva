@@ -14,7 +14,6 @@ import XMark from '@/presentation/icons/x-mark';
 export default component$(() => {
   const location = useLocation();
   const closePortal = useContext(PortalCloseAPIContextId);
-  let CrossComponent: Component;
 
   useOnWindow(
     'keydown',
