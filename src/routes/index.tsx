@@ -7,9 +7,10 @@ import {
   useTask$,
 } from '@builder.io/qwik';
 import Logo from '@/presentation/icons/logo';
-import { PortalAPI, PortalCloseAPIContextId } from '@/portal-provider';
 import { useLocation } from '@builder.io/qwik-city';
 import CSS from './styles.css?inline';
+import { PortalAPI } from '@/presentation/contexts/portal-api';
+import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
 
 export default component$(() => {
   const portal = useContext(PortalAPI);
