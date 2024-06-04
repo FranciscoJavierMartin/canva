@@ -1,6 +1,6 @@
 import { component$, useContext } from '@builder.io/qwik';
 import { PortalsContextId } from '@/presentation/contexts/portal';
-import { WrapJsxInContext } from './wrapper';
+import { WrapJsxInContext } from '@/presentation/ui/portal/wrapper';
 
 /**
  * IMPORTANT: In order for the <Portal> to correctly render in SSR, it needs

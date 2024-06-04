@@ -1,7 +1,7 @@
 import { component$, Slot } from '@builder.io/qwik';
 import type { DocumentHead, RequestHandler } from '@builder.io/qwik-city';
 import { PortalProvider } from '@/presentation/providers/portal-provider';
-import { Portal } from '@/presentation/ui/portal';
+import { Portal } from '@/presentation/ui/portal/portal';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
