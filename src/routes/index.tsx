@@ -19,7 +19,7 @@ export default component$(() => {
   );
 
   useTask$(({ track }) => {
-    track(() => location.url.search);
+    track(() => location.url.searchParams.get('modal'));
 
     if (location.url.searchParams.get('modal')) {
       openModal();
