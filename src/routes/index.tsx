@@ -60,9 +60,12 @@ export default component$(() => {
           <span class='text-2xl font-medium text-mid-gray'>
             Canva makes it easy to create and share professional designs,
           </span>
-          <button class='w-[200px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'>
+          <Link
+            href='?modal=true'
+            class='w-[200px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'
+          >
             Sign Up for Free
-          </button>
+          </Link>
         </div>
       </div>
     </div>
