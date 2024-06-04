@@ -5,6 +5,7 @@ import Logo from '@/presentation/icons/logo';
 import Modal from '@/presentation/ui/modal/modal';
 
 export default component$(() => {
+  const location = useLocation();
   const portal = useContext(PortalAPI);
   const openModal = $(() =>
     portal(
@@ -17,9 +18,9 @@ export default component$(() => {
     ),
   );
 
-  const location = useLocation();
+  useTask$(({ track }) => {
+    track(() => location.url.search);
 
-  useTask$(() => {
     if (location.url.searchParams.get('modal')) {
       openModal();
     }
@@ -36,7 +37,6 @@ export default component$(() => {
             <div class='flex gap-4'>
               <Link
                 href='?modal=true'
-                onClick$={openModal}
                 class='w-[80px] rounded-[5px] bg-teal-700 py-2 text-center font-medium text-white transition-all hover:bg-teal-500'
               >
                 Sign In
