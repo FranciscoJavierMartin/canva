@@ -15,8 +15,8 @@ export default component$(() => {
   );
 
   return (
-    <div class='fixed left-0 top-0 flex h-screen w-screen items-center justify-center bg-[#252627ad] transition-all duration-500'>
-      <div class='relative m-auto w-[350px] rounded-md bg-[#323335] px-6 py-4'>
+    <div class='fixed left-0 top-0 z-40 grid h-screen w-screen place-content-center bg-[#252627ad]'>
+      <div class='relative z-50 m-auto w-[350px] rounded-md bg-[#323335] px-6 py-4'>
         <Link
           href='..'
           class='absolute right-4 top-4 cursor-pointer text-xl text-white'
