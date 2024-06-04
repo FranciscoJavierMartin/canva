@@ -6,7 +6,16 @@ import Modal from '@/presentation/ui/modal/modal';
 
 export default component$(() => {
   const portal = useContext(PortalAPI);
-  const openModal = $(() => portal('modal', <Modal />));
+  const openModal = $(() =>
+    portal(
+      'modal',
+      <Modal>
+        <>
+          <h1>Hello world</h1>
+        </>
+      </Modal>,
+    ),
+  );
 
   const location = useLocation();
 

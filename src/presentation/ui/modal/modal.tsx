@@ -1,4 +1,4 @@
-import { $, component$, useContext, useOnWindow } from '@builder.io/qwik';
+import { $, Slot, component$, useContext, useOnWindow } from '@builder.io/qwik';
 import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
 import { Link } from '@builder.io/qwik-city';
 
@@ -21,7 +21,7 @@ export default component$(() => {
           href='..'
           class='absolute right-4 top-4 cursor-pointer text-xl text-white'
         ></Link>
-        <h1 class='text-white'>Modal</h1>
+        <Slot />
       </div>
     </div>
   );
