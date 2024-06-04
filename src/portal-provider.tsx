@@ -59,12 +59,14 @@ export const PortalProvider = component$(() => {
         contexts: [...(contexts || [])],
       };
       portal.close = $(() => {
+        // eslint-disable-next-line qwik/valid-lexical-scope
         portals.value = portals.value.filter((p) => p !== portal);
       });
       portal.contexts.push({
         id: PortalCloseAPIContextId,
         value: portal.close,
       });
+      // eslint-disable-next-line qwik/valid-lexical-scope
       portals.value = [...portals.value, portal];
       return portal.close;
     }),
