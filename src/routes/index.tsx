@@ -18,7 +18,18 @@ export default component$(() => {
       </Modal>,
     ),
   );
-  const openToast = $(() => portal('toast', <Toast />));
+  const openToast = $(() =>
+    portal(
+      'toast',
+      <Toast
+        text={`
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur fugiat
+          quam qui, voluptatibus doloremque ea quis eius iure error saepe
+          repudiandae facere sit suscipit. Reiciendis mollitia asperiores aut
+          neque quis.`}
+      />,
+    ),
+  );
 
   useTask$(({ track }) => {
     track(() => location.url.searchParams.get('modal'));

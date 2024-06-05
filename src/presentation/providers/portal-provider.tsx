@@ -27,7 +27,21 @@ export default component$(() => {
       };
       portal.close = $(() => {
         // eslint-disable-next-line qwik/valid-lexical-scope
-        portals.value = portals.value.filter((p) => p !== portal);
+        switch (name) {
+          case 'toast':
+            // eslint-disable-next-line qwik/valid-lexical-scope
+            if (portals.value.length > 1) {
+              // eslint-disable-next-line qwik/valid-lexical-scope
+              portals.value = portals.value.filter((p) => p !== portal);
+            } else {
+              // eslint-disable-next-line qwik/valid-lexical-scope
+              portals.value = [];
+            }
+            break;
+          default:
+            // eslint-disable-next-line qwik/valid-lexical-scope
+            portals.value = portals.value.filter((p) => p !== portal);
+        }
       });
       portal.contexts.push({
         id: PortalCloseAPIContextId,
