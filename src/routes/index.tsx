@@ -3,31 +3,17 @@ import { Link, useLocation } from '@builder.io/qwik-city';
 import { PortalAPI } from '@/presentation/contexts/portal-api';
 import Logo from '@/presentation/icons/logo';
 import Modal from '@/presentation/ui/modal/route-model/modal';
-import Toast from '@/presentation/ui/toast/Toast';
+import LoginForm from '@/presentation/components/forms/login-form';
 
 export default component$(() => {
   const location = useLocation();
   const portal = useContext(PortalAPI);
-  const openModal = $(() =>
+  const openLoginForm = $(() =>
     portal(
       'modal',
       <Modal>
-        <>
-          <h1>Hello world</h1>
-        </>
+        <LoginForm />
       </Modal>,
-    ),
-  );
-  const openToast = $(() =>
-    portal(
-      'toast',
-      <Toast
-        text={`
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur fugiat
-          quam qui, voluptatibus doloremque ea quis eius iure error saepe
-          repudiandae facere sit suscipit. Reiciendis mollitia asperiores aut
-          neque quis.`}
-      />,
     ),
   );
 
@@ -35,7 +21,12 @@ export default component$(() => {
     track(() => location.url.searchParams.get('modal'));
 
     if (location.url.searchParams.get('modal')) {
-      openModal();
+      if (location.url.searchParams.get('form') === 'login') {
+        openLoginForm();
+      }
+
+      // if (location.url.searchParams.get('form') === 'register') {
+      // }
     }
   });
 
@@ -49,13 +40,13 @@ export default component$(() => {
             </div>
             <div class='flex gap-4'>
               <Link
-                href='?modal=true'
+                href='?modal=true&form=login'
                 class='w-[80px] rounded-[5px] bg-teal-700 py-2 text-center font-medium text-white transition-all hover:bg-teal-500'
               >
                 Sign In
               </Link>
               <Link
-                href='?modal=true'
+                href='?modal=true&form=register'
                 class='w-[80px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'
               >
                 Sign Up
@@ -73,12 +64,12 @@ export default component$(() => {
           <span class='text-2xl font-medium text-mid-gray'>
             Canva makes it easy to create and share professional designs,
           </span>
-          <button
-            onClick$={openToast}
+          <Link
+            href='?modal=true&form=register'
             class='w-[200px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'
           >
             Sign Up for Free
-          </button>
+          </Link>
         </div>
       </div>
     </div>
