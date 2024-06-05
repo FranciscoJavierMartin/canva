@@ -58,9 +58,6 @@ export default component$(() => {
           placeholder='Password'
           errors={loginUser.value?.fieldErrors?.password}
         />
-        <p class='my-5'>
-          {JSON.stringify(loginUser.value?.fieldErrors?.password)}
-        </p>
         <button
           disabled={loginUser.isRunning}
           class='mt-6 w-full rounded-md bg-purple-500 px-3 py-2 font-semibold text-white outline-none hover:bg-purple-600 disabled:bg-purple-400'
