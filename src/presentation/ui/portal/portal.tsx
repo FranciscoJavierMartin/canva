@@ -8,17 +8,19 @@ import WrapJsxInContext from '@/presentation/ui/portal/wrapper';
  * AFTER the portal is rendered can't be done in SSR, because it is not possible
  * to return back to the <Portal/> after it has been streamed to the client.)
  */
-export default component$<{ name: string }>(({ name }) => {
-  const portals = useContext(PortalsContextId);
-  // useStylesScoped$(CSS);
-  const myPortals = portals.value.filter((portal) => portal.name === name);
-  return (
-    <>
-      {myPortals.map((portal, key) => (
-        <div key={key} data-portal={name}>
-          <WrapJsxInContext jsx={portal.jsx} contexts={portal.contexts} />
-        </div>
-      ))}
-    </>
-  );
-});
+export default component$<{ name: string; isToast?: boolean }>(
+  ({ name, isToast = false }) => {
+    const portals = useContext(PortalsContextId);
+    const myPortals = portals.value.filter((portal) => portal.name === name);
+    // TODO: Create another property called "stacked" to stack toasts
+    return (
+      <div class={{ 'absolute bottom-4 right-4': isToast }}>
+        {myPortals.map((portal, key) => (
+          <div key={key} data-portal={name}>
+            <WrapJsxInContext jsx={portal.jsx} contexts={portal.contexts} />
+          </div>
+        ))}
+      </div>
+    );
+  },
+);
