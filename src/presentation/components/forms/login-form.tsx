@@ -6,7 +6,7 @@ export default component$(() => {
   return (
     <>
       <h2 class='text-center text-2xl text-white'>Sign In</h2>
-      <Form class='flex flex-col gap-2'>
+      <Form class='mb-3 flex flex-col gap-2'>
         <InputForm name='email' id='email' placeholder='Email' type='email' />
         <InputForm
           name='password'
@@ -14,7 +14,9 @@ export default component$(() => {
           placeholder='Password'
           type='password'
         />
-        <button>Sign In</button>
+        <button class='mt-6 w-full rounded-md bg-purple-500 px-3 py-2 text-white outline-none hover:bg-purple-600'>
+          Sign In
+        </button>
       </Form>
     </>
   );
