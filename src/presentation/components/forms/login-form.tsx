@@ -3,7 +3,6 @@ import {
   Form,
   type RequestEventAction,
   globalAction$,
-  z,
   zod$,
 } from '@builder.io/qwik-city';
 import InputForm from '@/presentation/ui/inputs/input-form';
@@ -19,17 +18,7 @@ export const useLoginUser = globalAction$(
       // errors: {},
     };
   },
-  // TODO: Get from file
-  zod$({
-    email: z
-      .string({ required_error: 'Email is required' })
-      .trim()
-      .email('Invalid email'),
-    password: z
-      .string({ required_error: 'Password is required' })
-      .trim()
-      .min(6, 'Password is too short'),
-  }),
+  zod$(loginSchema),
 );
 
 export default component$(() => {

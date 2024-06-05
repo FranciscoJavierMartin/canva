@@ -47,8 +47,13 @@ export default component$(() => {
         id: PortalCloseAPIContextId,
         value: portal.close,
       });
-      // eslint-disable-next-line qwik/valid-lexical-scope
-      portals.value = [...portals.value, portal];
+      if (name === 'modal') {
+        // eslint-disable-next-line qwik/valid-lexical-scope
+        portals.value = [portal];
+      } else {
+        // eslint-disable-next-line qwik/valid-lexical-scope
+        portals.value = [...portals.value, portal];
+      }
       return portal.close;
     }),
   );
