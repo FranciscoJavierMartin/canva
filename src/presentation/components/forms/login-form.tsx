@@ -19,7 +19,17 @@ export const useLoginUser = globalAction$(
       // errors: {},
     };
   },
-  zod$(loginSchema),
+  // TODO: Get from file
+  zod$({
+    email: z
+      .string({ required_error: 'Email is required' })
+      .trim()
+      .email('Invalid email'),
+    password: z
+      .string({ required_error: 'Password is required' })
+      .trim()
+      .min(6, 'Password is too short'),
+  }),
 );
 
 export default component$(() => {
@@ -28,6 +38,7 @@ export default component$(() => {
 
   useTask$(({ cleanup }) => {
     cleanup(() => {
+      console.log('Hello');
       closePortal();
     });
   });
