@@ -9,7 +9,7 @@ export default component$<InputForm>(({ errors = [], ...props }) => {
         <div class='absolute flex w-full items-center rounded-md border-0 border-b-2 border-solid border-[#5c5c5e] focus-within:border-purple-500'>
           <input
             {...props}
-            class={['peer flex-grow bg-transparent px-3 py-2 outline-none']}
+            class={['peer flex-grow !bg-transparent px-3 py-2 outline-none']}
           />
           <label
             for={props.id}
