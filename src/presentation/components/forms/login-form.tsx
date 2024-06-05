@@ -27,7 +27,6 @@ export default component$(() => {
 
   useTask$(({ cleanup }) => {
     cleanup(() => {
-      console.log('Hello');
       closePortal();
     });
   });
