@@ -4,6 +4,7 @@ import { PortalAPI } from '@/presentation/contexts/portal-api';
 import Logo from '@/presentation/icons/logo';
 import Modal from '@/presentation/ui/modal/route-model/modal';
 import LoginForm from '@/presentation/components/forms/login-form';
+import RegisterForm from '@/presentation/components/forms/register-form';
 
 export default component$(() => {
   const location = useLocation();
@@ -16,6 +17,14 @@ export default component$(() => {
       </Modal>,
     ),
   );
+  const openRegisterForm = $(() =>
+    portal(
+      'modal',
+      <Modal>
+        <RegisterForm />
+      </Modal>,
+    ),
+  );
 
   useTask$(({ track }) => {
     track(() => location.url.searchParams.get('modal'));
@@ -25,8 +34,9 @@ export default component$(() => {
         openLoginForm();
       }
 
-      // if (location.url.searchParams.get('form') === 'register') {
-      // }
+      if (location.url.searchParams.get('form') === 'register') {
+        openRegisterForm();
+      }
     }
   });
 
