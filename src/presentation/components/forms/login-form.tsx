@@ -8,6 +8,7 @@ import {
 } from '@builder.io/qwik-city';
 import InputForm from '@/presentation/ui/inputs/input-form';
 import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
+import { loginSchema } from '@/core/validators/loginSchema';
 
 export const useLoginUser = globalAction$(
   async (data, requestEvent: RequestEventAction) => {
@@ -18,16 +19,7 @@ export const useLoginUser = globalAction$(
       // errors: {},
     };
   },
-  zod$({
-    email: z
-      .string({ required_error: 'Email is required' })
-      .trim()
-      .email('Invalid email'),
-    password: z
-      .string({ required_error: 'Password is required' })
-      .trim()
-      .min(6, 'Password is too short'),
-  }),
+  zod$(loginSchema),
 );
 
 export default component$(() => {

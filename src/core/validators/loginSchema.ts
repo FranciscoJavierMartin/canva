@@ -1,6 +1,6 @@
 import { z } from '@builder.io/qwik-city';
 
-export const loginSchema = z.object({
+export const loginSchema = {
   email: z
     .string({ required_error: 'Email is required' })
     .trim()
@@ -9,4 +9,4 @@ export const loginSchema = z.object({
     .string({ required_error: 'Password is required' })
     .trim()
     .min(6, 'Password is too short'),
-});
+};
