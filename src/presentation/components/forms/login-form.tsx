@@ -1,4 +1,4 @@
-import { component$ } from '@builder.io/qwik';
+import { component$, useContext, useTask$ } from '@builder.io/qwik';
 import {
   Form,
   type RequestEventAction,
@@ -7,6 +7,7 @@ import {
   zod$,
 } from '@builder.io/qwik-city';
 import InputForm from '@/presentation/ui/inputs/input-form';
+import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
 
 export const useLoginUser = globalAction$(
   async (data, requestEvent: RequestEventAction) => {
@@ -31,11 +32,18 @@ export const useLoginUser = globalAction$(
 
 export default component$(() => {
   const loginUser = useLoginUser();
+  const closePortal = useContext(PortalCloseAPIContextId);
+
+  useTask$(({ cleanup }) => {
+    cleanup(() => {
+      closePortal();
+    });
+  });
 
   return (
     <>
       <h2 class='text-center text-2xl text-white'>Sign In</h2>
-      <Form action={loginUser} class='mb-3 flex flex-col gap-2' >
+      <Form action={loginUser} class='mb-3 flex flex-col gap-2'>
         <InputForm
           id='email'
           name='email'
