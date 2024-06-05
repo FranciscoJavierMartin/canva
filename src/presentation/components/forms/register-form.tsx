@@ -36,6 +36,12 @@ export default component$(() => {
       <h2 class='text-center text-2xl text-white'>Sign Up</h2>
       <Form action={registerUser} class='mb-3 flex flex-col gap-2'>
         <InputForm
+          id='name'
+          name='name'
+          placeholder='Name'
+          errors={registerUser.value?.fieldErrors?.name}
+        />
+        <InputForm
           id='email'
           name='email'
           type='email'
