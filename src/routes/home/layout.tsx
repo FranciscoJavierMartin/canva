@@ -1,6 +1,6 @@
 import { Slot, component$ } from '@builder.io/qwik';
-import Navbar from '@/presentation/ui/Navbar';
 import { Link } from '@builder.io/qwik-city';
+import Navbar from '@/presentation/ui/Navbar';
 import Settings from '@/presentation/icons/settings';
 import Logout from '@/presentation/icons/logout';
 
