@@ -15,7 +15,7 @@ export const useLoginUser = globalAction$(
     console.log(data);
 
     return {
-      message: '',
+      message: 'Ups, something went wrong. Please try again.',
       // errors: {},
     };
   },
@@ -56,6 +56,9 @@ export default component$(() => {
         >
           Sign In
         </button>
+        {loginUser.value?.message && (
+          <p class='text-sm text-red-400'>{loginUser.value.message}</p>
+        )}
       </Form>
       <hr class='mb-3 mt-5' />
       <span class='mb-2 flex w-full justify-center gap-1 text-center text-white'>

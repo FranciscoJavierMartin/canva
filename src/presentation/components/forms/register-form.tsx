@@ -15,7 +15,7 @@ export const useRegisterUser = globalAction$(
     console.log(data);
 
     return {
-      message: '',
+      message: 'Ups, something went wrong. Please try again.',
       // errors: {},
     };
   },
@@ -62,6 +62,9 @@ export default component$(() => {
         >
           Sign Up
         </button>
+        {registerUser.value?.message && (
+          <p class='text-sm text-red-400'>{registerUser.value.message}</p>
+        )}
       </Form>
       <hr class='mb-3 mt-5' />
       <span class='mb-2 flex w-full justify-center gap-1 text-center text-white'>
