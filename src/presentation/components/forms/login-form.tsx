@@ -64,7 +64,7 @@ export default component$(() => {
       <span class='mb-2 flex w-full justify-center gap-1 text-center text-white'>
         New to Canva?{' '}
         <Link
-          href='?modal=true&form=register'
+          href='/?modal=true&form=register'
           class='cursor-pointer text-blue-400 hover:underline'
         >
           Sign Up

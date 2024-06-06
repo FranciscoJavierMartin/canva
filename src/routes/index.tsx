@@ -48,13 +48,13 @@ export default component$(() => {
             </Link>
             <div class='flex gap-4'>
               <Link
-                href='?modal=true&form=login'
+                href='/?modal=true&form=login'
                 class='button w-[80px] bg-teal-700 hover:bg-teal-500'
               >
                 Sign In
               </Link>
               <Link
-                href='?modal=true&form=register'
+                href='/?modal=true&form=register'
                 class='button w-[80px] bg-purple-700 hover:bg-purple-500'
               >
                 Sign Up
@@ -73,7 +73,7 @@ export default component$(() => {
             Canva makes it easy to create and share professional designs,
           </span>
           <Link
-            href='?modal=true&form=register'
+            href='/?modal=true&form=register'
             class='button w-[200px] bg-purple-700 hover:bg-purple-500'
           >
             Sign Up for Free
