@@ -1,10 +1,10 @@
 import { $, component$, useContext, useTask$ } from '@builder.io/qwik';
 import { Link, useLocation } from '@builder.io/qwik-city';
 import { PortalAPI } from '@/presentation/contexts/portal-api';
-import Logo from '@/presentation/icons/logo';
 import Modal from '@/presentation/ui/modal/route-model/modal';
 import LoginForm from '@/presentation/components/forms/login-form';
 import RegisterForm from '@/presentation/components/forms/register-form';
+import Navbar from '@/presentation/ui/Navbar';
 
 export default component$(() => {
   const location = useLocation();
@@ -40,29 +40,20 @@ export default component$(() => {
 
   return (
     <div class='min-h-screen w-full bg-black'>
-      <div class='bg-mid-black shadow-md'>
-        <div class='m-auto w-[93%] py-3'>
-          <div class='flex items-center justify-between'>
-            <Link href='/home' class='h-[30px] w-[80px]'>
-              <Logo />
-            </Link>
-            <div class='flex gap-4'>
-              <Link
-                href='/?modal=true&form=login'
-                class='button w-[80px] bg-teal-700 hover:bg-teal-500'
-              >
-                Sign In
-              </Link>
-              <Link
-                href='/?modal=true&form=register'
-                class='button w-[80px] bg-purple-700 hover:bg-purple-500'
-              >
-                Sign Up
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Navbar>
+        <Link
+          href='/?modal=true&form=login'
+          class='button w-[80px] bg-teal-700 hover:bg-teal-500'
+        >
+          Sign In
+        </Link>
+        <Link
+          href='/?modal=true&form=register'
+          class='button w-[80px] bg-purple-700 hover:bg-purple-500'
+        >
+          Sign Up
+        </Link>
+      </Navbar>
 
       <div class='size-full items-center justify-center p-4'>
         <div class='flex h-full flex-col items-center justify-center gap-6 pt-44 text-center'>
