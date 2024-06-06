@@ -3,8 +3,25 @@ import { Link } from '@builder.io/qwik-city';
 import Navbar from '@/presentation/ui/Navbar';
 import Settings from '@/presentation/icons/settings';
 import Logout from '@/presentation/icons/logout';
+import {
+  type NavLinkProps,
+  default as NavLink,
+} from '@/presentation/components/sidebar/NavLink';
 
-const navLinksSidebar = [];
+const navLinksSidebar: NavLinkProps[] = [
+  {
+    text: 'Home',
+    href: '/home',
+  },
+  {
+    text: 'Projects',
+    href: '/home/projects',
+  },
+  {
+    text: 'Templates',
+    href: '/home/templates',
+  },
+];
 
 export default component$(() => {
   return (
@@ -76,9 +93,7 @@ export default component$(() => {
           </div>
           <ul class='flex flex-col gap-2'>
             {navLinksSidebar.map((navLink, index) => (
-              <Link href='/' key={index}>
-                Test
-              </Link>
+              <NavLink key={index} {...navLink} />
             ))}
           </ul>
         </aside>
