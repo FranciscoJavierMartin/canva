@@ -5,21 +5,29 @@ type NavLinkProps = LinkProps & { activeClass?: string };
 
 export default component$<NavLinkProps>(({ activeClass, ...props }) => {
   const location = useLocation();
-  const toPathname = props.href ?? '';
-  const locationPathname = location.url.pathname;
-  const startSlashPosition =
-    toPathname !== '/' && toPathname.startsWith('/')
-      ? toPathname.length - 1
-      : toPathname.length;
-  const endSlashPosition =
-    toPathname !== '/' && toPathname.startsWith('/')
-      ? toPathname.length - 1
-      : toPathname.length;
-  const isActive: boolean =
-    locationPathname === toPathname ||
-    (locationPathname.endsWith(toPathname) &&
-      (locationPathname.charAt(endSlashPosition) === '/' ||
-        locationPathname.charAt(startSlashPosition) === '/'));
+  let toPathname: string = props.href ?? '';
+  let locationPathname: string = location.url.pathname;
+
+  if (toPathname.startsWith('/')) {
+    toPathname = toPathname.substring(1);
+  }
+
+  if (toPathname.endsWith('/')) {
+    toPathname = toPathname.substring(0, toPathname.length - 1);
+  }
+
+  if (locationPathname.startsWith('/')) {
+    locationPathname = locationPathname.substring(1);
+  }
+
+  if (locationPathname.endsWith('/')) {
+    locationPathname = locationPathname.substring(
+      0,
+      locationPathname.length - 1,
+    );
+  }
+
+  const isActive = locationPathname === toPathname;
 
   return (
     <Link
