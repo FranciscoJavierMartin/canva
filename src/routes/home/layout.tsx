@@ -1,6 +1,8 @@
 import { Slot, component$ } from '@builder.io/qwik';
 import Navbar from '@/presentation/ui/Navbar';
 import { Link } from '@builder.io/qwik-city';
+import Settings from '@/presentation/icons/settings';
+import Logout from '@/presentation/icons/logout';
 
 export default component$(() => {
   return (
@@ -40,11 +42,13 @@ export default component$(() => {
           <ul class='text-lighter-gray'>
             <li class='p-1 transition hover:bg-mid-black'>
               <Link class='flex gap-2 p-2' href='/'>
+                <Settings />
                 Settings
               </Link>
             </li>
             <li class='border-t px-1 pb-1 pt-2 transition hover:bg-mid-black'>
               <Link href='/' class='flex gap-2 p-2'>
+                <Logout />
                 Logout
               </Link>
             </li>
