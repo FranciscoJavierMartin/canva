@@ -12,7 +12,7 @@ export default component$<{ name: string; isToast?: boolean }>(
   ({ name, isToast = false }) => {
     const portals = useContext(PortalsContextId);
     const myPortals = portals.value.filter((portal) => portal.name === name);
-    // TODO: Create another property called "stacked" to stack toasts
+
     return (
       <div class={{ 'absolute bottom-4 right-4': isToast }}>
         {myPortals.map((portal, key) => (
