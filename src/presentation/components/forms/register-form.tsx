@@ -11,9 +11,9 @@ import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
 import { registerSchema } from '@/core/validators/registerSchema';
 
 export const useRegisterUser = globalAction$(
-  async (data, requestEvent: RequestEventAction) => {
+  async (data, { redirect }: RequestEventAction) => {
     console.log(data);
-
+    redirect(302, '/home');
     return {
       message: 'Ups, something went wrong. Please try again.',
       // errors: {},
