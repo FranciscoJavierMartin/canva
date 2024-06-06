@@ -49,13 +49,13 @@ export default component$(() => {
             <div class='flex gap-4'>
               <Link
                 href='?modal=true&form=login'
-                class='w-[80px] rounded-[5px] bg-teal-700 py-2 text-center font-medium text-white transition-all hover:bg-teal-500'
+                class='button w-[80px] bg-teal-700 hover:bg-teal-500'
               >
                 Sign In
               </Link>
               <Link
                 href='?modal=true&form=register'
-                class='w-[80px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'
+                class='button w-[80px] bg-purple-700 hover:bg-purple-500'
               >
                 Sign Up
               </Link>
@@ -74,7 +74,7 @@ export default component$(() => {
           </span>
           <Link
             href='?modal=true&form=register'
-            class='w-[200px] rounded-[5px] bg-purple-700 py-2 text-center font-medium text-white transition-all hover:bg-purple-500'
+            class='button w-[200px] bg-purple-700 hover:bg-purple-500'
           >
             Sign Up for Free
           </Link>

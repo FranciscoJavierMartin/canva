@@ -5,3 +5,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .button {
+    @apply rounded-[5px] py-2 text-center font-medium text-white transition-all;
+  }
+}
