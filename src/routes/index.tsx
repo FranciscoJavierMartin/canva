@@ -43,9 +43,9 @@ export default component$(() => {
       <div class='bg-mid-black shadow-md'>
         <div class='m-auto w-[93%] py-3'>
           <div class='flex items-center justify-between'>
-            <div class='h-[30px] w-[80px]'>
+            <Link href='/home' class='h-[30px] w-[80px]'>
               <Logo />
-            </div>
+            </Link>
             <div class='flex gap-4'>
               <Link
                 href='?modal=true&form=login'
