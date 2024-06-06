@@ -8,6 +8,8 @@ import {
   default as NavLink,
 } from '@/presentation/components/sidebar/NavLink';
 import HomeIcon from '@/presentation/icons/home';
+import Folder from '@/presentation/icons/folder';
+import TemplateIcon from '@/presentation/icons/template';
 
 const navLinksSidebar: NavLinkProps[] = [
   {
@@ -18,12 +20,12 @@ const navLinksSidebar: NavLinkProps[] = [
   {
     text: 'Projects',
     href: '/home/projects',
-    Icon: HomeIcon,
+    Icon: Folder,
   },
   {
     text: 'Templates',
     href: '/home/templates',
-    Icon: HomeIcon,
+    Icon: TemplateIcon,
   },
 ];
 
