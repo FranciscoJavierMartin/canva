@@ -81,7 +81,7 @@ export default component$(() => {
         </div>
       </Navbar>
       <div class='flex w-full'>
-        <aside class='h-[calc(100vh-69px)] w-[200px] bg-blue-steel p-5'>
+        <aside class='h-[calc(100vh-69px)] w-[300px] bg-blue-steel p-5'>
           <div class='mb-3 flex items-center justify-start gap-5 p-2'>
             <img
               class='size-[40px] rounded-full'
