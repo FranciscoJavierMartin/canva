@@ -1,12 +1,11 @@
 import { component$ } from '@builder.io/qwik';
+import NewDesignForm from '@/presentation/components/forms/new-design-form';
 
 export default component$(() => {
   return (
     <div>
       <div class='relative flex h-[250px] w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-dark to-dark-purple'>
-        <button class='absolute right-3 top-3 rounded-md bg-off-blue px-4 py-2 text-center font-medium text-white hover:bg-blue-dark'>
-          Custom size
-        </button>
+        <NewDesignForm />
         <div>
           <h2 class='py-6 text-3xl font-semibold text-white'>
             What will you design today

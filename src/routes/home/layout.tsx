@@ -48,7 +48,7 @@ export default component$(() => {
             width={45}
           />
         </button>
-        <div class='absolute right-1 top-16 hidden w-64 rounded-md border border-gray-700 bg-darker-gray pt-1 transition duration-500 peer-focus-within:block'>
+        <div class='absolute right-1 top-16 z-20 hidden w-64 rounded-md border border-gray-700 bg-darker-gray pt-1 transition duration-500 peer-focus-within:block'>
           <div class='flex items-center justify-start gap-5 p-3'>
             <img
               class='size-[40px] rounded-full'
