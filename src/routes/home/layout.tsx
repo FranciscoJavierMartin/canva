@@ -23,7 +23,7 @@ export default component$(() => {
             width={45}
           />
         </button>
-        <div class='absolute -right-4 top-14 w-64 border border-gray-700 bg-darker-gray pt-1 transition duration-500'>
+        <div class='absolute right-1 top-16 w-64 border border-gray-700 bg-darker-gray pt-1 transition duration-500'>
           <div class='flex items-center justify-start gap-5 p-3'>
             <img
               class='size-[40px] rounded-full'
