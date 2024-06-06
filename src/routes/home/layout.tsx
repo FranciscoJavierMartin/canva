@@ -7,19 +7,23 @@ import {
   type NavLinkProps,
   default as NavLink,
 } from '@/presentation/components/sidebar/NavLink';
+import HomeIcon from '@/presentation/icons/home';
 
 const navLinksSidebar: NavLinkProps[] = [
   {
     text: 'Home',
     href: '/home',
+    Icon: HomeIcon,
   },
   {
     text: 'Projects',
     href: '/home/projects',
+    Icon: HomeIcon,
   },
   {
     text: 'Templates',
     href: '/home/templates',
+    Icon: HomeIcon,
   },
 ];
 
