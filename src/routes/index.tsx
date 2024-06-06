@@ -27,14 +27,12 @@ export default component$(() => {
   );
 
   useTask$(({ track }) => {
-    track(() => location.url.searchParams.get('modal'));
+    track(() => location.url.search);
 
     if (location.url.searchParams.get('modal')) {
       if (location.url.searchParams.get('form') === 'login') {
         openLoginForm();
-      }
-
-      if (location.url.searchParams.get('form') === 'register') {
+      } else if (location.url.searchParams.get('form') === 'register') {
         openRegisterForm();
       }
     }

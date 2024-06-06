@@ -4,6 +4,7 @@ import {
   type RequestEventAction,
   globalAction$,
   zod$,
+  Link,
 } from '@builder.io/qwik-city';
 import InputForm from '@/presentation/ui/inputs/input-form';
 import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
@@ -32,7 +33,7 @@ export default component$(() => {
   });
 
   return (
-    <>
+    <div class='w-full'>
       <h2 class='text-center text-2xl text-white'>Sign Up</h2>
       <Form action={registerUser} class='mb-3 flex flex-col gap-2'>
         <InputForm
@@ -62,6 +63,16 @@ export default component$(() => {
           Sign Up
         </button>
       </Form>
-    </>
+      <hr class='mb-3 mt-5' />
+      <span class='mb-2 flex w-full justify-center gap-1 text-center text-white'>
+        Have an account?{' '}
+        <Link
+          href='?modal=true&form=login'
+          class='cursor-pointer text-blue-400 hover:underline'
+        >
+          Sign In
+        </Link>
+      </span>
+    </div>
   );
 });
