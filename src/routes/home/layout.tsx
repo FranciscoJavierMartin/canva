@@ -4,6 +4,8 @@ import Navbar from '@/presentation/ui/Navbar';
 import Settings from '@/presentation/icons/settings';
 import Logout from '@/presentation/icons/logout';
 
+const navLinksSidebar = [];
+
 export default component$(() => {
   return (
     <div class='min-h-screen w-full bg-black'>
@@ -55,7 +57,35 @@ export default component$(() => {
           </ul>
         </div>
       </Navbar>
-      <Slot />
+      <div class='flex w-full'>
+        <aside class='h-[calc(100vh-69px)] w-[300px] bg-blue-steel p-5'>
+          <div class='mb-3 flex items-center justify-start gap-5 p-2'>
+            <img
+              class='size-[40px] rounded-full'
+              src='https://templates-flatlogic.herokuapp.com/sing-app/html5/demo/img/people/a5.jpg'
+              alt='User avatar'
+              height={40}
+              width={40}
+            />
+            <div class='flex flex-col items-start justify-center'>
+              <span class='text-base font-bold text-lighter-gray'>
+                John Doe
+              </span>
+              <span class='text-sm text-lighter-gray'>Free</span>
+            </div>
+          </div>
+          <ul class='flex flex-col gap-2'>
+            {navLinksSidebar.map((navLink, index) => (
+              <Link href='/' key={index}>
+                Test
+              </Link>
+            ))}
+          </ul>
+        </aside>
+        <main class='p-4'>
+          <Slot />
+        </main>
+      </div>
     </div>
   );
 });
