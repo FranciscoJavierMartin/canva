@@ -1,5 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import NewDesignForm from '@/presentation/components/forms/new-design-form';
+import Carousel from '@/presentation/ui/Carousel';
 
 export default component$(() => {
   return (
@@ -16,6 +17,9 @@ export default component$(() => {
         <h2 class='py-6 text-xl font-semibold text-white'>
           Your recent designs
         </h2>
+        <div>
+          <Carousel />
+        </div>
       </div>
     </div>
   );
