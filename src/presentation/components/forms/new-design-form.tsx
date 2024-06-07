@@ -3,13 +3,16 @@ import {
   Form,
   type RequestEventAction,
   globalAction$,
+  zod$,
 } from '@builder.io/qwik-city';
 import InputNumber from '@/presentation/ui/inputs/input-number';
+import { newDesignSizeSchema } from '@/core/validators/new-design-size';
 
 export const useCreateNewDesign = globalAction$(
   (data, { redirect }: RequestEventAction) => {
     console.log(data);
   },
+  zod$(newDesignSizeSchema),
 );
 
 export default component$(() => {
@@ -43,6 +46,7 @@ export default component$(() => {
           />
         </div>
         <button
+          disabled={createNewDesign.isRunning}
           type='submit'
           class='w-full rounded-md bg-off-blue px-4 py-2 text-center font-medium text-white hover:bg-blue-dark'
         >
