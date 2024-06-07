@@ -7,16 +7,23 @@ import {
 import InputNumber from '@/presentation/ui/inputs/input-number';
 
 export const useCreateNewDesign = globalAction$(
-  (data, { redirect }: RequestEventAction) => {},
+  (data, { redirect }: RequestEventAction) => {
+    console.log(data);
+  },
 );
 
 export default component$(() => {
+  const createNewDesign = useCreateNewDesign();
+
   return (
     <div class='group'>
       <button class='absolute right-3 top-3 rounded-md bg-off-blue px-4 py-2 text-center font-medium text-white hover:bg-blue-dark'>
         Custom size
       </button>
-      <Form class='absolute right-3 top-16 z-20 w-[250px] gap-3 rounded-md bg-light-black p-4 text-white transition-all duration-500'>
+      <Form
+        action={createNewDesign}
+        class='absolute right-3 top-16 z-20 w-[250px] gap-3 rounded-md bg-light-black p-4 text-white transition-all duration-500'
+      >
         <div class='mb-3 grid grid-cols-2 gap-3'>
           <InputNumber
             text='Width'
