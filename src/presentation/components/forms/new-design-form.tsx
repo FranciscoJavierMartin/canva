@@ -40,6 +40,7 @@ export default component$(() => {
             placeholder='Width'
             required
             min={50}
+            max={100_000}
           />
           <InputNumber
             text='Height'
@@ -48,6 +49,7 @@ export default component$(() => {
             placeholder='Height'
             required
             min={50}
+            max={100_000}
           />
         </div>
         <button
