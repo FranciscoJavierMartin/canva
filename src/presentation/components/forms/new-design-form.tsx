@@ -10,10 +10,7 @@ import { newDesignSizeSchema } from '@/core/validators/new-design-size';
 
 export const useCreateNewDesign = globalAction$(
   ({ width, height }, { redirect }: RequestEventAction) => {
-    const queryParams = new URLSearchParams({
-      width: width.toString(),
-      height: height.toString(),
-    });
+    const queryParams = new URLSearchParams({ width, height });
 
     redirect(302, `/design/create?${queryParams.toString()}`);
   },
