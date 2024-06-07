@@ -1,18 +1,17 @@
-import { type InputHTMLAttributes, component$ } from '@builder.io/qwik';
+import { component$, type QwikIntrinsicElements } from '@builder.io/qwik';
 
-type InputNumber = InputHTMLAttributes<HTMLInputElement> & {
-  errors?: string[];
+type InputNumber = QwikIntrinsicElements['input'] & {
   text: string;
 };
 
-export default component$<InputNumber>(({ errors = [], text, ...props }) => {
+export default component$<InputNumber>(({ text, ...props }) => {
   return (
     <div class='flex flex-col items-start justify-center gap-2'>
       <label for={props.id}>{text}</label>
       <input
-        {...props}
         type='number'
         class='w-full rounded-md border border-[#404040] bg-[#1b1a1a] px-2 py-1 outline-none'
+        {...props}
       />
     </div>
   );
