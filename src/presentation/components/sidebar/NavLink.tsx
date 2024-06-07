@@ -10,9 +10,9 @@ export type NavLinkProps = LinkProps & {
 export default component$<NavLinkProps>(({ text, Icon, ...props }) => {
   return (
     <NavLink
+      {...props}
       class='flex items-center justify-start gap-3 rounded-md px-3 py-2 text-lighter-gray'
       activeClass='bg-[#ffffff26]'
-      {...props}
     >
       <Icon />
       <span class='font-medium'>{text}</span>

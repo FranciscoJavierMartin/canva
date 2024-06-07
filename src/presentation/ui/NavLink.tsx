@@ -30,10 +30,7 @@ export default component$<NavLinkProps>(({ activeClass, ...props }) => {
   const isActive = locationPathname === toPathname;
 
   return (
-    <Link
-      {...props}
-      class={`${props.class || ''} ${isActive ? activeClass : ''}`}
-    >
+    <Link {...props} class={[props.class || '', isActive ? activeClass : '']}>
       <Slot />
     </Link>
   );
