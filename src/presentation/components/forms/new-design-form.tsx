@@ -27,7 +27,7 @@ export default component$(() => {
       </button>
       <Form
         action={createNewDesign}
-        class='absolute right-3 top-16 z-20 hidden w-[250px] gap-3 rounded-md bg-light-black p-4 text-white transition-all duration-500 group-focus-within:block'
+        class='bg-black-light absolute right-3 top-16 z-20 hidden w-[250px] gap-3 rounded-md p-4 text-white transition-all duration-500 group-focus-within:block'
       >
         <div class='mb-3 grid grid-cols-2 gap-3'>
           <InputNumber

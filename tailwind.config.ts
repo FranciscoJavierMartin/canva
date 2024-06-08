@@ -5,9 +5,11 @@ export default {
     extend: {
       // TODO: Reestructure colors
       colors: {
-        black: '#18191b',
-        'mid-black': '#212223',
-        'light-black': '#252627',
+        black: {
+          DEFAULT: '#18191b',
+          light: '#252627',
+          mid: '#212223',
+        },
         'darker-gray': '#313030',
         'dark-gray': '#3c3c3d',
         'mid-gray': '#aca9a9',

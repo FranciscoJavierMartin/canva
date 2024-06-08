@@ -65,13 +65,13 @@ export default component$(() => {
             </div>
           </div>
           <ul class='text-lighter-gray'>
-            <li class='p-1 transition hover:bg-mid-black'>
+            <li class='hover:bg-black-mid p-1 transition'>
               <Link class='flex gap-2 p-2' href='/'>
                 <Settings />
                 Settings
               </Link>
             </li>
-            <li class='border-t px-1 pb-1 pt-2 transition hover:bg-mid-black'>
+            <li class='hover:bg-black-mid border-t px-1 pb-1 pt-2 transition'>
               <Link href='/' class='flex gap-2 p-2'>
                 <Logout />
                 Logout
