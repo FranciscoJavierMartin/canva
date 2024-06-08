@@ -22,12 +22,12 @@ export default component$(() => {
 
   return (
     <div class='group'>
-      <button class='absolute right-3 top-3 rounded-md bg-off-blue px-4 py-2 text-center font-medium text-white hover:bg-blue-dark'>
+      <button class='bg-blue-off absolute right-3 top-3 rounded-md px-4 py-2 text-center font-medium text-white hover:bg-blue-dark'>
         Custom size
       </button>
       <Form
         action={createNewDesign}
-        class='absolute right-3 top-16 z-20 hidden w-[250px] gap-3 rounded-md bg-light-black p-4 text-white transition-all duration-500 group-focus-within:block'
+        class='bg-black-light absolute right-3 top-16 z-20 hidden w-[250px] gap-3 rounded-md p-4 text-white transition-all duration-500 group-focus-within:block'
       >
         <div class='mb-3 grid grid-cols-2 gap-3'>
           <InputNumber
@@ -52,7 +52,7 @@ export default component$(() => {
         <button
           disabled={createNewDesign.isRunning}
           type='submit'
-          class='w-full rounded-md bg-off-blue px-4 py-2 text-center font-medium text-white hover:bg-blue-dark'
+          class='bg-blue-off w-full rounded-md px-4 py-2 text-center font-medium text-white hover:bg-blue-dark'
         >
           Create new design
         </button>

@@ -35,7 +35,7 @@ export default component$(() => {
       <Navbar>
         <Link
           href='/design/create'
-          class='button bg-light-purple px-2 hover:bg-purple-bright'
+          class='button bg-purple-light px-2 hover:bg-purple-bright'
         >
           Create a design
         </Link>
@@ -48,7 +48,7 @@ export default component$(() => {
             width={45}
           />
         </button>
-        <div class='absolute right-1 top-16 z-20 hidden w-64 rounded-md border border-gray-700 bg-darker-gray pt-1 transition duration-500 peer-focus-within:block'>
+        <div class='bg-gray-darker absolute right-1 top-16 z-20 hidden w-64 rounded-md border border-gray-700 pt-1 transition duration-500 peer-focus-within:block'>
           <div class='flex items-center justify-start gap-5 p-3'>
             <img
               class='size-[40px] rounded-full'
@@ -58,20 +58,20 @@ export default component$(() => {
               width={40}
             />
             <div class='flex flex-col items-start justify-center'>
-              <span class='text-sm font-bold text-lighter-gray'>John Doe</span>
-              <span class='text-sm font-bold text-lighter-gray'>
+              <span class='text-gray-lighter text-sm font-bold'>John Doe</span>
+              <span class='text-gray-lighter text-sm font-bold'>
                 john@doe.com
               </span>
             </div>
           </div>
-          <ul class='text-lighter-gray'>
-            <li class='p-1 transition hover:bg-mid-black'>
+          <ul class='text-gray-lighter'>
+            <li class='hover:bg-black-mid p-1 transition'>
               <Link class='flex gap-2 p-2' href='/'>
                 <Settings />
                 Settings
               </Link>
             </li>
-            <li class='border-t px-1 pb-1 pt-2 transition hover:bg-mid-black'>
+            <li class='hover:bg-black-mid border-t px-1 pb-1 pt-2 transition'>
               <Link href='/' class='flex gap-2 p-2'>
                 <Logout />
                 Logout
@@ -91,10 +91,10 @@ export default component$(() => {
               width={40}
             />
             <div class='flex flex-col items-start justify-center'>
-              <span class='text-base font-bold text-lighter-gray'>
+              <span class='text-gray-lighter text-base font-bold'>
                 John Doe
               </span>
-              <span class='text-sm text-lighter-gray'>Free</span>
+              <span class='text-gray-lighter text-sm'>Free</span>
             </div>
           </div>
           <ul class='flex flex-col gap-2'>
