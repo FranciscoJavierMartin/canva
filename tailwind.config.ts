@@ -3,7 +3,6 @@ export default {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
-      // TODO: Reestructure colors
       colors: {
         black: {
           DEFAULT: '#18191b',
