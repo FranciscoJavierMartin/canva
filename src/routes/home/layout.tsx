@@ -35,7 +35,7 @@ export default component$(() => {
       <Navbar>
         <Link
           href='/design/create'
-          class='button bg-light-purple px-2 hover:bg-purple-bright'
+          class='button bg-purple-light px-2 hover:bg-purple-bright'
         >
           Create a design
         </Link>
