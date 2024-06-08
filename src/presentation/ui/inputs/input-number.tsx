@@ -12,7 +12,7 @@ export default component$<InputNumber>(({ text, ...props }) => {
       </label>
       <input
         type='number'
-        class='w-full rounded-md border border-[#404040] bg-[#1b1a1a] px-2 py-1 text-right outline-none placeholder:text-left'
+        class='remove-input-number-indicator w-full rounded-md border border-[#404040] bg-[#1b1a1a] px-2 py-1 text-right outline-none placeholder:text-left'
         max={100_000}
         {...props}
       />
