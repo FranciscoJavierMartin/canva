@@ -12,6 +12,17 @@
   }
 }
 
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
 /* Input number remove arrow */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
