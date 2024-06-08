@@ -57,10 +57,10 @@ export default component$(() => {
 
       <div class='size-full items-center justify-center p-4'>
         <div class='flex h-full flex-col items-center justify-center gap-6 pt-44 text-center'>
-          <h2 class='text-5xl font-bold text-light-gray'>
+          <h2 class='text-gray-light text-5xl font-bold'>
             What you will design today?
           </h2>
-          <span class='text-2xl font-medium text-mid-gray'>
+          <span class='text-gray-mid text-2xl font-medium'>
             Canva makes it easy to create and share professional designs,
           </span>
           <Link
