@@ -61,7 +61,7 @@ const items: {
 
 export default component$(() => {
   return (
-    <div class='h-full w-[80px] overflow-y-auto bg-black text-gray-400'>
+    <div class='flex h-full w-[80px] flex-col overflow-y-auto bg-black text-gray-400'>
       {items.map(({ title, Icon }) => (
         <button
           key={title}
