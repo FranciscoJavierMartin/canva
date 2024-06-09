@@ -8,8 +8,8 @@ import {
   default as NavLink,
 } from '@/presentation/components/sidebar/NavLink';
 import HomeIcon from '@/presentation/icons/home';
-import Folder from '@/presentation/icons/folder';
-import TemplateIcon from '@/presentation/icons/template';
+import FolderIcon from '@/presentation/icons/folder';
+import LayoutIcon from '@/presentation/icons/layout';
 
 const navLinksSidebar: NavLinkProps[] = [
   {
@@ -20,12 +20,12 @@ const navLinksSidebar: NavLinkProps[] = [
   {
     text: 'Projects',
     href: '/home/projects',
-    Icon: Folder,
+    Icon: FolderIcon,
   },
   {
     text: 'Templates',
     href: '/home/templates',
-    Icon: TemplateIcon,
+    Icon: LayoutIcon,
   },
 ];
 
@@ -48,7 +48,7 @@ export default component$(() => {
             width={45}
           />
         </button>
-        <div class='absolute right-1 top-16 z-20 hidden w-64 rounded-md border border-gray-700 bg-gray-darker pt-1 transition duration-500 peer-focus-within:block'>
+        <div class='bg-gray-darker absolute right-1 top-16 z-20 hidden w-64 rounded-md border border-gray-700 pt-1 transition duration-500 peer-focus-within:block'>
           <div class='flex items-center justify-start gap-5 p-3'>
             <img
               class='size-[40px] rounded-full'
@@ -58,20 +58,20 @@ export default component$(() => {
               width={40}
             />
             <div class='flex flex-col items-start justify-center'>
-              <span class='text-sm font-bold text-gray-lighter'>John Doe</span>
-              <span class='text-sm font-bold text-gray-lighter'>
+              <span class='text-gray-lighter text-sm font-bold'>John Doe</span>
+              <span class='text-gray-lighter text-sm font-bold'>
                 john@doe.com
               </span>
             </div>
           </div>
           <ul class='text-gray-lighter'>
-            <li class='p-1 transition hover:bg-black-mid'>
+            <li class='hover:bg-black-mid p-1 transition'>
               <Link class='flex gap-2 p-2' href='/'>
                 <Settings />
                 Settings
               </Link>
             </li>
-            <li class='border-t px-1 pb-1 pt-2 transition hover:bg-black-mid'>
+            <li class='hover:bg-black-mid border-t px-1 pb-1 pt-2 transition'>
               <Link href='/' class='flex gap-2 p-2'>
                 <Logout />
                 Logout
@@ -91,10 +91,10 @@ export default component$(() => {
               width={40}
             />
             <div class='flex flex-col items-start justify-center'>
-              <span class='text-base font-bold text-gray-lighter'>
+              <span class='text-gray-lighter text-base font-bold'>
                 John Doe
               </span>
-              <span class='text-sm text-gray-lighter'>Free</span>
+              <span class='text-gray-lighter text-sm'>Free</span>
             </div>
           </div>
           <ul class='flex flex-col gap-2'>
