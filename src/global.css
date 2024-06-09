@@ -36,7 +36,6 @@
 }
 
 .edit-page-container {
-  display: grid;
   grid-template-columns: 85px 350px auto 250px;
   grid-template-rows: 64px auto;
   grid-template-areas:
