@@ -66,7 +66,7 @@ export default component$(() => {
         <button
           key={title}
           class={[
-            'flex flex-col items-center justify-center gap-1 hover:text-gray-100',
+            'flex h-[80px] flex-col items-center justify-center gap-1 hover:text-gray-100',
           ]}
         >
           <Icon styles='size-6' />

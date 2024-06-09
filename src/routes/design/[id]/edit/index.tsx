@@ -12,6 +12,9 @@ export default component$(() => {
         </div>
       </Navbar>
       <Sidebar />
+      <div class='h-full'>
+        
+      </div>
     </div>
   );
 });
