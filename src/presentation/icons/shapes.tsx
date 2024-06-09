@@ -1,13 +1,14 @@
 import { component$ } from '@builder.io/qwik';
+import type { IconProps } from '@/interfaces/types/icons';
 
-export default component$(() => (
+export default component$<IconProps>(({ styles }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     fill='none'
     viewBox='0 0 24 24'
     stroke-width='1.5'
     stroke='currentColor'
-    class='size-6'
+    class={['size-6', styles]}
   >
     <path
       stroke-linecap='round'

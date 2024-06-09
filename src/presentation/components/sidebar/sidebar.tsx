@@ -1,3 +1,4 @@
+import { type Component, component$ } from '@builder.io/qwik';
 import FolderIcon from '@/presentation/icons/folder';
 import ImageIcon from '@/presentation/icons/image';
 import LayoutIcon from '@/presentation/icons/layout';
@@ -5,14 +6,14 @@ import PencilIcon from '@/presentation/icons/pencil';
 import ShapesIcon from '@/presentation/icons/shapes';
 import TransparencyIcon from '@/presentation/icons/transparency';
 import UploadIcon from '@/presentation/icons/upload';
-import { type Component, component$ } from '@builder.io/qwik';
+import type { IconProps } from '@/interfaces/types/icons';
 
 const items: {
   title: string;
   //TODO: Type better 'type' and 'name'
   type: string;
   name: string;
-  Icon: Component;
+  Icon: Component<IconProps>;
 }[] = [
   {
     title: 'Design',
@@ -62,9 +63,14 @@ export default component$(() => {
   return (
     <div class='h-full w-[80px] overflow-y-auto bg-black text-gray-400'>
       {items.map(({ title, Icon }) => (
-        <button key={title} class={['flex']}>
-          <Icon />
-          <span>{title}</span>
+        <button
+          key={title}
+          class={[
+            'flex flex-col items-center justify-center gap-1 hover:text-gray-100',
+          ]}
+        >
+          <Icon styles='size-6' />
+          <span class='text-xs font-medium'>{title}</span>
         </button>
       ))}
     </div>
