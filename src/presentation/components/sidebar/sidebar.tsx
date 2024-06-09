@@ -61,7 +61,7 @@ const items: {
 
 export default component$(() => {
   return (
-    <div class='z-20 flex h-full w-[85px] flex-col overflow-y-auto bg-black text-gray-400'>
+    <div class='grid-area-icons z-20 flex h-full w-[85px] flex-col overflow-y-auto bg-black text-gray-400'>
       {items.map(({ title, Icon }) => (
         <button
           key={title}
