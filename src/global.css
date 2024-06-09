@@ -8,7 +8,7 @@
 
 @layer components {
   .button {
-    @apply rounded-[5px] py-2 text-center font-medium text-white transition-all;
+    @apply rounded-md py-2 text-center font-medium text-white transition-all;
   }
 }
 
