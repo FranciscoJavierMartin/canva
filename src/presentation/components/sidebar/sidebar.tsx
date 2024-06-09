@@ -70,11 +70,3 @@ export default component$(() => {
     </div>
   );
 });
-function TemplateIcon(
-  props: PublicProps<unknown>,
-  key: string | null,
-  flags: number,
-  dev?: DevJSX | undefined,
-): JSXOutput {
-  throw new Error('Function not implemented.');
-}
