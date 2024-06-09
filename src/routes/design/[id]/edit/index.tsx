@@ -5,7 +5,7 @@ import ArrowLeft from '@/presentation/icons/arrow-left';
 
 export default component$(() => {
   return (
-    <div class='min-w-screen edit-page-container grid h-screen grid-cols-[85px_350px_auto_250px] bg-black'>
+    <div class='min-w-screen edit-page-container grid h-screen grid-cols-[85px_350px_auto_250px] grid-rows-[64px_auto] bg-black'>
       <Navbar>
         <div class='flex items-center justify-center gap-2 text-gray-200'>
           <button class='button bg-purple-blue px-3'>Save</button>
