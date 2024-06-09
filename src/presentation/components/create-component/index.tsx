@@ -1,6 +1,7 @@
 import { type JSXOutput, component$ } from '@builder.io/qwik';
-import MainFrame from './main-frame';
 import type { ComponentInfo } from '@/interfaces/types/components';
+import MainFrame from './main-frame';
+import ShapeRect from './shape-rect';
 
 type CreateComponentProps = {
   info: ComponentInfo;
@@ -12,6 +13,13 @@ export default component$<CreateComponentProps>(({ info }) => {
   switch (info.name) {
     case 'main_frame':
       component = <MainFrame {...info} />;
+      break;
+    case 'shape':
+      switch (info.type) {
+        case 'rect':
+          component = <ShapeRect {...info} />;
+          break;
+      }
       break;
     default:
       component = <div />;
