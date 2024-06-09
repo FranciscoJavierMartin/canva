@@ -1,7 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import Navbar from '@/presentation/ui/Navbar';
 import Sidebar from '@/presentation/components/sidebar/sidebar';
-import ArrowLeft from '@/presentation/icons/arrow-left';
 
 export default component$(() => {
   return (
@@ -13,20 +12,10 @@ export default component$(() => {
         </div>
       </Navbar>
       <Sidebar />
-      <div
-        class={[
-          'bg-black-light grid-area-sidebar relative z-10 w-[350px]',
-          { 'p-0': true },
-        ]}
-      >
-        <button class='bg-black-light absolute -right-2 top-[calc(50%-50px)] flex h-[100px] w-[15px] items-center justify-center rounded-full text-slate-300 hover:text-gray-100'>
-          <ArrowLeft />
-        </button>
-      </div>
       <div class='grid-area-design h-full'></div>
       <div class='bg-black-light grid-area-tools z-10 h-full w-[250px] px-3 py-2 text-gray-300'>
         <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
-          <h1 class='text-white'>Hello world</h1>
+          <h1 class='text-white'>Tools</h1>
         </div>
       </div>
     </div>
