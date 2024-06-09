@@ -1,4 +1,4 @@
-import { component$ } from '@builder.io/qwik';
+import { Slot, component$ } from '@builder.io/qwik';
 import ArrowLeft from '@/presentation/icons/arrow-left';
 
 export default component$(() => {
@@ -12,6 +12,7 @@ export default component$(() => {
       <button class='bg-black-light absolute -right-2 top-[calc(50%-50px)] flex h-[100px] w-[15px] items-center justify-center rounded-full text-slate-300 hover:text-gray-100'>
         <ArrowLeft />
       </button>
+      <Slot />
     </div>
   );
 });
