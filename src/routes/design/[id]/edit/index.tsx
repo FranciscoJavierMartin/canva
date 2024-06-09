@@ -21,6 +21,12 @@ export default component$(() => {
             <ArrowLeft />
           </button>
         </div>
+        <div class='h-full w-10'></div>
+        <div class='bg-black-light h-full w-[250px] px-3 py-2 text-gray-300'>
+          <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
+
+          </div>
+        </div>
       </div>
     </div>
   );
