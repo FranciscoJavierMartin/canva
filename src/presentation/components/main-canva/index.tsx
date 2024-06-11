@@ -3,11 +3,11 @@ import type { ComponentInfo } from '@/interfaces/types/components';
 import MainFrame from './main-frame';
 import ShapeRect from './shape-rect';
 
-type CreateComponentProps = {
+type MainCanvaProps = {
   info: ComponentInfo;
 };
 
-export default component$<CreateComponentProps>(({ info }) => {
+export default component$<MainCanvaProps>(({ info }) => {
   let component: JSXOutput;
 
   switch (info.name) {

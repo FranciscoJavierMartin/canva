@@ -1,7 +1,7 @@
 import { $, component$, useSignal } from '@builder.io/qwik';
 import Navbar from '@/presentation/ui/Navbar';
 import Sidebar from '@/presentation/components/sidebar/sidebar';
-import CreateComponent from '@/presentation/components/create-component';
+import MainCanva from '@/presentation/components/main-canva';
 import type { ComponentInfo } from '@/interfaces/types/components';
 
 export default component$(() => {
@@ -58,7 +58,7 @@ export default component$(() => {
           >
             <div class='relative size-auto overflow-hidden'>
               {components.value.map((c) => (
-                <CreateComponent key={c.id} info={c} />
+                <MainCanva key={c.id} info={c} />
               ))}
             </div>
           </div>
