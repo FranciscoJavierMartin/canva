@@ -1,5 +1,5 @@
 import { component$, $ } from '@builder.io/qwik';
-import type { Component, QRL } from '@builder.io/qwik';
+import type { Component, QRL, Signal } from '@builder.io/qwik';
 import FolderIcon from '@/presentation/icons/folder';
 import ImageIcon from '@/presentation/icons/image';
 import LayoutIcon from '@/presentation/icons/layout';
@@ -53,8 +53,9 @@ const items: {
 ];
 
 export default component$<{
+  selectedOption: Signal<SidebarPanelType | undefined>;
   selectOption: QRL<(option: SidebarPanelType) => void>;
-}>(({ selectOption }) => {
+}>(({ selectOption, selectedOption }) => {
   return (
     <div class='grid-area-icons z-20 flex h-full w-[85px] flex-col overflow-y-auto bg-black text-gray-400'>
       {items.map(({ title, Icon, type }) => (
@@ -62,6 +63,7 @@ export default component$<{
           key={title}
           class={[
             'flex h-[80px] flex-col items-center justify-center gap-1 hover:text-gray-100',
+            { 'bg-black-light text-gray-200': type === selectedOption.value },
           ]}
           onClick$={$(() => selectOption(type))}
         >
