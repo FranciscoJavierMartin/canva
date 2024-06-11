@@ -5,17 +5,18 @@ import MainCanva from '@/presentation/components/main-canva';
 import type { ComponentInfo } from '@/interfaces/types/components';
 
 export default component$(() => {
-  const currentComponent = useSignal<ComponentInfo | undefined>({
-    name: 'main_frame',
-    type: 'rect',
-    id: Math.floor(Math.random() * 10_000 + 1),
-    height: 500,
-    width: 650,
-    zIndex: 1,
-    color: '#fff',
-    image: '',
-  });
-  const components = useSignal<ComponentInfo[]>([currentComponent.value!]);
+  // {
+  //   name: 'main_frame',
+  //   type: 'rect',
+  //   id: Math.floor(Math.random() * 10_000 + 1),
+  //   height: 500,
+  //   width: 650,
+  //   zIndex: 1,
+  //   color: '#fff',
+  //   image: '',
+  // }
+  const currentComponent = useSignal<ComponentInfo | undefined>();
+  const components = useSignal<ComponentInfo[]>([]);
 
   const moveElement = $(() => {
     console.log('Move element');
@@ -64,11 +65,13 @@ export default component$(() => {
           </div>
         </div>
       </div>
-      <div class='grid-area-tools z-10 h-full w-[250px] bg-black-light px-3 py-2 text-gray-300'>
-        <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
-          <h1 class='text-white'>Tools</h1>
+      {currentComponent.value && (
+        <div class='grid-area-tools z-10 h-full w-[250px] bg-black-light px-3 py-2 text-gray-300'>
+          <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
+            <h1 class='text-white'>Tools</h1>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 });
