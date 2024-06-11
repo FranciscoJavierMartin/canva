@@ -1,9 +1,9 @@
+/* eslint-disable qwik/valid-lexical-scope */
 import {
   component$,
   useSignal,
   $,
   type Component,
-  useTask$,
   useVisibleTask$,
 } from '@builder.io/qwik';
 import type { SidebarPanelType } from '@/interfaces/types/sidebar';
@@ -19,10 +19,14 @@ import background from './panels/background';
 
 export default component$(() => {
   const panel = useSignal<Component | undefined>();
-
   const selectedOption = useSignal<SidebarPanelType | undefined>();
-  const selectOption = $((option: SidebarPanelType) => {
+
+  const selectOption = $((option: SidebarPanelType): void => {
     selectedOption.value = selectedOption.value === option ? undefined : option;
+  });
+
+  const closePanel = $((): void => {
+    selectedOption.value = undefined;
   });
 
   // eslint-disable-next-line qwik/no-use-visible-task
@@ -59,7 +63,9 @@ export default component$(() => {
   return (
     <>
       <SidebarIcons selectOption={selectOption} />
-      <SidebarFold>{panel.value && <panel.value />}</SidebarFold>
+      <SidebarFold isOpen={!!selectedOption.value} closePanel={closePanel}>
+        {panel.value && <panel.value />}
+      </SidebarFold>
     </>
   );
 });

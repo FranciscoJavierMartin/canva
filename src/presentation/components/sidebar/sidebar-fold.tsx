@@ -1,15 +1,26 @@
-import { Slot, component$ } from '@builder.io/qwik';
+import { type QRL, Slot, component$ } from '@builder.io/qwik';
 import ArrowLeft from '@/presentation/icons/arrow-left';
 
-export default component$(() => {
+type SidebarFoldProps = {
+  isOpen: boolean;
+  closePanel: QRL<() => void>;
+};
+
+export default component$<SidebarFoldProps>(({ isOpen, closePanel }) => {
   return (
     <div
       class={[
-        'bg-black-light grid-area-sidebar relative z-10 w-[350px]',
-        { 'p-0': true },
+        'grid-area-sidebar relative z-10 w-[350px] bg-black-light',
+        {
+          'p-0': !isOpen,
+          'px-8 py-5': isOpen,
+        },
       ]}
     >
-      <button class='bg-black-light absolute -right-2 top-[calc(50%-50px)] flex h-[100px] w-[15px] items-center justify-center rounded-full text-slate-300 hover:text-gray-100'>
+      <button
+        onClick$={closePanel}
+        class='absolute -right-2 top-[calc(50%-50px)] flex h-[100px] w-[15px] items-center justify-center rounded-full bg-black-light text-slate-300 hover:text-gray-100'
+      >
         <ArrowLeft />
       </button>
       <Slot />
