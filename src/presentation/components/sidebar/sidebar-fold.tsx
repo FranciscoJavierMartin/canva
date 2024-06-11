@@ -10,10 +10,9 @@ export default component$<SidebarFoldProps>(({ isOpen, closePanel }) => {
   return (
     <div
       class={[
-        'grid-area-sidebar relative z-10 w-[350px] bg-black-light transition-transform',
+        'grid-area-sidebar relative z-10 w-[350px] bg-black-light p-5 transition-transform',
         {
           '-translate-x-full p-0': !isOpen,
-          'px-8 py-5 transition-transform': isOpen,
         },
       ]}
     >
