@@ -1,6 +1,7 @@
 import { $, component$, useSignal } from '@builder.io/qwik';
 import Navbar from '@/presentation/ui/Navbar';
 import Sidebar from '@/presentation/components/sidebar/sidebar';
+import CreateComponent from '@/presentation/components/create-component';
 import type { ComponentInfo } from '@/interfaces/types/components';
 
 export default component$(() => {
@@ -41,8 +42,27 @@ export default component$(() => {
         </div>
       </Navbar>
       <Sidebar />
-      <div class='grid-area-design h-full'>
-        
+      <div class='grid-area-design h-full border border-red-500'>
+        <div
+          class={[
+            'relative flex h-full w-full items-center justify-center',
+            {
+              'overflow-hidden': !currentComponent.value,
+            },
+          ]}
+        >
+          <div
+            class={
+              'flex min-h-[500px] min-w-[650px] items-center justify-center overflow-hidden'
+            }
+          >
+            <div class='relative size-auto overflow-hidden'>
+              {components.value.map((c) => (
+                <CreateComponent key={c.id} info={c} />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
       <div class='grid-area-tools z-10 h-full w-[250px] bg-black-light px-3 py-2 text-gray-300'>
         <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
