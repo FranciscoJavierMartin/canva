@@ -1,4 +1,5 @@
-import { type Component, component$, $, QRL } from '@builder.io/qwik';
+import { component$, $ } from '@builder.io/qwik';
+import type { Component, QRL } from '@builder.io/qwik';
 import FolderIcon from '@/presentation/icons/folder';
 import ImageIcon from '@/presentation/icons/image';
 import LayoutIcon from '@/presentation/icons/layout';
@@ -7,75 +8,67 @@ import ShapesIcon from '@/presentation/icons/shapes';
 import TransparencyIcon from '@/presentation/icons/transparency';
 import UploadIcon from '@/presentation/icons/upload';
 import type { IconProps } from '@/interfaces/types/icons';
+import type { SidebarPanelType } from '@/interfaces/types/sidebar';
 
 const items: {
   title: string;
-  //TODO: Type better 'type' and 'name'
-  type: string;
-  name: string;
+  type: SidebarPanelType;
   Icon: Component<IconProps>;
 }[] = [
   {
     title: 'Design',
     type: 'design',
-    name: 'design',
     Icon: LayoutIcon,
   },
   {
     title: 'Shapes',
     type: 'shape',
-    name: 'shape',
     Icon: ShapesIcon,
   },
   {
     title: 'Upload',
-    type: 'image',
-    name: 'uploadImage',
+    type: 'uploadImage',
     Icon: UploadIcon,
   },
   {
     title: 'Text',
     type: 'text',
-    name: 'text',
     Icon: PencilIcon,
   },
   {
     title: 'Project',
-    type: 'project',
-    name: 'projects',
+    type: 'projects',
     Icon: FolderIcon,
   },
   {
     title: 'Images',
     type: 'initImage',
-    name: 'images',
     Icon: ImageIcon,
   },
   {
     title: 'Background',
     type: 'background',
-    name: 'background',
     Icon: TransparencyIcon,
   },
 ];
 
-export default component$<{ selectOption: QRL<(option: string) => void> }>(
-  ({ selectOption }) => {
-    return (
-      <div class='grid-area-icons z-20 flex h-full w-[85px] flex-col overflow-y-auto bg-black text-gray-400'>
-        {items.map(({ title, Icon, name }) => (
-          <button
-            key={title}
-            class={[
-              'flex h-[80px] flex-col items-center justify-center gap-1 hover:text-gray-100',
-            ]}
-            onClick$={$(() => selectOption(name))}
-          >
-            <Icon styles='size-6' />
-            <span class='text-xs font-medium'>{title}</span>
-          </button>
-        ))}
-      </div>
-    );
-  },
-);
+export default component$<{
+  selectOption: QRL<(option: SidebarPanelType) => void>;
+}>(({ selectOption }) => {
+  return (
+    <div class='grid-area-icons z-20 flex h-full w-[85px] flex-col overflow-y-auto bg-black text-gray-400'>
+      {items.map(({ title, Icon, type }) => (
+        <button
+          key={title}
+          class={[
+            'flex h-[80px] flex-col items-center justify-center gap-1 hover:text-gray-100',
+          ]}
+          onClick$={$(() => selectOption(type))}
+        >
+          <Icon styles='size-6' />
+          <span class='text-xs font-medium'>{title}</span>
+        </button>
+      ))}
+    </div>
+  );
+});
