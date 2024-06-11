@@ -62,7 +62,10 @@ export default component$(() => {
 
   return (
     <>
-      <SidebarIcons selectOption={selectOption} selectedOption={selectedOption}/>
+      <SidebarIcons
+        selectOption={selectOption}
+        selectedOption={selectedOption}
+      />
       <SidebarFold isOpen={!!selectedOption.value} closePanel={closePanel}>
         {panel.value && <panel.value />}
       </SidebarFold>

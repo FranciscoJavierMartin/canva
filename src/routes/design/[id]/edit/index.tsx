@@ -13,7 +13,7 @@ export default component$(() => {
       </Navbar>
       <Sidebar />
       <div class='grid-area-design h-full'></div>
-      <div class='bg-black-light grid-area-tools z-10 h-full w-[250px] px-3 py-2 text-gray-300'>
+      <div class='grid-area-tools z-10 h-full w-[250px] bg-black-light px-3 py-2 text-gray-300'>
         <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
           <h1 class='text-white'>Tools</h1>
         </div>
