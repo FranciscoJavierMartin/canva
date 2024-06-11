@@ -1,4 +1,11 @@
-import { component$, useSignal, $, type Component } from '@builder.io/qwik';
+import {
+  component$,
+  useSignal,
+  $,
+  type Component,
+  useTask$,
+  useVisibleTask$,
+} from '@builder.io/qwik';
 import type { SidebarPanelType } from '@/interfaces/types/sidebar';
 import SidebarIcons from './sidebar-icons';
 import SidebarFold from './sidebar-fold';
@@ -16,6 +23,11 @@ export default component$(() => {
   const selectedOption = useSignal<SidebarPanelType | undefined>();
   const selectOption = $((option: SidebarPanelType) => {
     selectedOption.value = selectedOption.value === option ? undefined : option;
+  });
+
+  // eslint-disable-next-line qwik/no-use-visible-task
+  useVisibleTask$(({ track }) => {
+    track(() => [selectedOption.value]);
 
     switch (selectedOption.value) {
       case 'design':
