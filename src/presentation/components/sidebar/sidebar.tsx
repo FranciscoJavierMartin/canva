@@ -1,23 +1,33 @@
-import { type JSXOutput, component$, useSignal } from '@builder.io/qwik';
+import { component$, useSignal, $, type Component } from '@builder.io/qwik';
 import SidebarIcons from './sidebar-icons';
 import SidebarFold from './sidebar-fold';
-import TemplateDesign from './template-design';
+import design from './panels/design';
+import shapes from './panels/shapes';
 
 export default component$(() => {
-  let panel: JSXOutput = <div />;
+  const panel = useSignal<Component | undefined>();
 
-  const state = useSignal('design');
+  const selectedOption = useSignal<string | undefined>();
+  const selectMenu = $((option: string) => {
+    console.log(option);
+    selectedOption.value = selectedOption.value === option ? undefined : option;
 
-  switch (state.value) {
-    case 'design':
-      panel = <TemplateDesign />;
-      break;
-  }
+    switch (selectedOption.value) {
+      case 'design':
+        panel.value = design;
+        break;
+      case 'shape':
+        panel.value = shapes;
+        break;
+      default:
+        panel.value = undefined;
+    }
+  });
 
   return (
     <>
-      <SidebarIcons />
-      <SidebarFold>{panel}</SidebarFold>
+      <SidebarIcons selectOption={selectMenu} />
+      <SidebarFold>{panel.value && <panel.value />}</SidebarFold>
     </>
   );
 });

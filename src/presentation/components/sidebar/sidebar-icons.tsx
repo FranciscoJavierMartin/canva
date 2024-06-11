@@ -1,4 +1,4 @@
-import { type Component, component$ } from '@builder.io/qwik';
+import { type Component, component$, $, QRL } from '@builder.io/qwik';
 import FolderIcon from '@/presentation/icons/folder';
 import ImageIcon from '@/presentation/icons/image';
 import LayoutIcon from '@/presentation/icons/layout';
@@ -59,20 +59,23 @@ const items: {
   },
 ];
 
-export default component$(() => {
-  return (
-    <div class='grid-area-icons z-20 flex h-full w-[85px] flex-col overflow-y-auto bg-black text-gray-400'>
-      {items.map(({ title, Icon }) => (
-        <button
-          key={title}
-          class={[
-            'flex h-[80px] flex-col items-center justify-center gap-1 hover:text-gray-100',
-          ]}
-        >
-          <Icon styles='size-6' />
-          <span class='text-xs font-medium'>{title}</span>
-        </button>
-      ))}
-    </div>
-  );
-});
+export default component$<{ selectOption: QRL<(option: string) => void> }>(
+  ({ selectOption }) => {
+    return (
+      <div class='grid-area-icons z-20 flex h-full w-[85px] flex-col overflow-y-auto bg-black text-gray-400'>
+        {items.map(({ title, Icon, name }) => (
+          <button
+            key={title}
+            class={[
+              'flex h-[80px] flex-col items-center justify-center gap-1 hover:text-gray-100',
+            ]}
+            onClick$={$(() => selectOption(name))}
+          >
+            <Icon styles='size-6' />
+            <span class='text-xs font-medium'>{title}</span>
+          </button>
+        ))}
+      </div>
+    );
+  },
+);
