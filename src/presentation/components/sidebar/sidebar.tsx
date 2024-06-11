@@ -1,78 +1,71 @@
-import { type Component, component$ } from '@builder.io/qwik';
-import FolderIcon from '@/presentation/icons/folder';
-import ImageIcon from '@/presentation/icons/image';
-import LayoutIcon from '@/presentation/icons/layout';
-import PencilIcon from '@/presentation/icons/pencil';
-import ShapesIcon from '@/presentation/icons/shapes';
-import TransparencyIcon from '@/presentation/icons/transparency';
-import UploadIcon from '@/presentation/icons/upload';
-import type { IconProps } from '@/interfaces/types/icons';
-
-const items: {
-  title: string;
-  //TODO: Type better 'type' and 'name'
-  type: string;
-  name: string;
-  Icon: Component<IconProps>;
-}[] = [
-  {
-    title: 'Design',
-    type: 'design',
-    name: 'design',
-    Icon: LayoutIcon,
-  },
-  {
-    title: 'Shapes',
-    type: 'shape',
-    name: 'shape',
-    Icon: ShapesIcon,
-  },
-  {
-    title: 'Upload',
-    type: 'image',
-    name: 'uploadImage',
-    Icon: UploadIcon,
-  },
-  {
-    title: 'Text',
-    type: 'text',
-    name: 'text',
-    Icon: PencilIcon,
-  },
-  {
-    title: 'Project',
-    type: 'project',
-    name: 'projects',
-    Icon: FolderIcon,
-  },
-  {
-    title: 'Images',
-    type: 'initImage',
-    name: 'images',
-    Icon: ImageIcon,
-  },
-  {
-    title: 'Background',
-    type: 'background',
-    name: 'background',
-    Icon: TransparencyIcon,
-  },
-];
+/* eslint-disable qwik/valid-lexical-scope */
+import {
+  component$,
+  useSignal,
+  $,
+  type Component,
+  useVisibleTask$,
+} from '@builder.io/qwik';
+import type { SidebarPanelType } from '@/interfaces/types/sidebar';
+import SidebarIcons from './sidebar-icons';
+import SidebarFold from './sidebar-fold';
+import design from './panels/design';
+import shapes from './panels/shapes';
+import upload from './panels/upload';
+import text from './panels/text';
+import projects from './panels/projects';
+import images from './panels/images';
+import background from './panels/background';
 
 export default component$(() => {
+  const panel = useSignal<Component | undefined>();
+  const selectedOption = useSignal<SidebarPanelType | undefined>();
+
+  const selectOption = $((option: SidebarPanelType): void => {
+    selectedOption.value = selectedOption.value === option ? undefined : option;
+  });
+
+  const closePanel = $((): void => {
+    selectedOption.value = undefined;
+  });
+
+  // eslint-disable-next-line qwik/no-use-visible-task
+  useVisibleTask$(({ track }) => {
+    track(() => [selectedOption.value]);
+
+    switch (selectedOption.value) {
+      case 'design':
+        panel.value = design;
+        break;
+      case 'shape':
+        panel.value = shapes;
+        break;
+      case 'uploadImage':
+        panel.value = upload;
+        break;
+      case 'text':
+        panel.value = text;
+        break;
+      case 'projects':
+        panel.value = projects;
+        break;
+      case 'initImage':
+        panel.value = images;
+        break;
+      case 'background':
+        panel.value = background;
+        break;
+      default:
+        panel.value = undefined;
+    }
+  });
+
   return (
-    <div class='flex h-full w-[80px] flex-col overflow-y-auto bg-black text-gray-400'>
-      {items.map(({ title, Icon }) => (
-        <button
-          key={title}
-          class={[
-            'flex h-[80px] flex-col items-center justify-center gap-1 hover:text-gray-100',
-          ]}
-        >
-          <Icon styles='size-6' />
-          <span class='text-xs font-medium'>{title}</span>
-        </button>
-      ))}
-    </div>
+    <>
+      <SidebarIcons selectOption={selectOption} />
+      <SidebarFold isOpen={!!selectedOption.value} closePanel={closePanel}>
+        {panel.value && <panel.value />}
+      </SidebarFold>
+    </>
   );
 });

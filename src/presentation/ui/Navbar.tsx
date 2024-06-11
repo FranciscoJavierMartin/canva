@@ -4,7 +4,7 @@ import Logo from '@/presentation/icons/logo';
 
 export default component$(() => {
   return (
-    <header class='w-full bg-black-mid shadow-md'>
+    <header class='bg-black-mid grid-area-header z-30 w-full shadow-md'>
       <div class='m-auto p-3'>
         <nav class='flex items-center justify-between'>
           <Link href='/home' class='h-[30px] w-[80px]'>

@@ -11,7 +11,7 @@ export default component$<NavLinkProps>(({ text, Icon, ...props }) => {
   return (
     <NavLink
       {...props}
-      class='flex items-center justify-start gap-3 rounded-md px-3 py-2 text-gray-lighter'
+      class='text-gray-lighter flex items-center justify-start gap-3 rounded-md px-3 py-2'
       activeClass='bg-[#ffffff26]'
     >
       <Icon />
