@@ -1,25 +1,22 @@
 // TODO: Extract common properties
-export type MainFrameInfo = {
-  name: 'main_frame';
-  type: 'rect';
+type BaseComponent = {
   id: number;
   height: number;
   width: number;
   zIndex: number;
   color: string;
+};
+
+export type MainFrameInfo = BaseComponent & {
+  name: 'main_frame';
+  type: 'rect';
   image: string;
 };
 
-export type ShapeRectInfo = {
+export type ShapeRectInfo = BaseComponent & {
   name: 'shape';
   type: 'rect';
-  id: number;
-  height: number;
-  width: number;
-  zIndex: number;
-  color: string;
   image: string;
-
   left: number;
   top: number;
   rotate: number;
