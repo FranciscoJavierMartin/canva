@@ -8,7 +8,7 @@ export default component$<IconProps>(({ styles }) => (
     viewBox='0 0 24 24'
     stroke-width='1.5'
     stroke='currentColor'
-    class={['size-6', styles]}
+    class={['size-3', styles]}
   >
     <path
       stroke-linecap='round'
