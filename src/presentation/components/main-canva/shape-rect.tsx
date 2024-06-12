@@ -38,6 +38,10 @@ export default component$<ShapeRectProps>(
             zIndex,
             image,
             setCurrentComponent,
+            left,
+            top,
+            opacity,
+            rotation,
             // eslint-disable-next-line qwik/valid-lexical-scope
             ...props,
           })
