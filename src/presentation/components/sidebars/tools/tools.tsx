@@ -41,6 +41,14 @@ export default component$<ToolsProps>(() => {
               }}
             />
           </div>
+          {canva.currentComponent.value?.name === 'main_frame' && (
+            <button
+              class='button bg-slate-600 px-3'
+              onClick$={() => canva.removeBackground()}
+            >
+              Remove background
+            </button>
+          )}
         </div>
       )}
     </aside>

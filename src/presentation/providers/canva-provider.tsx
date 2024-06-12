@@ -29,7 +29,7 @@ export default component$(() => {
   });
 
   // TODO: Use useStore
-  // TODO: An alternative is keep the index instead of the current object
+  // TODO: An alternative is keep the index or the id instead of the current object
   // eslint-disable-next-line qwik/use-method-usage
   const currentComponent: Signal<ComponentInfo | undefined> = useSignal<
     ComponentInfo | undefined
@@ -65,6 +65,10 @@ export default component$(() => {
     console.log('Remove element');
   });
 
+  const removeBackground = $(() => {
+    console.log('Remove background');
+  });
+
   useContextProvider<CanvaContextState>(CanvaContext, {
     currentComponent,
     componentData,
@@ -74,6 +78,7 @@ export default component$(() => {
     removeElement,
     resizeElement,
     moveElement,
+    removeBackground
   });
 
   // eslint-disable-next-line qwik/no-use-visible-task
