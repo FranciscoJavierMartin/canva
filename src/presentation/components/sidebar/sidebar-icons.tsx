@@ -57,7 +57,7 @@ export default component$<{
   selectOption: QRL<(option: SidebarPanelType) => void>;
 }>(({ selectOption, selectedOption }) => {
   return (
-    <div class='grid-area-icons z-20 flex h-full w-[85px] flex-col overflow-y-auto bg-black text-gray-400'>
+    <aside class='z-30 flex h-full w-[85px] flex-col overflow-y-auto bg-black text-gray-400'>
       {items.map(({ title, Icon, type }) => (
         <button
           key={title}
@@ -71,6 +71,6 @@ export default component$<{
           <span class='text-xs font-medium'>{title}</span>
         </button>
       ))}
-    </div>
+    </aside>
   );
 });

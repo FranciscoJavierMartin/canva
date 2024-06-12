@@ -1,3 +1,4 @@
+import Sidebar from '@/presentation/components/sidebar/sidebar';
 import Navbar from '@/presentation/ui/Navbar';
 import { component$, useSignal } from '@builder.io/qwik';
 
@@ -14,14 +15,14 @@ export default component$(() => {
         </div>
       </Navbar>
       <div class='relative flex h-[calc(100vh-64px)]'>
-        <aside class='z-30 w-[85px] bg-emerald-200'>
+        {/* <aside class='z-30 w-[85px] bg-emerald-200'>
           <button
             onClick$={() => (openSidebar.value = !openSidebar.value)}
             class='p-2 text-white'
           >
             Icon
           </button>
-        </aside>
+        </aside> */}
         <aside
           class={[
             'absolute left-[85px] z-20 h-full w-[350px] bg-yellow-400 text-emerald-600 transition-transform duration-300',
@@ -33,6 +34,7 @@ export default component$(() => {
         >
           Sidebar menu
         </aside>
+        <Sidebar />
         <div class='w-[calc(100vw-85px)] bg-blue-400'>
           <main class='flex h-full flex-col items-center justify-center'>
             <h1 class='text-purple-600'>Hello world</h1>
