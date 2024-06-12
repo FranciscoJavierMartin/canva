@@ -4,13 +4,25 @@ import {
   component$,
   useContextProvider,
   useSignal,
+  type Signal,
 } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import type { ComponentInfo } from '@/interfaces/types/components';
 import type { CanvaContextState } from '@/interfaces/types/canva';
 
 export default component$(() => {
-  const currentComponent = useSignal<ComponentInfo | undefined>({
+  // eslint-disable-next-line prefer-const
+  let currentComponent: Signal<ComponentInfo | undefined>;
+
+  const setCurrentComponent = $((component: ComponentInfo) => {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (currentComponent?.value) {
+      currentComponent.value = component;
+    }
+  });
+
+  // eslint-disable-next-line qwik/use-method-usage
+  currentComponent = useSignal<ComponentInfo | undefined>({
     name: 'main_frame',
     type: 'rect',
     id: Math.floor(Math.random() * 10_000 + 1),
@@ -19,7 +31,9 @@ export default component$(() => {
     zIndex: 1,
     color: '#fff',
     image: '',
+    setCurrentComponent: setCurrentComponent,
   });
+
   const components = useSignal<ComponentInfo[]>([currentComponent.value!]);
 
   const moveElement = $(() => {
@@ -41,6 +55,7 @@ export default component$(() => {
   useContextProvider<CanvaContextState>(CanvaContext, {
     currentComponent,
     components,
+    setCurrentComponent,
     rotateElement,
     removeElement,
     resizeElement,

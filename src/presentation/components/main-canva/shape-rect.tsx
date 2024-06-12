@@ -4,7 +4,19 @@ import type { ShapeRectInfo } from '@/interfaces/types/components';
 type ShapeRectProps = ShapeRectInfo;
 
 export default component$<ShapeRectProps>(
-  ({ width, height, color, opacity, left, top, zIndex, rotate }) => {
+  ({
+    width,
+    height,
+    color,
+    opacity,
+    left,
+    top,
+    zIndex,
+    rotate,
+    setCurrentComponent,
+    image,
+    ...props
+  }) => {
     return (
       <div
         class='group absolute hover:border-2 hover:border-indigo-500'
@@ -18,6 +30,18 @@ export default component$<ShapeRectProps>(
           zIndex,
           transform: rotate ? `rotate(${rotate}deg)` : 'rotate(0deg)',
         }}
+        onClick$={() =>
+          setCurrentComponent({
+            width,
+            height,
+            color,
+            zIndex,
+            image,
+            setCurrentComponent,
+            // eslint-disable-next-line qwik/valid-lexical-scope
+            ...props,
+          })
+        }
       ></div>
     );
   },

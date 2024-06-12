@@ -5,6 +5,7 @@ type BaseComponent = {
   width: number;
   zIndex: number;
   color: string;
+  setCurrentComponent: QRL<(component: ComponentInfo) => void>;
 };
 
 export type MainFrameInfo = BaseComponent & {
