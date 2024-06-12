@@ -13,11 +13,13 @@ import { registerSchema } from '@/core/validators/registerSchema';
 export const useRegisterUser = globalAction$(
   async (data, { redirect }: RequestEventAction) => {
     console.log(data);
-    redirect(302, '/home');
-    // return {
-    //   message: 'Ups, something went wrong. Please try again.',
-    //   // errors: {},
-    // };
+
+    throw redirect(302, '/home');
+
+    return {
+      message: 'Ups, something went wrong. Please try again.',
+      // errors: {},
+    };
   },
   zod$(registerSchema),
 );
