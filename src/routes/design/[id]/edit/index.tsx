@@ -6,6 +6,7 @@ import Tools from '@/presentation/components/sidebars/tools/tools';
 import type { ComponentInfo } from '@/interfaces/types/components';
 
 export default component$(() => {
+  // TODO: Add all inputs signals
   const currentComponent = useSignal<ComponentInfo | undefined>({
     name: 'main_frame',
     type: 'rect',
@@ -51,7 +52,7 @@ export default component$(() => {
             ))}
           </main>
         </div>
-        <Tools isOpen={!!currentComponent.value} />
+        <Tools component={currentComponent.value} />
       </div>
     </div>
   );
