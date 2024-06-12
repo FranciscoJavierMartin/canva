@@ -20,7 +20,7 @@ export default component$(() => {
             <button class='text-white'>Open tools</button>
           </main>
         </div>
-        <Tools />
+        <Tools isOpen={true} />
       </div>
     </div>
   );

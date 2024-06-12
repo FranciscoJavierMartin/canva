@@ -1,15 +1,17 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 
-export default component$(() => {
-  const openTools = useSignal<boolean>(true);
+type ToolsProps = {
+  isOpen: boolean;
+};
 
+export default component$<ToolsProps>(({ isOpen }) => {
   return (
     <aside
       class={[
         'absolute right-0 h-full w-[250px] bg-gray-700 transition-transform duration-300',
         {
-          'translate-x-[250px]': !openTools.value,
-          'translate-x-0': openTools.value,
+          'translate-x-[250px]': !isOpen,
+          'translate-x-0': isOpen,
         },
       ]}
     >
