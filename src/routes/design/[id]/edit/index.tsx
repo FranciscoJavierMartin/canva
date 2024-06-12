@@ -37,14 +37,14 @@ export default component$(() => {
   return (
     <div class='min-w-screen h-screen bg-black'>
       <Navbar>
-        <div class='flex items-center justify-center gap-2 text-gray-200'>
+        <div class='center-elements gap-2 text-gray-200'>
           <button class='button bg-purple-blue px-3'>Save</button>
           <button class='button bg-purple-bright px-3'>Download</button>
         </div>
       </Navbar>
       <div class='relative flex h-[calc(100vh-64px)]'>
         <Sidebar />
-        <div class='flex h-full w-[calc(100vw-85px)] items-center justify-center'>
+        <div class='center-elements h-full w-[calc(100vw-85px)]'>
           <main class='relative size-auto min-h-[500px] min-w-[650px] overflow-hidden'>
             {components.value.map((c) => (
               <MainCanva key={c.id} info={c} />

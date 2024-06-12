@@ -34,29 +34,7 @@
     }
   }
 
-  .grid-template-areas-edit-page-container {
-    grid-template-areas:
-      'header header header header'
-      'icons sidebar design tools';
-
-    .grid-area-header {
-      grid-area: header;
-    }
-
-    .grid-area-icons {
-      grid-area: icons;
-    }
-
-    .grid-area-sidebar {
-      grid-area: sidebar;
-    }
-
-    .grid-area-design {
-      grid-area: design;
-    }
-
-    .grid-area-tools {
-      grid-area: tools;
-    }
+  .center-elements {
+    @apply flex items-center justify-center;
   }
 }

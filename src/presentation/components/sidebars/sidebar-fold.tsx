@@ -20,7 +20,7 @@ export default component$<SidebarFoldProps>(({ isOpen, closePanel }) => {
       <button
         onClick$={closePanel}
         class={[
-          'absolute -right-2 top-[calc(50%-50px)] flex h-[100px] w-[15px] items-center justify-center rounded-full bg-black-light text-slate-300 hover:text-gray-100',
+          'center-elements absolute -right-2 top-[calc(50%-50px)] h-[100px] w-[15px] rounded-full bg-black-light text-slate-300 hover:text-gray-100',
           {
             hidden: !isOpen,
           },

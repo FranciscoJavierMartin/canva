@@ -5,7 +5,7 @@ import Carousel from '@/presentation/ui/Carousel';
 export default component$(() => {
   return (
     <div>
-      <div class='relative flex h-[250px] w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-dark to-purple-dark'>
+      <div class='center-elements relative h-[250px] w-full rounded-md bg-gradient-to-r from-blue-dark to-purple-dark'>
         <NewDesignForm />
         <div>
           <h2 class='py-6 text-3xl font-semibold text-white'>

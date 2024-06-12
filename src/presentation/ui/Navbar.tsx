@@ -10,7 +10,7 @@ export default component$(() => {
           <Link href='/home' class='h-[30px] w-[80px]'>
             <Logo />
           </Link>
-          <div class='flex items-center justify-center gap-4'>
+          <div class='center-elements gap-4'>
             <Slot />
           </div>
         </nav>

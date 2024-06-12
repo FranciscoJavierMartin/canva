@@ -62,7 +62,7 @@ export default component$<{
         <button
           key={title}
           class={[
-            'flex h-[80px] flex-col items-center justify-center gap-1 hover:text-gray-100',
+            'center-elements h-[80px] flex-col gap-1 hover:text-gray-100',
             { 'bg-black-light text-gray-200': type === selectedOption.value },
           ]}
           onClick$={$(() => selectOption(type))}
