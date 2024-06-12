@@ -4,6 +4,7 @@ import Sidebar from '@/presentation/components/sidebars/sidebar';
 import CanvaComponent from '@/presentation/components/main-canva/canva-component';
 import Tools from '@/presentation/components/sidebars/tools/tools';
 import type { ComponentInfo } from '@/interfaces/types/components';
+import CanvaProvider from '@/presentation/providers/canva-provider';
 
 export default component$(() => {
   // TODO: Add all inputs signals
@@ -43,7 +44,7 @@ export default component$(() => {
           <button class='button bg-purple-bright px-3'>Download</button>
         </div>
       </Navbar>
-      <div class='relative flex h-[calc(100vh-64px)]'>
+      <CanvaProvider>
         <Sidebar />
         <div class='center-elements h-full w-[calc(100vw-85px)]'>
           <main class='relative size-auto min-h-[500px] min-w-[650px] overflow-hidden'>
@@ -53,7 +54,7 @@ export default component$(() => {
           </main>
         </div>
         <Tools component={currentComponent.value} />
-      </div>
+      </CanvaProvider>
     </div>
   );
 });
