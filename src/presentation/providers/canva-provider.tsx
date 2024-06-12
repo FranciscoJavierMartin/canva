@@ -5,6 +5,7 @@ import {
   useContextProvider,
   useSignal,
   useStore,
+  useVisibleTask$,
   type Signal,
 } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
@@ -69,6 +70,30 @@ export default component$(() => {
     removeElement,
     resizeElement,
     moveElement,
+  });
+
+  // eslint-disable-next-line qwik/no-use-visible-task
+  useVisibleTask$(({ track }) => {
+    track(() => [componentData.color]);
+
+    if (currentComponent.value) {
+      const index = components.value.findIndex(
+        (c) => c.id === currentComponent.value?.id,
+      );
+      const temp = components.value.filter(
+        (c) => c.id !== currentComponent.value?.id,
+      );
+
+      // if (currentComponent.value.name === 'main_frame' && componentData.image) {
+      //   components.value[index].image =
+      //     componentData.image || currentComponent.value.image;
+      // }
+
+      components.value[index].color =
+        componentData.color || currentComponent.value.color;
+
+      components.value = [...temp, components.value[index]];
+    }
   });
 
   return (
