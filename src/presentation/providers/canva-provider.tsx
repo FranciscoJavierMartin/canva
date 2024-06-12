@@ -16,11 +16,9 @@ import type {
 } from '@/interfaces/types/canva';
 
 export default component$(() => {
-  // eslint-disable-next-line prefer-const
-  let currentComponent: Signal<ComponentInfo | undefined>;
-
   const componentData = useStore<ComponentData>({
     color: '',
+    image: '',
   });
 
   const setCurrentComponent = $((component: ComponentInfo) => {
@@ -30,8 +28,11 @@ export default component$(() => {
     }
   });
 
+  // TODO: Use useStore
   // eslint-disable-next-line qwik/use-method-usage
-  currentComponent = useSignal<ComponentInfo | undefined>({
+  const currentComponent: Signal<ComponentInfo | undefined> = useSignal<
+    ComponentInfo | undefined
+  >({
     name: 'main_frame',
     type: 'rect',
     id: Math.floor(Math.random() * 10_000 + 1),
@@ -43,6 +44,7 @@ export default component$(() => {
     setCurrentComponent: setCurrentComponent,
   });
 
+  // TODO: Use useStore
   const components = useSignal<ComponentInfo[]>([currentComponent.value!]);
 
   const moveElement = $(() => {
@@ -74,7 +76,7 @@ export default component$(() => {
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ track }) => {
-    track(() => [componentData.color]);
+    track(() => [componentData.color, componentData.image]);
 
     if (currentComponent.value) {
       const index = components.value.findIndex(
@@ -84,14 +86,17 @@ export default component$(() => {
         (c) => c.id !== currentComponent.value?.id,
       );
 
-      // if (currentComponent.value.name === 'main_frame' && componentData.image) {
-      //   components.value[index].image =
-      //     componentData.image || currentComponent.value.image;
-      // }
+      console.log(currentComponent.value.name, componentData.image);
+
+      if (currentComponent.value.name === 'main_frame' && componentData.image) {
+        components.value[index].image =
+          componentData.image || currentComponent.value.image;
+      }
 
       components.value[index].color =
         componentData.color || currentComponent.value.color;
 
+      console.log(components.value[index].image);
       components.value = [...temp, components.value[index]];
     }
   });

@@ -13,4 +13,5 @@ export type CanvaContextState = {
 
 export type ComponentData = {
   color: string;
+  image: string;
 };
