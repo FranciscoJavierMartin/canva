@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import type { ShapeRectInfo } from '@/interfaces/types/components';
+import type { ShapeRectInfo } from '@/interfaces/components.interface';
 
 type ShapeRectProps = ShapeRectInfo;
 
@@ -12,7 +12,7 @@ export default component$<ShapeRectProps>(
     left,
     top,
     zIndex,
-    rotate,
+    rotation,
     setCurrentComponent,
     image,
     ...props
@@ -28,7 +28,7 @@ export default component$<ShapeRectProps>(
           left: `${left}px`,
           top: `${top}px`,
           zIndex,
-          transform: rotate ? `rotate(${rotate}deg)` : 'rotate(0deg)',
+          transform: rotation ? `rotate(${rotation}deg)` : 'rotate(0deg)',
         }}
         onClick$={() =>
           setCurrentComponent({
