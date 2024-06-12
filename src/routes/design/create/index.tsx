@@ -1,6 +1,6 @@
 import { component$, useSignal } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
-import MainCanva from '@/presentation/components/main-canva/index';
+import CanvaComponent from '@/presentation/components/main-canva/canva-component';
 import type { ComponentInfo } from '@/interfaces/types/components';
 
 export default component$(() => {
@@ -21,7 +21,7 @@ export default component$(() => {
   return (
     <div class='center-elements h-screen w-screen'>
       <div ref={ref} class='relative size-auto overflow-auto'>
-        <MainCanva info={obj} />
+        <CanvaComponent info={obj} />
       </div>
     </div>
   );

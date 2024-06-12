@@ -1,7 +1,7 @@
 import { $, component$, useSignal } from '@builder.io/qwik';
 import Navbar from '@/presentation/ui/Navbar';
 import Sidebar from '@/presentation/components/sidebars/sidebar';
-import MainCanva from '@/presentation/components/main-canva';
+import CanvaComponent from '@/presentation/components/main-canva/canva-component';
 import Tools from '@/presentation/components/sidebars/tools/tools';
 import type { ComponentInfo } from '@/interfaces/types/components';
 
@@ -48,7 +48,7 @@ export default component$(() => {
         <div class='center-elements h-full w-[calc(100vw-85px)]'>
           <main class='relative size-auto min-h-[500px] min-w-[650px] overflow-hidden'>
             {components.value.map((c) => (
-              <MainCanva key={c.id} info={c} />
+              <CanvaComponent key={c.id} info={c} />
             ))}
           </main>
         </div>
