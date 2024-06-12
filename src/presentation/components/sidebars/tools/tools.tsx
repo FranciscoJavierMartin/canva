@@ -9,7 +9,7 @@ export default component$<ToolsProps>(({ component }) => {
   return (
     <aside
       class={[
-        'absolute right-0 h-full w-[250px] bg-black-light text-gray-300 transition-transform duration-300 z-10',
+        'absolute right-0 z-10 h-full w-[250px] bg-black-light text-gray-300 transition-transform duration-300',
         {
           'translate-x-full': !component,
           'translate-x-0': !!component,
