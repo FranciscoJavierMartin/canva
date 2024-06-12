@@ -14,12 +14,18 @@ export default component$(() => {
         <aside class='w-[85px] bg-emerald-200'>
           <button class='p-2 text-white'>Icon</button>
         </aside>
-        <aside class='absolute left-[85px] z-30 w-[350px] bg-yellow-400 text-emerald-600'>
+        <aside class='absolute left-[85px] z-30 h-full w-[350px] bg-yellow-400 text-emerald-600'>
           Sidebar menu
         </aside>
         <div class='w-[calc(100vw-85px)] bg-blue-400'>
-          <h1 class='text-blue-500'>Hello world</h1>
+          <main class='flex h-full flex-col items-center justify-center'>
+            <h1 class='text-purple-600'>Hello world</h1>
+            <button class='text-white'>Open tools</button>
+          </main>
         </div>
+        <aside class='absolute right-0 h-full w-[250px] bg-gray-700'>
+          <h2 class='text-white'>Tools</h2>
+        </aside>
       </div>
     </div>
   );
