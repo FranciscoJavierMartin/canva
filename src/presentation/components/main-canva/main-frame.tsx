@@ -5,7 +5,6 @@ type MainFrameProps = MainFrameInfo;
 
 export default component$<MainFrameProps>(
   ({ width, height, color, zIndex, image, setCurrentComponent, ...props }) => {
-    console.log(image);
     return (
       <div
         class='shadow-md hover:border-2 hover:border-indigo-500'

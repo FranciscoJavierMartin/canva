@@ -66,7 +66,11 @@ export default component$(() => {
   });
 
   const removeBackground = $(() => {
-    console.log('Remove background');
+    const index = components.findIndex(
+      (c) => c.id === currentComponent.value?.id,
+    );
+    components[index].image = '';
+    componentData.image = '';
   });
 
   useContextProvider<CanvaContextState>(CanvaContext, {
@@ -78,7 +82,7 @@ export default component$(() => {
     removeElement,
     resizeElement,
     moveElement,
-    removeBackground
+    removeBackground,
   });
 
   // eslint-disable-next-line qwik/no-use-visible-task
@@ -89,8 +93,6 @@ export default component$(() => {
       const index = components.findIndex(
         (c) => c.id === currentComponent.value?.id,
       );
-
-      console.log(currentComponent.value.name, componentData.image);
 
       if (currentComponent.value.name === 'main_frame' && componentData.image) {
         components[index].image =
