@@ -4,15 +4,23 @@ import {
   component$,
   useContextProvider,
   useSignal,
+  useStore,
   type Signal,
 } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import type { ComponentInfo } from '@/interfaces/types/components';
-import type { CanvaContextState } from '@/interfaces/types/canva';
+import type {
+  CanvaContextState,
+  ComponentData,
+} from '@/interfaces/types/canva';
 
 export default component$(() => {
   // eslint-disable-next-line prefer-const
   let currentComponent: Signal<ComponentInfo | undefined>;
+
+  const componentData = useStore<ComponentData>({
+    color: '',
+  });
 
   const setCurrentComponent = $((component: ComponentInfo) => {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -54,6 +62,7 @@ export default component$(() => {
 
   useContextProvider<CanvaContextState>(CanvaContext, {
     currentComponent,
+    componentData,
     components,
     setCurrentComponent,
     rotateElement,
