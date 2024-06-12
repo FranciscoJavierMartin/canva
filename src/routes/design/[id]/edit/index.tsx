@@ -1,10 +1,10 @@
 import { $, component$, useSignal } from '@builder.io/qwik';
 import Navbar from '@/presentation/ui/Navbar';
 import Sidebar from '@/presentation/components/sidebars/sidebar';
-import CanvaComponent from '@/presentation/components/main-canva/canva-component';
 import Tools from '@/presentation/components/sidebars/tools/tools';
-import type { ComponentInfo } from '@/interfaces/types/components';
+import MainCanva from '@/presentation/components/main-canva/main-canva';
 import CanvaProvider from '@/presentation/providers/canva-provider';
+import type { ComponentInfo } from '@/interfaces/types/components';
 
 export default component$(() => {
   // TODO: Add all inputs signals
@@ -46,14 +46,8 @@ export default component$(() => {
       </Navbar>
       <CanvaProvider>
         <Sidebar />
-        <div class='center-elements h-full w-[calc(100vw-85px)]'>
-          <main class='relative size-auto min-h-[500px] min-w-[650px] overflow-hidden'>
-            {components.value.map((c) => (
-              <CanvaComponent key={c.id} info={c} />
-            ))}
-          </main>
-        </div>
-        <Tools component={currentComponent.value} />
+        <MainCanva />
+        <Tools />
       </CanvaProvider>
     </div>
   );
