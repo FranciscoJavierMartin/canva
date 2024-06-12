@@ -3,6 +3,7 @@ import { component$, useSignal } from '@builder.io/qwik';
 
 export default component$(() => {
   const openTools = useSignal<boolean>(false);
+  const openSidebar = useSignal<boolean>(false);
 
   return (
     <div class='min-w-screen h-screen bg-black'>
@@ -13,10 +14,23 @@ export default component$(() => {
         </div>
       </Navbar>
       <div class='relative flex h-[calc(100vh-64px)]'>
-        <aside class='w-[85px] bg-emerald-200'>
-          <button class='p-2 text-white'>Icon</button>
+        <aside class='z-30 w-[85px] bg-emerald-200'>
+          <button
+            onClick$={() => (openSidebar.value = !openSidebar.value)}
+            class='p-2 text-white'
+          >
+            Icon
+          </button>
         </aside>
-        <aside class='absolute left-[85px] z-30 h-full w-[350px] bg-yellow-400 text-emerald-600'>
+        <aside
+          class={[
+            'absolute left-[85px] z-20 h-full w-[350px] bg-yellow-400 text-emerald-600 transition-transform',
+            {
+              'translate-x-0': openSidebar.value,
+              '-translate-x-[350px]': !openSidebar.value,
+            },
+          ]}
+        >
           Sidebar menu
         </aside>
         <div class='w-[calc(100vw-85px)] bg-blue-400'>
