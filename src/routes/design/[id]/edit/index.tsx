@@ -1,6 +1,6 @@
 import { $, component$, useSignal } from '@builder.io/qwik';
 import Navbar from '@/presentation/ui/Navbar';
-import Sidebar from '@/presentation/components/sidebar/sidebar';
+import Sidebar from '@/presentation/components/sidebars/sidebar';
 import MainCanva from '@/presentation/components/main-canva';
 import type { ComponentInfo } from '@/interfaces/types/components';
 

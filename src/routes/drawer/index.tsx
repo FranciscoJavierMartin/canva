@@ -1,4 +1,4 @@
-import Sidebar from '@/presentation/components/sidebar/sidebar';
+import Sidebar from '@/presentation/components/sidebars/sidebar';
 import Navbar from '@/presentation/ui/Navbar';
 import { component$, useSignal } from '@builder.io/qwik';
 
