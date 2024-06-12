@@ -1,4 +1,4 @@
-import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
+import { PortalCloseAPIContextId } from '@/presentation/contexts/portals/portal-close';
 import { Slot, component$, useContext } from '@builder.io/qwik';
 
 // TODO: Remove toast after timeout

@@ -1,5 +1,5 @@
 import { $, Slot, component$, useContext, useOnWindow } from '@builder.io/qwik';
-import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
+import { PortalCloseAPIContextId } from '@/presentation/contexts/portals/portal-close';
 import XMark from '@/presentation/icons/x-mark';
 
 export default component$(() => {
