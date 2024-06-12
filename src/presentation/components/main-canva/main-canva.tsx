@@ -1,8 +1,9 @@
-import { component$ } from '@builder.io/qwik';
-import CanvaComponent from './canva-component';
+import { component$, useContext } from '@builder.io/qwik';
+import CanvaComponent from '@/presentation/components/main-canva/canva-component';
+import { CanvaContext } from '@/presentation/contexts/canva/canva';
 
 export default component$(() => {
-  const components = { value: [] as any[] };
+  const { components } = useContext(CanvaContext);
 
   return (
     <div class='center-elements h-full w-[calc(100vw-85px)]'>

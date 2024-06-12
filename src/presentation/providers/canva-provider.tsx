@@ -1,5 +1,13 @@
-import { $, Slot, component$, useSignal } from '@builder.io/qwik';
+import {
+  $,
+  Slot,
+  component$,
+  useContextProvider,
+  useSignal,
+} from '@builder.io/qwik';
+import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import type { ComponentInfo } from '@/interfaces/types/components';
+import type { CanvaContextState } from '@/interfaces/types/canva';
 
 export default component$(() => {
   const currentComponent = useSignal<ComponentInfo | undefined>({
@@ -28,6 +36,15 @@ export default component$(() => {
 
   const removeElement = $(() => {
     console.log('Remove element');
+  });
+
+  useContextProvider<CanvaContextState>(CanvaContext, {
+    currentComponent,
+    components,
+    rotateElement,
+    removeElement,
+    resizeElement,
+    moveElement,
   });
 
   return (
