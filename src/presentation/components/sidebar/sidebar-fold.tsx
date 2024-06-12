@@ -8,11 +8,12 @@ type SidebarFoldProps = {
 
 export default component$<SidebarFoldProps>(({ isOpen, closePanel }) => {
   return (
-    <div
+    <aside
       class={[
-        'grid-area-sidebar relative z-10 w-[350px] bg-black-light p-5 transition-transform',
+        'absolute left-[85px] z-20 h-full w-[350px] bg-black-light p-5 transition-transform duration-300',
         {
-          '-translate-x-full p-0': !isOpen,
+          '-translate-x-full': !isOpen,
+          'translate-x-0': isOpen,
         },
       ]}
     >
@@ -28,6 +29,6 @@ export default component$<SidebarFoldProps>(({ isOpen, closePanel }) => {
         <ArrowLeft />
       </button>
       <Slot />
-    </div>
+    </aside>
   );
 });
