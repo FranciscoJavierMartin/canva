@@ -24,7 +24,7 @@ export default component$(() => {
         </aside>
         <aside
           class={[
-            'absolute left-[85px] z-20 h-full w-[350px] bg-yellow-400 text-emerald-600 transition-transform',
+            'absolute left-[85px] z-20 h-full w-[350px] bg-yellow-400 text-emerald-600 transition-transform duration-300',
             {
               'translate-x-0': openSidebar.value,
               '-translate-x-[350px]': !openSidebar.value,
@@ -46,7 +46,7 @@ export default component$(() => {
         </div>
         <aside
           class={[
-            'absolute right-0 h-full w-[250px] bg-gray-700 transition-transform duration-1000',
+            'absolute right-0 h-full w-[250px] bg-gray-700 transition-transform duration-300',
             {
               'translate-x-[250px]': !openTools.value,
               'translate-x-0': openTools.value,
