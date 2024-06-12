@@ -1,4 +1,3 @@
-import Sidebar from '@/presentation/components/sidebar/sidebar';
 import Navbar from '@/presentation/ui/Navbar';
 import { component$ } from '@builder.io/qwik';
 
@@ -11,8 +10,16 @@ export default component$(() => {
           <button class='button bg-purple-bright px-3'>Download</button>
         </div>
       </Navbar>
-      <div class=''>
-        
+      <div class='relative flex h-[calc(100vh-64px)]'>
+        <aside class='w-[85px] bg-emerald-200'>
+          <button class='p-2 text-white'>Icon</button>
+        </aside>
+        <aside class='absolute left-[85px] z-30 w-[350px] bg-yellow-400 text-emerald-600'>
+          Sidebar menu
+        </aside>
+        <div class='w-[calc(100vw-85px)] bg-blue-400'>
+          <h1 class='text-blue-500'>Hello world</h1>
+        </div>
       </div>
     </div>
   );
