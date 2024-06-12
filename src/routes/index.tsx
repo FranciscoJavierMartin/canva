@@ -55,8 +55,8 @@ export default component$(() => {
         </Link>
       </Navbar>
 
-      <div class='size-full items-center justify-center p-4'>
-        <div class='flex h-full flex-col items-center justify-center gap-6 pt-44 text-center'>
+      <div class='center-elements size-full p-4'>
+        <div class='center-elements h-full flex-col gap-6 pt-44 text-center'>
           <h2 class='text-5xl font-bold text-gray-light'>
             What you will design today?
           </h2>

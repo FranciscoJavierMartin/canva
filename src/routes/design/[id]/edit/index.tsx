@@ -1,22 +1,22 @@
 import { $, component$, useSignal } from '@builder.io/qwik';
 import Navbar from '@/presentation/ui/Navbar';
-import Sidebar from '@/presentation/components/sidebar/sidebar';
+import Sidebar from '@/presentation/components/sidebars/sidebar';
 import MainCanva from '@/presentation/components/main-canva';
+import Tools from '@/presentation/components/sidebars/tools/tools';
 import type { ComponentInfo } from '@/interfaces/types/components';
 
 export default component$(() => {
-  // {
-  //   name: 'main_frame',
-  //   type: 'rect',
-  //   id: Math.floor(Math.random() * 10_000 + 1),
-  //   height: 500,
-  //   width: 650,
-  //   zIndex: 1,
-  //   color: '#fff',
-  //   image: '',
-  // }
-  const currentComponent = useSignal<ComponentInfo | undefined>();
-  const components = useSignal<ComponentInfo[]>([]);
+  const currentComponent = useSignal<ComponentInfo | undefined>({
+    name: 'main_frame',
+    type: 'rect',
+    id: Math.floor(Math.random() * 10_000 + 1),
+    height: 500,
+    width: 650,
+    zIndex: 1,
+    color: '#fff',
+    image: '',
+  });
+  const components = useSignal<ComponentInfo[]>([currentComponent.value!]);
 
   const moveElement = $(() => {
     console.log('Move element');
@@ -35,43 +35,24 @@ export default component$(() => {
   });
 
   return (
-    <div class='min-w-screen grid-template-areas-edit-page-container grid h-screen grid-cols-[85px_350px_auto_250px] grid-rows-[64px_auto] bg-black'>
+    <div class='min-w-screen h-screen bg-black'>
       <Navbar>
-        <div class='flex items-center justify-center gap-2 text-gray-200'>
+        <div class='center-elements gap-2 text-gray-200'>
           <button class='button bg-purple-blue px-3'>Save</button>
           <button class='button bg-purple-bright px-3'>Download</button>
         </div>
       </Navbar>
-      <Sidebar />
-      <div class='grid-area-design h-full border border-red-500'>
-        <div
-          class={[
-            'relative flex h-full w-full items-center justify-center',
-            {
-              'overflow-hidden': !currentComponent.value,
-            },
-          ]}
-        >
-          <div
-            class={
-              'flex min-h-[500px] min-w-[650px] items-center justify-center overflow-hidden'
-            }
-          >
-            <main class='relative size-auto overflow-hidden'>
-              {components.value.map((c) => (
-                <MainCanva key={c.id} info={c} />
-              ))}
-            </main>
-          </div>
+      <div class='relative flex h-[calc(100vh-64px)]'>
+        <Sidebar />
+        <div class='center-elements h-full w-[calc(100vw-85px)]'>
+          <main class='relative size-auto min-h-[500px] min-w-[650px] overflow-hidden'>
+            {components.value.map((c) => (
+              <MainCanva key={c.id} info={c} />
+            ))}
+          </main>
         </div>
+        <Tools isOpen={!!currentComponent.value} />
       </div>
-      {currentComponent.value && (
-        <section class='grid-area-tools z-10 h-full w-[250px] bg-black-light px-3 py-2 text-gray-300'>
-          <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
-            <h1 class='text-white'>Tools</h1>
-          </div>
-        </section>
-      )}
     </div>
   );
 });

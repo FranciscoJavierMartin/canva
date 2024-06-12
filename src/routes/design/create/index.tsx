@@ -19,7 +19,7 @@ export default component$(() => {
   };
 
   return (
-    <div class='flex h-screen w-screen items-center justify-center'>
+    <div class='center-elements h-screen w-screen'>
       <div ref={ref} class='relative size-auto overflow-auto'>
         <MainCanva info={obj} />
       </div>
