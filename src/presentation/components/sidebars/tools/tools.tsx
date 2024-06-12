@@ -2,7 +2,7 @@ import { component$ } from '@builder.io/qwik';
 import type { ComponentInfo } from '@/interfaces/types/components';
 
 type ToolsProps = {
-  component: ComponentInfo | undefined;
+  component?: ComponentInfo | undefined;
 };
 
 export default component$<ToolsProps>(({ component }) => {
