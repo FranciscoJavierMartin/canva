@@ -5,8 +5,7 @@ type ToolsProps = {};
 
 export default component$<ToolsProps>(() => {
   const canva = useContext(CanvaContext);
-
-  const isOpen = useComputed$(() => !!canva.currentComponent);
+  const isOpen = useComputed$(() => !!canva.currentComponent.value);
 
   return (
     <aside
@@ -18,7 +17,7 @@ export default component$<ToolsProps>(() => {
         },
       ]}
     >
-      {canva.currentComponent.value && (
+      {!!canva.currentComponent.value && (
         <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
           <div class='mt-4 flex items-center justify-start gap-4'>
             <span>Color</span>

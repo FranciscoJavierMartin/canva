@@ -29,6 +29,7 @@ export default component$(() => {
   });
 
   // TODO: Use useStore
+  // TODO: An alternative is keep the index instead of the current object
   // eslint-disable-next-line qwik/use-method-usage
   const currentComponent: Signal<ComponentInfo | undefined> = useSignal<
     ComponentInfo | undefined
@@ -41,7 +42,7 @@ export default component$(() => {
     zIndex: 1,
     color: '#fff',
     image: '',
-    setCurrentComponent: setCurrentComponent,
+    setCurrentComponent: $(() => {}),
   });
 
   const components = useStore<ComponentInfo[]>([currentComponent.value!], {
