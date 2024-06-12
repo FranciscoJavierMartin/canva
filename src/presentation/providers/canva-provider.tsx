@@ -9,7 +9,7 @@ import {
   type Signal,
 } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
-import type { ComponentInfo } from '@/interfaces/types/components';
+import type { ComponentInfo } from '@/interfaces/components.interface';
 import type {
   CanvaContextState,
   ComponentData,

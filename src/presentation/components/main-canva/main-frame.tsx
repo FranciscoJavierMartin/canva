@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import type { MainFrameInfo } from '@/interfaces/types/components';
+import type { MainFrameInfo } from '@/interfaces/components.interface';
 
 type MainFrameProps = MainFrameInfo;
 

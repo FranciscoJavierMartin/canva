@@ -1,7 +1,7 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { $, component$, useSignal } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
 import CanvaComponent from '@/presentation/components/main-canva/canva-component';
-import type { ComponentInfo } from '@/interfaces/types/components';
+import type { ComponentInfo } from '@/interfaces/components.interface';
 
 export default component$(() => {
   const ref = useSignal<HTMLDivElement>();
@@ -16,6 +16,8 @@ export default component$(() => {
     zIndex: 1,
     color: 'green',
     image: '',
+    // TODO: Get from context
+    setCurrentComponent: $(() => {})
   };
 
   return (

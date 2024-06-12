@@ -1,5 +1,5 @@
 import { type JSXOutput, component$ } from '@builder.io/qwik';
-import type { ComponentInfo } from '@/interfaces/types/components';
+import type { ComponentInfo } from '@/interfaces/components.interface';
 import MainFrame from './main-frame';
 import ShapeRect from './shape-rect';
 
