@@ -57,20 +57,20 @@ export default component$(() => {
               'flex min-h-[500px] min-w-[650px] items-center justify-center overflow-hidden'
             }
           >
-            <div class='relative size-auto overflow-hidden'>
+            <main class='relative size-auto overflow-hidden'>
               {components.value.map((c) => (
                 <MainCanva key={c.id} info={c} />
               ))}
-            </div>
+            </main>
           </div>
         </div>
       </div>
       {currentComponent.value && (
-        <div class='grid-area-tools z-10 h-full w-[250px] bg-black-light px-3 py-2 text-gray-300'>
+        <section class='grid-area-tools z-10 h-full w-[250px] bg-black-light px-3 py-2 text-gray-300'>
           <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
             <h1 class='text-white'>Tools</h1>
           </div>
-        </div>
+        </section>
       )}
     </div>
   );
