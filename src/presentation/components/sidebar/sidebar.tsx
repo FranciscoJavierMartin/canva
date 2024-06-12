@@ -61,7 +61,7 @@ export default component$(() => {
   });
 
   return (
-    <>
+    <aside>
       <SidebarIcons
         selectOption={selectOption}
         selectedOption={selectedOption}
@@ -69,6 +69,6 @@ export default component$(() => {
       <SidebarFold isOpen={!!selectedOption.value} closePanel={closePanel}>
         {panel.value && <panel.value />}
       </SidebarFold>
-    </>
+    </aside>
   );
 });
