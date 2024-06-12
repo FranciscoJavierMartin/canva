@@ -32,10 +32,10 @@ export default component$(() => {
         </div>
         <aside
           class={[
-            'absolute h-full w-[250px] bg-gray-700 transition-all duration-1000',
+            'absolute right-0 h-full w-[250px] bg-gray-700 transition-transform duration-1000',
             {
-              '-right-[250px]': !openTools.value,
-              'right-0': openTools.value,
+              'translate-x-[250px]': !openTools.value,
+              'translate-x-0': openTools.value,
             },
           ]}
         >
