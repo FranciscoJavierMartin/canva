@@ -13,11 +13,13 @@ import { loginSchema } from '@/core/validators/loginSchema';
 export const useLoginUser = globalAction$(
   async (data, { redirect }: RequestEventAction) => {
     console.log(data);
-    redirect(302, '/home');
-    // return {
-    //   message: 'Ups, something went wrong. Please try again.',
-    //   // errors: {},
-    // };
+
+    throw redirect(302, '/home');
+
+    return {
+      message: 'Ups, something went wrong. Please try again.',
+      // errors: {},
+    };
   },
   zod$(loginSchema),
 );
