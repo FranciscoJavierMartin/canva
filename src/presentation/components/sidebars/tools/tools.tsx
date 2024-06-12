@@ -10,7 +10,7 @@ export default component$<ToolsProps>(({ isOpen }) => {
       class={[
         'absolute right-0 h-full w-[250px] bg-gray-700 transition-transform duration-300',
         {
-          'translate-x-[250px]': !isOpen,
+          'translate-x-full': !isOpen,
           'translate-x-0': isOpen,
         },
       ]}
