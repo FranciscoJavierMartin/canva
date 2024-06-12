@@ -1,9 +1,4 @@
-import {
-  component$,
-  useComputed$,
-  useContext,
-  useVisibleTask$,
-} from '@builder.io/qwik';
+import { component$, useComputed$, useContext } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 
 type ToolsProps = {};
@@ -12,10 +7,6 @@ export default component$<ToolsProps>(() => {
   const canva = useContext(CanvaContext);
 
   const isOpen = useComputed$(() => !!canva.currentComponent);
-
-  useVisibleTask$(({ track }) => {
-    // track(() => [component.value.])
-  });
 
   return (
     <aside

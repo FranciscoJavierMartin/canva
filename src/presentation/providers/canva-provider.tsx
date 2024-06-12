@@ -44,8 +44,9 @@ export default component$(() => {
     setCurrentComponent: setCurrentComponent,
   });
 
-  // TODO: Use useStore
-  const components = useSignal<ComponentInfo[]>([currentComponent.value!]);
+  const components = useStore<ComponentInfo[]>([currentComponent.value!], {
+    deep: true,
+  });
 
   const moveElement = $(() => {
     console.log('Move element');
@@ -79,25 +80,19 @@ export default component$(() => {
     track(() => [componentData.color, componentData.image]);
 
     if (currentComponent.value) {
-      const index = components.value.findIndex(
+      const index = components.findIndex(
         (c) => c.id === currentComponent.value?.id,
-      );
-      const temp = components.value.filter(
-        (c) => c.id !== currentComponent.value?.id,
       );
 
       console.log(currentComponent.value.name, componentData.image);
 
       if (currentComponent.value.name === 'main_frame' && componentData.image) {
-        components.value[index].image =
+        components[index].image =
           componentData.image || currentComponent.value.image;
       }
 
-      components.value[index].color =
+      components[index].color =
         componentData.color || currentComponent.value.color;
-
-      console.log(components.value[index].image);
-      components.value = [...temp, components.value[index]];
     }
   });
 

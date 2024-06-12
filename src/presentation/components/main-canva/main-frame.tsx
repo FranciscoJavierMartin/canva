@@ -29,7 +29,15 @@ export default component$<MainFrameProps>(
         }
       >
         {/* eslint-disable-next-line qwik/jsx-img */}
-        {image && <img class='size-full' src={image} alt='image' />}
+        {image && (
+          <img
+            class='size-full'
+            src={image}
+            alt='image'
+            width={width}
+            height={height}
+          />
+        )}
       </div>
     );
   },
