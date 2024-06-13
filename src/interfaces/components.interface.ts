@@ -1,13 +1,12 @@
 import type { QRL } from '@builder.io/qwik';
 
-// TODO: Extract common properties
 interface BaseComponent {
   id: string;
   height: number;
   width: number;
   zIndex: number;
   color: string;
-  setCurrentComponent: QRL<(component: ComponentInfo) => void>;
+  setCurrentComponentId: QRL<(componentId: string) => void>;
 }
 
 export interface MainFrameInfo extends BaseComponent {

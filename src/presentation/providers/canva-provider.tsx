@@ -28,24 +28,25 @@ export default component$(() => {
   // TODO: Use computed property to get current component
   // An alternative is use an object or a Map like {[uuid]: component}
 
-  const currentId = useSignal<string>(createId());
+  const currentComponentId = useSignal<string>(createId());
 
-  const setCurrentComponent = $((component: ComponentInfo) => {
-    currentId.value = component.id;
+  const setCurrentComponentId = $((componentId: string) => {
+    currentComponentId.value = componentId;
   });
 
   const components = useStore<ComponentsStore>(
     {
-      [currentId.value]: {
+      [currentComponentId.value]: {
         name: 'main_frame',
         type: 'rect',
-        id: currentId.value,
+        id: currentComponentId.value,
         height: 500,
         width: 650,
         zIndex: 1,
         color: '#fff',
         image: '',
-        setCurrentComponent: $(() => {}),
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        setCurrentComponentId: $((_componentId: string) => {}),
       },
     },
     {
@@ -54,7 +55,7 @@ export default component$(() => {
   );
 
   const currentComponent = useComputed$<ComponentInfo | undefined>(() =>
-    currentId.value ? components[currentId.value] : undefined,
+    currentComponentId.value ? components[currentComponentId.value] : undefined,
   );
 
   const moveElement = $(() => {
@@ -71,11 +72,11 @@ export default component$(() => {
 
   const removeElement = $((id: string) => {
     delete components[id];
-    currentId.value = '';
+    currentComponentId.value = '';
   });
 
   const removeBackground = $(() => {
-    components[currentId.value].image = '';
+    components[currentComponentId.value].image = '';
     componentData.image = '';
   });
 
@@ -83,7 +84,7 @@ export default component$(() => {
     currentComponent,
     componentData,
     components,
-    setCurrentComponent,
+    setCurrentComponentId,
     rotateElement,
     removeElement,
     resizeElement,
@@ -97,11 +98,11 @@ export default component$(() => {
 
     if (currentComponent.value) {
       if (currentComponent.value.name === 'main_frame' && componentData.image) {
-        components[currentId.value].image =
+        components[currentComponentId.value].image =
           componentData.image || currentComponent.value.image;
       }
 
-      components[currentId.value].color =
+      components[currentComponentId.value].color =
         componentData.color || currentComponent.value.color;
     }
   });

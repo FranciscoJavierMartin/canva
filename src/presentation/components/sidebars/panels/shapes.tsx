@@ -19,7 +19,7 @@ export default component$(() => {
       color: '#3c3c3d',
       rotation: 0,
       image: '',
-      setCurrentComponent: canva.setCurrentComponent,
+      setCurrentComponentId: canva.setCurrentComponentId,
       rotateElement: canva.rotateElement,
       moveElement: canva.moveElement,
       resizeElement: canva.resizeElement,

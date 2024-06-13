@@ -5,7 +5,7 @@ export type CanvaContextState = {
   currentComponent: Signal<ComponentInfo | undefined>;
   componentData: ComponentData;
   components: ComponentsStore;
-  setCurrentComponent: QRL<(component: ComponentInfo) => void>;
+  setCurrentComponentId: QRL<(componentId: string) => void>;
   moveElement: QRL<() => void>;
   resizeElement: QRL<() => void>;
   rotateElement: QRL<() => void>;

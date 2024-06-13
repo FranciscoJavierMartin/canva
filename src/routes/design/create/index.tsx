@@ -15,10 +15,10 @@ export default component$(() => {
     height: +(location.url.searchParams.get('height') ?? 500),
     width: +(location.url.searchParams.get('width') ?? 650),
     zIndex: 1,
-    color: 'green',
+    color: '#fff',
     image: '',
-    // TODO: Get from context
-    setCurrentComponent: $(() => {}),
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setCurrentComponentId: $((componentId: string) => {}),
   };
 
   return (
