@@ -12,6 +12,7 @@ export default component$<ShapeCircleProps>(
 
     return (
       <div
+        id={id}
         class='group absolute hover:border-2 hover:border-indigo-500'
         style={{
           left: `${left}px`,

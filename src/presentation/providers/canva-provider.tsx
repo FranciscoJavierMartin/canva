@@ -25,7 +25,7 @@ export default component$(() => {
 
   const currentComponentId = useSignal<string>(createId());
 
-  const setCurrentComponentId = $((componentId: string) => {
+  const setCurrentComponentId = $((componentId: string): void => {
     currentComponentId.value = componentId;
   });
 
@@ -51,24 +51,48 @@ export default component$(() => {
     () => components[currentComponentId.value],
   );
 
-  const moveElement = $(() => {
-    console.log('Move element');
+  const moveElement = $((id: string): void => {
+    let isMoving: boolean = true;
+    setCurrentComponentId(id);
+    const currentDiv = document.getElementById(id);
+
+    function mouseMove({ movementX, movementY }: MouseEvent): void {
+      if (currentDiv) {
+        const getStyle = window.getComputedStyle(currentDiv);
+        const left = parseInt(getStyle.left);
+        const top = parseInt(getStyle.top);
+
+        if (isMoving) {
+          currentDiv.style.left = `${left + movementX}px`;
+          currentDiv.style.top = `${top + movementY}px`;
+        }
+      }
+    }
+
+    function mouseUp(): void {
+      isMoving = false;
+      window.removeEventListener('mousemove', mouseMove);
+      window.removeEventListener('mouseup', mouseUp);
+    }
+
+    window.addEventListener('mousemove', mouseMove);
+    window.addEventListener('mouseup', mouseUp);
   });
 
-  const resizeElement = $((id: string) => {
+  const resizeElement = $((id: string): void => {
     console.log('Resize element');
   });
 
-  const rotateElement = $((id: string) => {
+  const rotateElement = $((id: string): void => {
     console.log('Rotate element');
   });
 
-  const removeElement = $((id: string) => {
+  const removeElement = $((id: string): void => {
     delete components[id];
     currentComponentId.value = '';
   });
 
-  const removeBackground = $(() => {
+  const removeBackground = $((): void => {
     components[currentComponentId.value].image = '';
     componentData.image = '';
   });

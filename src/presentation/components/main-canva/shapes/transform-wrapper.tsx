@@ -29,19 +29,19 @@ export default component$<TransformWrapperProps>(({ id }) => {
         class='absolute -left-1 -top-1 z-50 hidden size-2.5 cursor-pointer bg-red-600 group-hover:block'
       ></div>
       <div
-        onMouseDown$={() => canvaContext.moveElement()}
+        onMouseDown$={() => canvaContext.moveElement(id)}
         class='absolute -top-1 left-1/2 z-50 hidden size-2.5 -translate-x-1/2 cursor-ns-resize bg-blue-600 group-hover:block'
       ></div>
       <div
-        onMouseDown$={() => canvaContext.moveElement()}
+        onMouseDown$={() => canvaContext.moveElement(id)}
         class='absolute left-1 top-1/2 z-50 hidden size-2.5 -translate-x-2 -translate-y-2 cursor-ew-resize bg-blue-600 group-hover:block'
       ></div>
       <div
-        onMouseDown$={() => canvaContext.moveElement()}
+        onMouseDown$={() => canvaContext.moveElement(id)}
         class='absolute right-1 top-1/2 z-50 hidden size-2.5 -translate-y-2 translate-x-2 cursor-ew-resize bg-blue-600 group-hover:block'
       ></div>
       <div
-        onMouseDown$={() => canvaContext.moveElement()}
+        onMouseDown$={() => canvaContext.moveElement(id)}
         class='absolute -bottom-1 left-1/2 z-50 hidden size-2.5 -translate-x-1/2 cursor-ns-resize bg-blue-600 group-hover:block'
       ></div>
     </>
