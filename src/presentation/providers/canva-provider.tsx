@@ -40,8 +40,7 @@ export default component$(() => {
         zIndex: 1,
         color: '#fff',
         image: '',
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        setCurrentComponentId: $((_componentId: string) => {}),
+        setCurrentComponentId,
       },
     },
     {
@@ -99,6 +98,8 @@ export default component$(() => {
 
       components[currentComponentId.value].color =
         componentData.color || currentComponent.value.color;
+
+      componentData.color = '';
     }
   });
 
