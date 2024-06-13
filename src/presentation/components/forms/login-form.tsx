@@ -18,7 +18,6 @@ export const useLoginUser = globalAction$(
 
     return {
       message: 'Ups, something went wrong. Please try again.',
-      // errors: {},
     };
   },
   zod$(loginSchema),

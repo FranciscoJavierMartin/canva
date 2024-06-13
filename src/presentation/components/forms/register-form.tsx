@@ -18,7 +18,6 @@ export const useRegisterUser = globalAction$(
 
     return {
       message: 'Ups, something went wrong. Please try again.',
-      // errors: {},
     };
   },
   zod$(registerSchema),
