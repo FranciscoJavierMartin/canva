@@ -61,7 +61,9 @@ export default component$(() => {
   });
 
   const removeElement = $((id: number) => {
-    console.log('Remove element', id);
+    const index = components.findIndex((c) => c.id === id);
+    components.splice(index, 1);
+    currentComponent.value = undefined;
   });
 
   const removeBackground = $(() => {
