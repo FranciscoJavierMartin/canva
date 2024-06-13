@@ -30,6 +30,8 @@ export default component$(() => {
 
   // TODO: Use useStore
   // TODO: An alternative is keep the index or the id instead of the current object
+  // TODO: Use computed property to get current component
+  // An alternative is use an object or a Map like {[uuid]: component}
   // eslint-disable-next-line qwik/use-method-usage
   const currentComponent: Signal<ComponentInfo | undefined> = useSignal<
     ComponentInfo | undefined
