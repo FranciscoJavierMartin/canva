@@ -3,6 +3,7 @@ import type { ComponentInfo } from '@/interfaces/components.interface';
 import MainFrame from './main-frame';
 import ShapeRect from './shape-rect';
 import ShapeCircle from './shape-circle';
+import ShapeTriangle from './shape-triangle';
 
 type CanvaComponentProps = {
   info: ComponentInfo;
@@ -22,6 +23,9 @@ export default component$<CanvaComponentProps>(({ info }) => {
           break;
         case 'circle':
           component = <ShapeCircle {...info} />;
+          break;
+        case 'triangle':
+          component = <ShapeTriangle {...info} />;
           break;
       }
       break;
