@@ -2,7 +2,7 @@ import type { QRL } from '@builder.io/qwik';
 
 // TODO: Extract common properties
 interface BaseComponent {
-  id: number;
+  id: string;
   height: number;
   width: number;
   zIndex: number;

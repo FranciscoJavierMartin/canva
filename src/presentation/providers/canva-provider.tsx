@@ -14,6 +14,7 @@ import type {
   CanvaContextState,
   ComponentData,
 } from '@/interfaces/canva.interface';
+import { createId } from '@paralleldrive/cuid2';
 
 export default component$(() => {
   const componentData = useStore<ComponentData>({
@@ -31,7 +32,7 @@ export default component$(() => {
   >({
     name: 'main_frame',
     type: 'rect',
-    id: Math.floor(Math.random() * 10_000 + 1),
+    id: createId(),
     height: 500,
     width: 650,
     zIndex: 1,
@@ -60,7 +61,7 @@ export default component$(() => {
     console.log('Rotate element');
   });
 
-  const removeElement = $((id: number) => {
+  const removeElement = $((id: string) => {
     const index = components.findIndex((c) => c.id === id);
     components.splice(index, 1);
     currentComponent.value = undefined;

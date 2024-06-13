@@ -9,7 +9,7 @@ export type CanvaContextState = {
   moveElement: QRL<() => void>;
   resizeElement: QRL<() => void>;
   rotateElement: QRL<() => void>;
-  removeElement: QRL<(id: number) => void>;
+  removeElement: QRL<(id: string) => void>;
   removeBackground: QRL<() => void>;
 };
 
