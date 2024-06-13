@@ -75,11 +75,8 @@ export default component$(() => {
   });
 
   const removeBackground = $(() => {
-    // const index = components.findIndex(
-    //   (c) => c.id === currentComponent.value?.id,
-    // );
-    // components[index].image = '';
-    // componentData.image = '';
+    components[currentId.value].image = '';
+    componentData.image = '';
   });
 
   useContextProvider<CanvaContextState>(CanvaContext, {
