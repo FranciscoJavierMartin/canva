@@ -7,8 +7,8 @@ export type CanvaContextState = {
   components: ComponentsStore;
   setCurrentComponentId: QRL<(componentId: string) => void>;
   moveElement: QRL<() => void>;
-  resizeElement: QRL<() => void>;
-  rotateElement: QRL<() => void>;
+  resizeElement: QRL<(id: string) => void>;
+  rotateElement: QRL<(id: string) => void>;
   removeElement: QRL<(id: string) => void>;
   removeBackground: QRL<() => void>;
 };

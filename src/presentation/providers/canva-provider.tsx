@@ -55,11 +55,11 @@ export default component$(() => {
     console.log('Move element');
   });
 
-  const resizeElement = $(() => {
+  const resizeElement = $((id: string) => {
     console.log('Resize element');
   });
 
-  const rotateElement = $(() => {
+  const rotateElement = $((id: string) => {
     console.log('Rotate element');
   });
 

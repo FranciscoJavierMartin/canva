@@ -1,6 +1,6 @@
 import { component$, useContext } from '@builder.io/qwik';
+import TransformWrapper from '@/presentation/components/main-canva/shapes/transform-wrapper';
 import Trash from '@/presentation/icons/trash';
-import Element from './element';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import type { ShapeCircleInfo } from '@/interfaces/components.interface';
 
@@ -30,7 +30,7 @@ export default component$<ShapeCircleProps>(
             opacity,
           }}
         ></div>
-        <Element />
+        <TransformWrapper id={id} />
         <button
           onClick$={() => canvaContext.removeElement(id)}
           class='absolute right-1 top-1 hidden cursor-pointer rounded-md bg-white p-1 text-red-500 group-hover:block'

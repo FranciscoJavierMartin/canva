@@ -1,5 +1,5 @@
 import { component$, useContext } from '@builder.io/qwik';
-import Element from './element';
+import TransformWrapper from '@/presentation/components/main-canva/shapes/transform-wrapper';
 import Trash from '@/presentation/icons/trash';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import type { ShapeRectInfo } from '@/interfaces/components.interface';
@@ -25,7 +25,7 @@ export default component$<ShapeRectProps>(
         }}
         onClick$={() => canvaContext.setCurrentComponentId(id)}
       >
-        <Element />
+        <TransformWrapper id={id} />
         <button
           onClick$={() => canvaContext.removeElement(id)}
           class='absolute right-1 top-1 hidden cursor-pointer rounded-md bg-white p-1 text-red-500 group-hover:block'
