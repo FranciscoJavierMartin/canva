@@ -2,18 +2,20 @@ import {
   $,
   Slot,
   component$,
+  useComputed$,
   useContextProvider,
   useSignal,
   useStore,
   useVisibleTask$,
-  type Signal,
 } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import type { ComponentInfo } from '@/interfaces/components.interface';
 import type {
   CanvaContextState,
   ComponentData,
+  ComponentsStore,
 } from '@/interfaces/canva.interface';
+import { createId } from '@paralleldrive/cuid2';
 
 export default component$(() => {
   const componentData = useStore<ComponentData>({
@@ -21,32 +23,35 @@ export default component$(() => {
     image: '',
   });
 
-  // TODO: Use useStore
-  // TODO: An alternative is keep the index or the id instead of the current object
-  // TODO: Use computed property to get current component
-  // An alternative is use an object or a Map like {[uuid]: component}
-  // eslint-disable-next-line qwik/use-method-usage
-  const currentComponent: Signal<ComponentInfo | undefined> = useSignal<
-    ComponentInfo | undefined
-  >({
-    name: 'main_frame',
-    type: 'rect',
-    id: Math.floor(Math.random() * 10_000 + 1),
-    height: 500,
-    width: 650,
-    zIndex: 1,
-    color: '#fff',
-    image: '',
-    setCurrentComponent: $(() => {}),
+  const currentComponentId = useSignal<string>(createId());
+
+  const setCurrentComponentId = $((componentId: string) => {
+    currentComponentId.value = componentId;
   });
 
-  const setCurrentComponent = $((component: ComponentInfo) => {
-    currentComponent.value = component;
-  });
+  const components = useStore<ComponentsStore>(
+    {
+      [currentComponentId.value]: {
+        name: 'main_frame',
+        type: 'rect',
+        id: currentComponentId.value,
+        height: 500,
+        width: 650,
+        zIndex: 1,
+        color: '#fff',
+        image: '',
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        setCurrentComponentId: $((_componentId: string) => {}),
+      },
+    },
+    {
+      deep: true,
+    },
+  );
 
-  const components = useStore<ComponentInfo[]>([currentComponent.value!], {
-    deep: true,
-  });
+  const currentComponent = useComputed$<ComponentInfo | undefined>(() =>
+    currentComponentId.value ? components[currentComponentId.value] : undefined,
+  );
 
   const moveElement = $(() => {
     console.log('Move element');
@@ -60,17 +65,13 @@ export default component$(() => {
     console.log('Rotate element');
   });
 
-  const removeElement = $((id: number) => {
-    const index = components.findIndex((c) => c.id === id);
-    components.splice(index, 1);
-    currentComponent.value = undefined;
+  const removeElement = $((id: string) => {
+    delete components[id];
+    currentComponentId.value = '';
   });
 
   const removeBackground = $(() => {
-    const index = components.findIndex(
-      (c) => c.id === currentComponent.value?.id,
-    );
-    components[index].image = '';
+    components[currentComponentId.value].image = '';
     componentData.image = '';
   });
 
@@ -78,7 +79,7 @@ export default component$(() => {
     currentComponent,
     componentData,
     components,
-    setCurrentComponent,
+    setCurrentComponentId,
     rotateElement,
     removeElement,
     resizeElement,
@@ -91,16 +92,12 @@ export default component$(() => {
     track(() => [componentData.color, componentData.image]);
 
     if (currentComponent.value) {
-      const index = components.findIndex(
-        (c) => c.id === currentComponent.value?.id,
-      );
-
       if (currentComponent.value.name === 'main_frame' && componentData.image) {
-        components[index].image =
+        components[currentComponentId.value].image =
           componentData.image || currentComponent.value.image;
       }
 
-      components[index].color =
+      components[currentComponentId.value].color =
         componentData.color || currentComponent.value.color;
     }
   });

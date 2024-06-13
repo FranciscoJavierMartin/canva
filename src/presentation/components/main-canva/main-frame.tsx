@@ -4,7 +4,7 @@ import type { MainFrameInfo } from '@/interfaces/components.interface';
 type MainFrameProps = MainFrameInfo;
 
 export default component$<MainFrameProps>(
-  ({ width, height, color, zIndex, image, setCurrentComponent, ...props }) => {
+  ({ width, height, color, zIndex, image, setCurrentComponentId, id }) => {
     return (
       <div
         class='shadow-md hover:border-2 hover:border-indigo-500'
@@ -14,18 +14,7 @@ export default component$<MainFrameProps>(
           background: color,
           zIndex,
         }}
-        onClick$={() =>
-          setCurrentComponent({
-            width,
-            height,
-            color,
-            zIndex,
-            image,
-            setCurrentComponent,
-            // eslint-disable-next-line qwik/valid-lexical-scope
-            ...props,
-          })
-        }
+        onClick$={() => setCurrentComponentId(id)}
       >
         {/* eslint-disable-next-line qwik/jsx-img */}
         {image && (

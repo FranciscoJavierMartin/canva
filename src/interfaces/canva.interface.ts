@@ -4,16 +4,20 @@ import type { ComponentInfo } from '@/interfaces/components.interface';
 export type CanvaContextState = {
   currentComponent: Signal<ComponentInfo | undefined>;
   componentData: ComponentData;
-  components: ComponentInfo[];
-  setCurrentComponent: QRL<(component: ComponentInfo) => void>;
+  components: ComponentsStore;
+  setCurrentComponentId: QRL<(componentId: string) => void>;
   moveElement: QRL<() => void>;
   resizeElement: QRL<() => void>;
   rotateElement: QRL<() => void>;
-  removeElement: QRL<(id: number) => void>;
+  removeElement: QRL<(id: string) => void>;
   removeBackground: QRL<() => void>;
 };
 
 export type ComponentData = {
   color: string;
   image: string;
+};
+
+export type ComponentsStore = {
+  [key: string]: ComponentInfo;
 };

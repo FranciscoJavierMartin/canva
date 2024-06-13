@@ -16,9 +16,7 @@ export default component$<ShapeRectProps>(
     top,
     zIndex,
     rotation,
-    setCurrentComponent,
-    image,
-    ...props
+    setCurrentComponentId,
   }) => {
     const canva = useContext(CanvaContext);
 
@@ -35,23 +33,7 @@ export default component$<ShapeRectProps>(
           zIndex,
           transform: rotation ? `rotate(${rotation}deg)` : 'rotate(0deg)',
         }}
-        onClick$={() =>
-          setCurrentComponent({
-            id,
-            width,
-            height,
-            color,
-            zIndex,
-            image,
-            setCurrentComponent,
-            left,
-            top,
-            opacity,
-            rotation,
-            // eslint-disable-next-line qwik/valid-lexical-scope
-            ...props,
-          })
-        }
+        onClick$={() => setCurrentComponentId(id)}
       >
         <button
           onClick$={() => canva.removeElement(id)}
