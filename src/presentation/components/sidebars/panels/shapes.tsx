@@ -27,7 +27,6 @@ export default component$(() => {
     };
 
     canva.components[shape.id] = shape;
-    // canva.components.push(shape);
   });
 
   return (
