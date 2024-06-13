@@ -98,19 +98,15 @@ export default component$(() => {
   useVisibleTask$(({ track }) => {
     track(() => [componentData.color, componentData.image]);
 
-    // if (currentComponent.value) {
-    //   const index = components.findIndex(
-    //     (c) => c.id === currentComponent.value?.id,
-    //   );
+    if (currentComponent.value) {
+      if (currentComponent.value.name === 'main_frame' && componentData.image) {
+        components[currentId.value].image =
+          componentData.image || currentComponent.value.image;
+      }
 
-    //   if (currentComponent.value.name === 'main_frame' && componentData.image) {
-    //     components[index].image =
-    //       componentData.image || currentComponent.value.image;
-    //   }
-
-    //   components[index].color =
-    //     componentData.color || currentComponent.value.color;
-    // }
+      components[currentId.value].color =
+        componentData.color || currentComponent.value.color;
+    }
   });
 
   return (
