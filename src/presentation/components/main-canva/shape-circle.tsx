@@ -1,15 +1,14 @@
 import { component$, useContext } from '@builder.io/qwik';
-import type { ShapeRectInfo } from '@/interfaces/components.interface';
+import type { ShapeCircleInfo } from '@/interfaces/components.interface';
 import Trash from '@/presentation/icons/trash';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 
-type ShapeRectProps = ShapeRectInfo;
+type ShapeCircleProps = ShapeCircleInfo;
 
-export default component$<ShapeRectProps>(
+export default component$<ShapeCircleProps>(
   ({
     id,
     width,
-    height,
     color,
     opacity,
     left,
@@ -24,10 +23,6 @@ export default component$<ShapeRectProps>(
       <div
         class='group absolute hover:border-2 hover:border-indigo-500'
         style={{
-          width: `${width}px`,
-          height: `${height}px`,
-          backgroundColor: color,
-          opacity,
           left: `${left}px`,
           top: `${top}px`,
           zIndex,
@@ -35,6 +30,15 @@ export default component$<ShapeRectProps>(
         }}
         onClick$={() => setCurrentComponentId(id)}
       >
+        <div
+          class='rounded-full'
+          style={{
+            width: `${width}px`,
+            height: `${width}px`,
+            backgroundColor: color,
+            opacity,
+          }}
+        ></div>
         <button
           onClick$={() => canva.removeElement(id)}
           class='absolute right-1 top-1 hidden cursor-pointer rounded-md bg-white p-1 text-red-500 group-hover:block'

@@ -1,7 +1,8 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { $, component$, useSignal } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
-import MainCanva from '@/presentation/components/main-canva/index';
-import type { ComponentInfo } from '@/interfaces/types/components';
+import { createId } from '@paralleldrive/cuid2';
+import CanvaComponent from '@/presentation/components/main-canva/canva-component';
+import type { ComponentInfo } from '@/interfaces/components.interface';
 
 export default component$(() => {
   const ref = useSignal<HTMLDivElement>();
@@ -10,18 +11,20 @@ export default component$(() => {
   const obj: ComponentInfo = {
     name: 'main_frame',
     type: 'rect',
-    id: Math.floor(Math.random() * 100 + 1),
+    id: createId(),
     height: +(location.url.searchParams.get('height') ?? 500),
     width: +(location.url.searchParams.get('width') ?? 650),
     zIndex: 1,
-    color: 'green',
+    color: '#fff',
     image: '',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setCurrentComponentId: $((componentId: string) => {}),
   };
 
   return (
     <div class='center-elements h-screen w-screen'>
       <div ref={ref} class='relative size-auto overflow-auto'>
-        <MainCanva info={obj} />
+        <CanvaComponent info={obj} />
       </div>
     </div>
   );

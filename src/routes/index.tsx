@@ -1,6 +1,6 @@
 import { $, component$, useContext, useTask$ } from '@builder.io/qwik';
 import { Link, useLocation } from '@builder.io/qwik-city';
-import { PortalAPI } from '@/presentation/contexts/portal-api';
+import { PortalAPI } from '@/presentation/contexts/portals/portal-api';
 import Modal from '@/presentation/ui/modal/route-model/modal';
 import LoginForm from '@/presentation/components/forms/login-form';
 import RegisterForm from '@/presentation/components/forms/register-form';

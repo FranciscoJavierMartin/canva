@@ -1,13 +1,15 @@
 import { type JSXOutput, component$ } from '@builder.io/qwik';
-import type { ComponentInfo } from '@/interfaces/types/components';
+import type { ComponentInfo } from '@/interfaces/components.interface';
 import MainFrame from './main-frame';
 import ShapeRect from './shape-rect';
+import ShapeCircle from './shape-circle';
+import ShapeTriangle from './shape-triangle';
 
-type MainCanvaProps = {
+type CanvaComponentProps = {
   info: ComponentInfo;
 };
 
-export default component$<MainCanvaProps>(({ info }) => {
+export default component$<CanvaComponentProps>(({ info }) => {
   let component: JSXOutput;
 
   switch (info.name) {
@@ -18,6 +20,12 @@ export default component$<MainCanvaProps>(({ info }) => {
       switch (info.type) {
         case 'rect':
           component = <ShapeRect {...info} />;
+          break;
+        case 'circle':
+          component = <ShapeCircle {...info} />;
+          break;
+        case 'triangle':
+          component = <ShapeTriangle {...info} />;
           break;
       }
       break;

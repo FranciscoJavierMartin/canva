@@ -1,5 +1,5 @@
 import { component$, useContext } from '@builder.io/qwik';
-import { PortalsContextId } from '@/presentation/contexts/portal';
+import { PortalsContextId } from '@/presentation/contexts/portals/portal';
 import WrapJsxInContext from '@/presentation/ui/portal/wrapper';
 
 /**

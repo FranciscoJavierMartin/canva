@@ -7,7 +7,7 @@ import {
   useTask$,
 } from '@builder.io/qwik';
 import { Link, useLocation } from '@builder.io/qwik-city';
-import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
+import { PortalCloseAPIContextId } from '@/presentation/contexts/portals/portal-close';
 import XMark from '@/presentation/icons/x-mark';
 
 export default component$(() => {
