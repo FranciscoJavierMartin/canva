@@ -1,5 +1,5 @@
 import type { Signal, QRL } from '@builder.io/qwik';
-import type { ComponentInfo } from '@/interfaces/types/components';
+import type { ComponentInfo } from '@/interfaces/components.interface';
 
 export type CanvaContextState = {
   currentComponent: Signal<ComponentInfo | undefined>;

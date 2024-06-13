@@ -13,7 +13,7 @@ import type { ComponentInfo } from '@/interfaces/components.interface';
 import type {
   CanvaContextState,
   ComponentData,
-} from '@/interfaces/types/canva';
+} from '@/interfaces/canva.interface';
 
 export default component$(() => {
   const componentData = useStore<ComponentData>({
