@@ -4,7 +4,7 @@ import type { ComponentInfo } from '@/interfaces/components.interface';
 export type CanvaContextState = {
   currentComponent: Signal<ComponentInfo | undefined>;
   componentData: ComponentData;
-  components: ComponentInfo[];
+  components: ComponentsStore;
   setCurrentComponent: QRL<(component: ComponentInfo) => void>;
   moveElement: QRL<() => void>;
   resizeElement: QRL<() => void>;
@@ -16,4 +16,8 @@ export type CanvaContextState = {
 export type ComponentData = {
   color: string;
   image: string;
+};
+
+export type ComponentsStore = {
+  [key: string]: ComponentInfo;
 };

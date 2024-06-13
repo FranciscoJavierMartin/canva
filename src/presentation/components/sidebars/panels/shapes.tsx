@@ -26,7 +26,8 @@ export default component$(() => {
       type,
     };
 
-    canva.components.push(shape);
+    canva.components[shape.id] = shape;
+    // canva.components.push(shape);
   });
 
   return (

@@ -13,6 +13,7 @@ import type { ComponentInfo } from '@/interfaces/components.interface';
 import type {
   CanvaContextState,
   ComponentData,
+  ComponentsStore,
 } from '@/interfaces/canva.interface';
 import { createId } from '@paralleldrive/cuid2';
 
@@ -45,9 +46,26 @@ export default component$(() => {
     currentComponent.value = component;
   });
 
-  const components = useStore<ComponentInfo[]>([currentComponent.value!], {
-    deep: true,
-  });
+  const currentId = useSignal<string>(createId());
+
+  const components = useStore<ComponentsStore>(
+    {
+      [currentId.value]: {
+        name: 'main_frame',
+        type: 'rect',
+        id: currentId.value,
+        height: 500,
+        width: 650,
+        zIndex: 1,
+        color: '#fff',
+        image: '',
+        setCurrentComponent: $(() => {}),
+      },
+    },
+    {
+      deep: true,
+    },
+  );
 
   const moveElement = $(() => {
     console.log('Move element');
@@ -62,17 +80,19 @@ export default component$(() => {
   });
 
   const removeElement = $((id: string) => {
-    const index = components.findIndex((c) => c.id === id);
-    components.splice(index, 1);
+    delete components[id];
+    currentId.value = '';
+    // const index = components.findIndex((c) => c.id === id);
+    // components.splice(index, 1);
     currentComponent.value = undefined;
   });
 
   const removeBackground = $(() => {
-    const index = components.findIndex(
-      (c) => c.id === currentComponent.value?.id,
-    );
-    components[index].image = '';
-    componentData.image = '';
+    // const index = components.findIndex(
+    //   (c) => c.id === currentComponent.value?.id,
+    // );
+    // components[index].image = '';
+    // componentData.image = '';
   });
 
   useContextProvider<CanvaContextState>(CanvaContext, {
@@ -91,19 +111,19 @@ export default component$(() => {
   useVisibleTask$(({ track }) => {
     track(() => [componentData.color, componentData.image]);
 
-    if (currentComponent.value) {
-      const index = components.findIndex(
-        (c) => c.id === currentComponent.value?.id,
-      );
+    // if (currentComponent.value) {
+    //   const index = components.findIndex(
+    //     (c) => c.id === currentComponent.value?.id,
+    //   );
 
-      if (currentComponent.value.name === 'main_frame' && componentData.image) {
-        components[index].image =
-          componentData.image || currentComponent.value.image;
-      }
+    //   if (currentComponent.value.name === 'main_frame' && componentData.image) {
+    //     components[index].image =
+    //       componentData.image || currentComponent.value.image;
+    //   }
 
-      components[index].color =
-        componentData.color || currentComponent.value.color;
-    }
+    //   components[index].color =
+    //     componentData.color || currentComponent.value.color;
+    // }
   });
 
   return (
