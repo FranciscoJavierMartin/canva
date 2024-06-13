@@ -2,11 +2,11 @@ import {
   $,
   Slot,
   component$,
+  useComputed$,
   useContextProvider,
   useSignal,
   useStore,
   useVisibleTask$,
-  type Signal,
 } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import type { ComponentInfo } from '@/interfaces/components.interface';
@@ -27,26 +27,12 @@ export default component$(() => {
   // TODO: An alternative is keep the index or the id instead of the current object
   // TODO: Use computed property to get current component
   // An alternative is use an object or a Map like {[uuid]: component}
-  // eslint-disable-next-line qwik/use-method-usage
-  const currentComponent: Signal<ComponentInfo | undefined> = useSignal<
-    ComponentInfo | undefined
-  >({
-    name: 'main_frame',
-    type: 'rect',
-    id: createId(),
-    height: 500,
-    width: 650,
-    zIndex: 1,
-    color: '#fff',
-    image: '',
-    setCurrentComponent: $(() => {}),
-  });
-
-  const setCurrentComponent = $((component: ComponentInfo) => {
-    currentComponent.value = component;
-  });
 
   const currentId = useSignal<string>(createId());
+
+  const setCurrentComponent = $((component: ComponentInfo) => {
+    currentId.value = component.id;
+  });
 
   const components = useStore<ComponentsStore>(
     {
@@ -67,6 +53,10 @@ export default component$(() => {
     },
   );
 
+  const currentComponent = useComputed$<ComponentInfo | undefined>(() =>
+    currentId.value ? components[currentId.value] : undefined,
+  );
+
   const moveElement = $(() => {
     console.log('Move element');
   });
@@ -82,9 +72,6 @@ export default component$(() => {
   const removeElement = $((id: string) => {
     delete components[id];
     currentId.value = '';
-    // const index = components.findIndex((c) => c.id === id);
-    // components.splice(index, 1);
-    currentComponent.value = undefined;
   });
 
   const removeBackground = $(() => {
