@@ -16,7 +16,6 @@ export default component$<MainFrameProps>(
         }}
         onClick$={() => setCurrentComponentId(id)}
       >
-        {/* eslint-disable-next-line qwik/jsx-img */}
         {image && (
           <img
             class='size-full'

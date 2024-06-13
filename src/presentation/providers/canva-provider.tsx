@@ -48,8 +48,8 @@ export default component$(() => {
     },
   );
 
-  const currentComponent = useComputed$<ComponentInfo | undefined>(() =>
-    currentComponentId.value ? components[currentComponentId.value] : undefined,
+  const currentComponent = useComputed$<ComponentInfo | undefined>(
+    () => components[currentComponentId.value],
   );
 
   const moveElement = $(() => {
