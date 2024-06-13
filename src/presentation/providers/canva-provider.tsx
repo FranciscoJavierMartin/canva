@@ -23,11 +23,6 @@ export default component$(() => {
     image: '',
   });
 
-  // TODO: Use useStore
-  // TODO: An alternative is keep the index or the id instead of the current object
-  // TODO: Use computed property to get current component
-  // An alternative is use an object or a Map like {[uuid]: component}
-
   const currentComponentId = useSignal<string>(createId());
 
   const setCurrentComponentId = $((componentId: string) => {
