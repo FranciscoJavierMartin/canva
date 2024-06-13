@@ -6,7 +6,6 @@ interface BaseComponent {
   width: number;
   zIndex: number;
   color: string;
-  setCurrentComponentId: QRL<(componentId: string) => void>;
 }
 
 export interface MainFrameInfo extends BaseComponent {

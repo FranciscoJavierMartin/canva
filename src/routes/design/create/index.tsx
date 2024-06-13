@@ -1,4 +1,4 @@
-import { $, component$, useSignal } from '@builder.io/qwik';
+import { component$, useSignal } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
 import { createId } from '@paralleldrive/cuid2';
 import CanvaComponent from '@/presentation/components/main-canva/canva-component';
@@ -17,8 +17,6 @@ export default component$(() => {
     zIndex: 1,
     color: '#fff',
     image: '',
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    setCurrentComponentId: $((componentId: string) => {}),
   };
 
   return (

@@ -6,18 +6,7 @@ import { CanvaContext } from '@/presentation/contexts/canva/canva';
 type ShapeTriangleProps = ShapeTriangleInfo;
 
 export default component$<ShapeTriangleProps>(
-  ({
-    id,
-    width,
-    height,
-    color,
-    opacity,
-    left,
-    top,
-    zIndex,
-    rotation,
-    setCurrentComponentId,
-  }) => {
+  ({ id, width, height, color, opacity, left, top, zIndex, rotation }) => {
     const canva = useContext(CanvaContext);
 
     return (
@@ -29,7 +18,7 @@ export default component$<ShapeTriangleProps>(
           zIndex,
           transform: rotation ? `rotate(${rotation}deg)` : 'rotate(0deg)',
         }}
-        onClick$={() => setCurrentComponentId(id)}
+        onClick$={() => canva.setCurrentComponentId(id)}
       >
         <div
           style={{

@@ -6,17 +6,7 @@ import { CanvaContext } from '@/presentation/contexts/canva/canva';
 type ShapeCircleProps = ShapeCircleInfo;
 
 export default component$<ShapeCircleProps>(
-  ({
-    id,
-    width,
-    color,
-    opacity,
-    left,
-    top,
-    zIndex,
-    rotation,
-    setCurrentComponentId,
-  }) => {
+  ({ id, width, color, opacity, left, top, zIndex, rotation }) => {
     const canva = useContext(CanvaContext);
 
     return (
@@ -28,7 +18,7 @@ export default component$<ShapeCircleProps>(
           zIndex,
           transform: rotation ? `rotate(${rotation}deg)` : 'rotate(0deg)',
         }}
-        onClick$={() => setCurrentComponentId(id)}
+        onClick$={() => canva.setCurrentComponentId(id)}
       >
         <div
           class='rounded-full'

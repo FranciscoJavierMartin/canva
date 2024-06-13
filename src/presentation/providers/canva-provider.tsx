@@ -40,7 +40,6 @@ export default component$(() => {
         zIndex: 1,
         color: '#fff',
         image: '',
-        setCurrentComponentId,
       },
     },
     {
