@@ -80,7 +80,31 @@ export default component$(() => {
   });
 
   const resizeElement = $((id: string): void => {
-    console.log('Resize element');
+    let isMoving: boolean = true;
+    setCurrentComponentId(id);
+    const currentDiv = document.getElementById(id);
+
+    function mouseMove({ movementX, movementY }: MouseEvent): void {
+      if (currentDiv) {
+        const getStyle = window.getComputedStyle(currentDiv);
+        const width = parseInt(getStyle.width);
+        const height = parseInt(getStyle.height);
+
+        if (isMoving) {
+          currentDiv.style.width = `${width + movementX}px`;
+          currentDiv.style.height = `${height + movementY}px`;
+        }
+      }
+    }
+
+    function mouseUp(): void {
+      isMoving = false;
+      window.removeEventListener('mousemove', mouseMove);
+      window.removeEventListener('mouseup', mouseUp);
+    }
+
+    window.addEventListener('mousemove', mouseMove);
+    window.addEventListener('mouseup', mouseUp);
   });
 
   const rotateElement = $((id: string): void => {
