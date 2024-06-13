@@ -1,12 +1,13 @@
 import { component$, useContext } from '@builder.io/qwik';
-import type { ShapeTriangleInfo } from '@/interfaces/components.interface';
 import Trash from '@/presentation/icons/trash';
+import Element from './element';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
+import type { ShapeCircleInfo } from '@/interfaces/components.interface';
 
-type ShapeTriangleProps = ShapeTriangleInfo;
+type ShapeCircleProps = ShapeCircleInfo;
 
-export default component$<ShapeTriangleProps>(
-  ({ id, width, height, color, opacity, left, top, zIndex, rotation }) => {
+export default component$<ShapeCircleProps>(
+  ({ id, width, color, opacity, left, top, zIndex, rotation }) => {
     const canvaContext = useContext(CanvaContext);
 
     return (
@@ -21,14 +22,15 @@ export default component$<ShapeTriangleProps>(
         onClick$={() => canvaContext.setCurrentComponentId(id)}
       >
         <div
+          class='rounded-full'
           style={{
             width: `${width}px`,
-            height: `${height}px`,
+            height: `${width}px`,
             backgroundColor: color,
             opacity,
-            clipPath: 'polygon(50% 0, 100% 100%, 0 100%)',
           }}
         ></div>
+        <Element />
         <button
           onClick$={() => canvaContext.removeElement(id)}
           class='absolute right-1 top-1 hidden cursor-pointer rounded-md bg-white p-1 text-red-500 group-hover:block'

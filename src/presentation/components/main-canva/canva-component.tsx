@@ -1,9 +1,9 @@
 import { type JSXOutput, component$ } from '@builder.io/qwik';
 import type { ComponentInfo } from '@/interfaces/components.interface';
 import MainFrame from './main-frame';
-import ShapeRect from './shape-rect';
-import ShapeCircle from './shape-circle';
-import ShapeTriangle from './shape-triangle';
+import ShapeRect from './shapes/shape-rect';
+import ShapeCircle from './shapes/shape-circle';
+import ShapeTriangle from './shapes/shape-triangle';
 
 type CanvaComponentProps = {
   info: ComponentInfo;
