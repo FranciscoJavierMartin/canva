@@ -4,8 +4,8 @@ import { CanvaContext } from '@/presentation/contexts/canva/canva';
 type ToolsProps = {};
 
 export default component$<ToolsProps>(() => {
-  const canva = useContext(CanvaContext);
-  const isOpen = useComputed$(() => !!canva.currentComponent.value);
+  const canvaContext = useContext(CanvaContext);
+  const isOpen = useComputed$(() => !!canvaContext.currentComponent.value);
 
   return (
     <aside
@@ -17,7 +17,7 @@ export default component$<ToolsProps>(() => {
         },
       ]}
     >
-      {!!canva.currentComponent.value && (
+      {!!canvaContext.currentComponent.value && (
         <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
           <div class='mt-4 flex items-center justify-start gap-4'>
             <span>Color</span>
@@ -26,9 +26,9 @@ export default component$<ToolsProps>(() => {
               class='size-[30px] rounded-md'
               style={{
                 backgroundColor:
-                  canva.currentComponent.value.color &&
-                  canva.currentComponent.value.color !== '#fff'
-                    ? canva.currentComponent.value.color
+                  canvaContext.currentComponent.value.color &&
+                  canvaContext.currentComponent.value.color !== '#fff'
+                    ? canvaContext.currentComponent.value.color
                     : 'gray',
               }}
             ></label>
@@ -37,14 +37,14 @@ export default component$<ToolsProps>(() => {
               class='invisible'
               id='color-input'
               onChange$={(event: Event, element: HTMLInputElement) => {
-                canva.componentData.color = element.value;
+                canvaContext.componentData.color = element.value;
               }}
             />
           </div>
-          {canva.currentComponent.value?.name === 'main_frame' && (
+          {canvaContext.currentComponent.value?.name === 'main_frame' && (
             <button
               class='button bg-slate-600 px-3'
-              onClick$={() => canva.removeBackground()}
+              onClick$={() => canvaContext.removeBackground()}
             >
               Remove background
             </button>

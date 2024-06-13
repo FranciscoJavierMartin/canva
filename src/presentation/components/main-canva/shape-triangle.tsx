@@ -7,7 +7,7 @@ type ShapeTriangleProps = ShapeTriangleInfo;
 
 export default component$<ShapeTriangleProps>(
   ({ id, width, height, color, opacity, left, top, zIndex, rotation }) => {
-    const canva = useContext(CanvaContext);
+    const canvaContext = useContext(CanvaContext);
 
     return (
       <div
@@ -18,7 +18,7 @@ export default component$<ShapeTriangleProps>(
           zIndex,
           transform: rotation ? `rotate(${rotation}deg)` : 'rotate(0deg)',
         }}
-        onClick$={() => canva.setCurrentComponentId(id)}
+        onClick$={() => canvaContext.setCurrentComponentId(id)}
       >
         <div
           style={{
@@ -30,7 +30,7 @@ export default component$<ShapeTriangleProps>(
           }}
         ></div>
         <button
-          onClick$={() => canva.removeElement(id)}
+          onClick$={() => canvaContext.removeElement(id)}
           class='absolute right-1 top-1 hidden cursor-pointer rounded-md bg-white p-1 text-red-500 group-hover:block'
         >
           <Trash />

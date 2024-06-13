@@ -2,7 +2,7 @@ import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import { component$, useContext } from '@builder.io/qwik';
 
 export default component$(() => {
-  const canva = useContext(CanvaContext);
+  const canvaContext = useContext(CanvaContext);
 
   return (
     <div class='grid grid-cols-2 gap-2'>
@@ -11,7 +11,7 @@ export default component$(() => {
           key={img}
           class='h-[90px] w-full cursor-pointer overflow-hidden rounded-md'
           onClick$={() =>
-            (canva.componentData.image =
+            (canvaContext.componentData.image =
               'https://media.cntraveler.com/photos/56e20de2a69cef316dc99c9f/master/pass/neuschwanstein-castle-germany-cr-getty.jpg')
           }
         >

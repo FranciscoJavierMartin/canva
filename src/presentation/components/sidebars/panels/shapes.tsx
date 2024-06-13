@@ -4,7 +4,7 @@ import type { ShapeInfo } from '@/interfaces/components.interface';
 import { createId } from '@paralleldrive/cuid2';
 
 export default component$(() => {
-  const canva = useContext(CanvaContext);
+  const canvaContext = useContext(CanvaContext);
 
   const createShape = $((type: 'rect' | 'circle' | 'triangle') => {
     const shape: ShapeInfo = {
@@ -19,13 +19,13 @@ export default component$(() => {
       color: '#3c3c3d',
       rotation: 0,
       image: '',
-      rotateElement: canva.rotateElement,
-      moveElement: canva.moveElement,
-      resizeElement: canva.resizeElement,
+      rotateElement: canvaContext.rotateElement,
+      moveElement: canvaContext.moveElement,
+      resizeElement: canvaContext.resizeElement,
       type,
     };
 
-    canva.components[shape.id] = shape;
+    canvaContext.components[shape.id] = shape;
   });
 
   return (
