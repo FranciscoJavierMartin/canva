@@ -21,13 +21,6 @@ export default component$(() => {
     image: '',
   });
 
-  const setCurrentComponent = $((component: ComponentInfo) => {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    if (currentComponent?.value) {
-      currentComponent.value = component;
-    }
-  });
-
   // TODO: Use useStore
   // TODO: An alternative is keep the index or the id instead of the current object
   // TODO: Use computed property to get current component
@@ -47,6 +40,10 @@ export default component$(() => {
     setCurrentComponent: $(() => {}),
   });
 
+  const setCurrentComponent = $((component: ComponentInfo) => {
+    currentComponent.value = component;
+  });
+
   const components = useStore<ComponentInfo[]>([currentComponent.value!], {
     deep: true,
   });
@@ -63,8 +60,8 @@ export default component$(() => {
     console.log('Rotate element');
   });
 
-  const removeElement = $(() => {
-    console.log('Remove element');
+  const removeElement = $((id: number) => {
+    console.log('Remove element', id);
   });
 
   const removeBackground = $(() => {
