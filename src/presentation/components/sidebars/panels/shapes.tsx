@@ -6,7 +6,7 @@ import type { ShapeInfo } from '@/interfaces/components.interface';
 export default component$(() => {
   const canvaContext = useContext(CanvaContext);
 
-  const createShape = $((type: 'rect' | 'circle' | 'triangle') => {
+  const createShape = $((type: 'rect' | 'circle' | 'triangle'): void => {
     const shape: ShapeInfo = {
       id: createId(),
       type,

@@ -33,11 +33,17 @@ export interface ShapeTriangleInfo extends ShapeCommonInfo {
   type: 'triangle';
 }
 
-export interface TextInfo extends BaseComponent {
+export interface TextInfo extends Omit<BaseComponent, 'height' | 'width'> {
   name: 'text';
   type: 'rect';
   left: number;
   top: number;
+  rotation: number;
+  opacity: number;
+  padding: number;
+  font: number;
+  text: string;
+  weight: number;
 }
 
 export type ShapeInfo = ShapeRectInfo | ShapeCircleInfo | ShapeTriangleInfo;
