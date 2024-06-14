@@ -23,6 +23,9 @@ export type ComponentData = {
   top: number;
   opacity: number;
   zIndex: number;
+  fontSize?: number;
+  padding?: number;
+  fontWeight?: number;
 };
 
 export type ComponentsStore = {

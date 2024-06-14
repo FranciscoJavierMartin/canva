@@ -13,6 +13,7 @@ import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import type {
   ComponentInfo,
   ShapeInfo,
+  TextInfo,
 } from '@/interfaces/components.interface';
 import type {
   CanvaContextState,
@@ -198,9 +199,13 @@ export default component$(() => {
       componentData.left,
       componentData.opacity,
       componentData.zIndex,
+      componentData.padding,
+      componentData.fontSize,
+      componentData.fontWeight,
     ]);
 
     if (currentComponent.value) {
+      // TODO: Add support for text resize and rotate
       if (currentComponent.value.name === 'shape') {
         (components[currentComponentId.value] as ShapeInfo).rotation =
           componentData.rotation || currentComponent.value.rotation;
@@ -208,6 +213,15 @@ export default component$(() => {
           componentData.width || currentComponent.value.width;
         (components[currentComponentId.value] as ShapeInfo).height =
           componentData.height || currentComponent.value.height;
+      }
+
+      if (currentComponent.value.name === 'text') {
+        (components[currentComponentId.value] as TextInfo).fontSize =
+          componentData.fontSize || currentComponent.value.fontSize;
+        (components[currentComponentId.value] as TextInfo).padding =
+          componentData.padding || currentComponent.value.padding;
+        (components[currentComponentId.value] as TextInfo).fontWeight =
+          componentData.fontWeight || currentComponent.value.fontWeight;
       }
 
       if (currentComponent.value.name === 'main_frame' && componentData.image) {
@@ -239,6 +253,9 @@ export default component$(() => {
       componentData.top = 0;
       componentData.opacity = 0;
       componentData.zIndex = 0;
+      componentData.fontSize = undefined;
+      componentData.padding = undefined;
+      componentData.fontWeight = undefined;
     }
   });
 
