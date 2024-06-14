@@ -21,6 +21,12 @@ export type ComponentData = {
   height: number;
   left: number;
   top: number;
+  opacity: number;
+  zIndex: number;
+  fontSize?: number;
+  padding?: number;
+  fontWeight?: number;
+  text?: string;
 };
 
 export type ComponentsStore = {
