@@ -13,7 +13,6 @@ export type CanvaContextState = {
   removeBackground: QRL<() => void>;
 };
 
-// TODO: Add left, top,
 export type ComponentData = {
   color: string;
   image: string;
