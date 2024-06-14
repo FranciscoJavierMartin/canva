@@ -13,6 +13,7 @@ export type CanvaContextState = {
   removeBackground: QRL<() => void>;
 };
 
+// TODO: Add rotate, width, height, left, top, 
 export type ComponentData = {
   color: string;
   image: string;

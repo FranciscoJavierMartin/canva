@@ -108,7 +108,44 @@ export default component$(() => {
   });
 
   const rotateElement = $((id: string): void => {
-    console.log('Rotate element');
+    let isMoving: boolean = true;
+    setCurrentComponentId(id);
+    const currentDiv = document.getElementById(id);
+
+    function mouseMove({ pageX, pageY }: MouseEvent): void {
+      if (currentDiv) {
+        const boundingRect = currentDiv.getBoundingClientRect();
+        const figureCenter = {
+          x: boundingRect.left + boundingRect.width / 2,
+          y: boundingRect.top + boundingRect.height / 2,
+        };
+
+        const angle =
+          Math.atan2(pageX - figureCenter.x, -(pageY - figureCenter.y)) *
+          (180 / Math.PI);
+
+        if (isMoving) {
+          currentDiv.style.transform = `rotate(${angle}deg)`;
+        }
+      }
+    }
+
+    function mouseUp(): void {
+      isMoving = false;
+      window.removeEventListener('mousemove', mouseMove);
+      window.removeEventListener('mouseup', mouseUp);
+
+      const angle = parseFloat(
+        currentDiv?.style.transform
+          .split('(')[1]
+          .split(')')[0]
+          .split(',')[0]
+          .replace('deg', '') || '0',
+      );
+    }
+
+    window.addEventListener('mousemove', mouseMove);
+    window.addEventListener('mouseup', mouseUp);
   });
 
   const removeElement = $((id: string): void => {
@@ -138,6 +175,10 @@ export default component$(() => {
     track(() => [componentData.color, componentData.image]);
 
     if (currentComponent.value) {
+      // if(currentComponent.value.name !== 'text'){
+
+      // }
+
       if (currentComponent.value.name === 'main_frame' && componentData.image) {
         components[currentComponentId.value].image =
           componentData.image || currentComponent.value.image;
