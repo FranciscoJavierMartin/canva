@@ -17,9 +17,9 @@ export default component$(() => {
       rotation: 0,
       zIndex: 1,
       padding: 6,
-      font: 22,
+      fontSize: 22,
       text: 'Add you text',
-      weight: 400,
+      fontWeight: 400,
       color: '#3c3c3d',
     };
 

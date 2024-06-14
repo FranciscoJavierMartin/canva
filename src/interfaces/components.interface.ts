@@ -41,9 +41,9 @@ export interface TextInfo extends Omit<BaseComponent, 'height' | 'width'> {
   rotation: number;
   opacity: number;
   padding: number;
-  font: number;
+  fontSize: number;
   text: string;
-  weight: number;
+  fontWeight: number;
 }
 
 export type ShapeInfo = ShapeRectInfo | ShapeCircleInfo | ShapeTriangleInfo;

@@ -1,9 +1,10 @@
 import { type JSXOutput, component$ } from '@builder.io/qwik';
 import type { ComponentInfo } from '@/interfaces/components.interface';
-import MainFrame from './main-frame';
-import ShapeRect from './shapes/shape-rect';
-import ShapeCircle from './shapes/shape-circle';
-import ShapeTriangle from './shapes/shape-triangle';
+import MainFrame from '@/presentation/components/main-canva/main-frame';
+import ShapeRect from '@/presentation/components/main-canva/shapes/shape-rect';
+import ShapeCircle from '@/presentation/components/main-canva/shapes/shape-circle';
+import ShapeTriangle from '@/presentation/components/main-canva/shapes/shape-triangle';
+import TextComponent from '@/presentation/components/main-canva/text-component';
 
 type CanvaComponentProps = {
   info: ComponentInfo;
@@ -28,6 +29,9 @@ export default component$<CanvaComponentProps>(({ info }) => {
           component = <ShapeTriangle {...info} />;
           break;
       }
+      break;
+    case 'text':
+      component = <TextComponent {...info} />;
       break;
     default:
       component = <div />;
