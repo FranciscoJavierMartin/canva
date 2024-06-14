@@ -25,6 +25,8 @@ export default component$(() => {
     color: '',
     image: '',
     rotation: 0,
+    width: 0,
+    height: 0,
   });
 
   const currentComponentId = useSignal<string>(createId());
@@ -105,6 +107,8 @@ export default component$(() => {
       isMoving = false;
       window.removeEventListener('mousemove', mouseMove);
       window.removeEventListener('mouseup', mouseUp);
+      componentData.width = parseInt(currentDiv?.style.width || '0');
+      componentData.height = parseInt(currentDiv?.style.width || '0');
     }
 
     window.addEventListener('mousemove', mouseMove);
@@ -182,12 +186,18 @@ export default component$(() => {
       componentData.color,
       componentData.image,
       componentData.rotation,
+      componentData.height,
+      componentData.width,
     ]);
 
     if (currentComponent.value) {
       if (currentComponent.value.name === 'shape') {
         (components[currentComponentId.value] as ShapeInfo).rotation =
           componentData.rotation || currentComponent.value.rotation;
+        components[currentComponentId.value].width =
+          componentData.width || currentComponent.value.width;
+        components[currentComponentId.value].height =
+          componentData.height || currentComponent.value.height;
       }
 
       if (currentComponent.value.name === 'main_frame' && componentData.image) {
@@ -200,6 +210,8 @@ export default component$(() => {
 
       componentData.color = '';
       componentData.rotation = 0;
+      componentData.height = 0;
+      componentData.width = 0;
     }
   });
 
