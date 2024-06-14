@@ -20,6 +20,8 @@ export type ComponentData = {
   rotation: number;
   width: number;
   height: number;
+  left: number;
+  top: number;
 };
 
 export type ComponentsStore = {

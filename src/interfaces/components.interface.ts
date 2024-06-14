@@ -36,6 +36,8 @@ export interface ShapeTriangleInfo extends ShapeCommonInfo {
 export interface TextInfo extends BaseComponent {
   name: 'text';
   type: 'rect';
+  left: number;
+  top: number;
 }
 
 export type ShapeInfo = ShapeRectInfo | ShapeCircleInfo | ShapeTriangleInfo;
