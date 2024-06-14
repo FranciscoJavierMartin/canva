@@ -38,6 +38,11 @@ export interface ShapeTriangleInfo extends ShapeCommonInfo {
   type: 'triangle';
 }
 
+export interface TextInfo extends BaseComponent {
+  name: 'text';
+  type: 'rect';
+}
+
 export type ShapeInfo = ShapeRectInfo | ShapeCircleInfo | ShapeTriangleInfo;
 
-export type ComponentInfo = MainFrameInfo | ShapeInfo;
+export type ComponentInfo = MainFrameInfo | ShapeInfo | TextInfo;

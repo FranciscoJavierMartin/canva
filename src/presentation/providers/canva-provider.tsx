@@ -8,19 +8,23 @@ import {
   useStore,
   useVisibleTask$,
 } from '@builder.io/qwik';
+import { createId } from '@paralleldrive/cuid2';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
-import type { ComponentInfo } from '@/interfaces/components.interface';
+import type {
+  ComponentInfo,
+  ShapeInfo,
+} from '@/interfaces/components.interface';
 import type {
   CanvaContextState,
   ComponentData,
   ComponentsStore,
 } from '@/interfaces/canva.interface';
-import { createId } from '@paralleldrive/cuid2';
 
 export default component$(() => {
   const componentData = useStore<ComponentData>({
     color: '',
     image: '',
+    rotation: 0,
   });
 
   const currentComponentId = useSignal<string>(createId());
@@ -142,6 +146,8 @@ export default component$(() => {
           .split(',')[0]
           .replace('deg', '') || '0',
       );
+
+      componentData.rotation = angle;
     }
 
     window.addEventListener('mousemove', mouseMove);
@@ -154,7 +160,7 @@ export default component$(() => {
   });
 
   const removeBackground = $((): void => {
-    components[currentComponentId.value].image = '';
+    (components[currentComponentId.value] as { image: string }).image = '';
     componentData.image = '';
   });
 
@@ -172,15 +178,20 @@ export default component$(() => {
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ track }) => {
-    track(() => [componentData.color, componentData.image]);
+    track(() => [
+      componentData.color,
+      componentData.image,
+      componentData.rotation,
+    ]);
 
     if (currentComponent.value) {
-      // if(currentComponent.value.name !== 'text'){
-
-      // }
+      if (currentComponent.value.name === 'shape') {
+        (components[currentComponentId.value] as ShapeInfo).rotation =
+          componentData.rotation || currentComponent.value.rotation;
+      }
 
       if (currentComponent.value.name === 'main_frame' && componentData.image) {
-        components[currentComponentId.value].image =
+        (components[currentComponentId.value] as { image: string }).image =
           componentData.image || currentComponent.value.image;
       }
 
@@ -188,6 +199,7 @@ export default component$(() => {
         componentData.color || currentComponent.value.color;
 
       componentData.color = '';
+      componentData.rotation = 0;
     }
   });
 
