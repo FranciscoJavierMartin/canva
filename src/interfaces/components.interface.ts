@@ -1,5 +1,3 @@
-import type { QRL } from '@builder.io/qwik';
-
 interface BaseComponent {
   id: string;
   height: number;
@@ -21,9 +19,6 @@ interface ShapeCommonInfo extends BaseComponent {
   top: number;
   rotation: number;
   opacity: number;
-  rotateElement: QRL<() => void>;
-  moveElement: QRL<() => void>;
-  resizeElement: QRL<() => void>;
 }
 
 export interface ShapeRectInfo extends ShapeCommonInfo {
@@ -38,6 +33,13 @@ export interface ShapeTriangleInfo extends ShapeCommonInfo {
   type: 'triangle';
 }
 
+export interface TextInfo extends BaseComponent {
+  name: 'text';
+  type: 'rect';
+  left: number;
+  top: number;
+}
+
 export type ShapeInfo = ShapeRectInfo | ShapeCircleInfo | ShapeTriangleInfo;
 
-export type ComponentInfo = MainFrameInfo | ShapeInfo;
+export type ComponentInfo = MainFrameInfo | ShapeInfo | TextInfo;

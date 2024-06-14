@@ -6,7 +6,7 @@ type MainFrameProps = MainFrameInfo;
 
 export default component$<MainFrameProps>(
   ({ width, height, color, zIndex, image, id }) => {
-    const canva = useContext(CanvaContext);
+    const canvaContext = useContext(CanvaContext);
 
     return (
       <div
@@ -17,7 +17,7 @@ export default component$<MainFrameProps>(
           background: color,
           zIndex,
         }}
-        onClick$={() => canva.setCurrentComponentId(id)}
+        onClick$={() => canvaContext.setCurrentComponentId(id)}
       >
         {image && (
           <img

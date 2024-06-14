@@ -27,7 +27,6 @@ export default {
           steel: '#34569f',
           off: '#32769ead',
         },
-        green: '#1e830f',
       },
     },
   },

@@ -6,9 +6,9 @@ export type CanvaContextState = {
   componentData: ComponentData;
   components: ComponentsStore;
   setCurrentComponentId: QRL<(componentId: string) => void>;
-  moveElement: QRL<() => void>;
-  resizeElement: QRL<() => void>;
-  rotateElement: QRL<() => void>;
+  moveElement: QRL<(id: string) => void>;
+  resizeElement: QRL<(id: string) => void>;
+  rotateElement: QRL<(id: string) => void>;
   removeElement: QRL<(id: string) => void>;
   removeBackground: QRL<() => void>;
 };
@@ -16,6 +16,11 @@ export type CanvaContextState = {
 export type ComponentData = {
   color: string;
   image: string;
+  rotation: number;
+  width: number;
+  height: number;
+  left: number;
+  top: number;
 };
 
 export type ComponentsStore = {
