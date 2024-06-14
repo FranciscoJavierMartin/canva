@@ -29,6 +29,7 @@ export default component$(() => {
     height: 0,
     left: 0,
     top: 0,
+    opacity: 1,
   });
 
   const currentComponentId = useSignal<string>(createId());
@@ -194,15 +195,16 @@ export default component$(() => {
       componentData.width,
       componentData.top,
       componentData.left,
+      componentData.opacity,
     ]);
 
     if (currentComponent.value) {
       if (currentComponent.value.name === 'shape') {
         (components[currentComponentId.value] as ShapeInfo).rotation =
           componentData.rotation || currentComponent.value.rotation;
-        components[currentComponentId.value].width =
+        (components[currentComponentId.value] as ShapeInfo).width =
           componentData.width || currentComponent.value.width;
-        components[currentComponentId.value].height =
+        (components[currentComponentId.value] as ShapeInfo).height =
           componentData.height || currentComponent.value.height;
       }
 
@@ -218,6 +220,8 @@ export default component$(() => {
         (
           components[currentComponentId.value] as { left: number; top: number }
         ).top = componentData.top || currentComponent.value.top;
+        (components[currentComponentId.value] as { opacity: number }).opacity =
+          componentData.opacity || currentComponent.value.opacity;
       }
 
       components[currentComponentId.value].color =
@@ -229,6 +233,7 @@ export default component$(() => {
       componentData.width = 0;
       componentData.left = 0;
       componentData.top = 0;
+      componentData.opacity = 0;
     }
   });
 

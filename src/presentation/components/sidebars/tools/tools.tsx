@@ -50,6 +50,26 @@ export default component$<ToolsProps>(() => {
               Remove background
             </button>
           )}
+          {canvaContext.currentComponent.value.name !== 'main_frame' && (
+            <div class='flex gap-6'>
+              <div class='flex items-center justify-start gap-1'>
+                <span class='text-md'>Opacity</span>
+                <input
+                  type='range'
+                  min={0.1}
+                  step={0.1}
+                  max={1}
+                  value={canvaContext.currentComponent.value.opacity}
+                  class='range'
+                  onChange$={(event: Event, element: HTMLInputElement) => {
+                    canvaContext.componentData.opacity = parseFloat(
+                      element.value,
+                    );
+                  }}
+                />
+              </div>
+            </div>
+          )}
         </div>
       )}
     </aside>
