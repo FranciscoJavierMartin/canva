@@ -11,8 +11,8 @@ export default component$(() => {
         >
           <Upload />
           Upload image
+          <input type='file' id='image' class='hidden' />
         </label>
-        <input type='file' id='image' class='hidden' />
       </div>
     </div>
   );
