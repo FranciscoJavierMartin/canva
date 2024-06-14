@@ -21,6 +21,7 @@ export default component$<ToolsProps>(() => {
         <div class='flex h-full flex-col items-start justify-start gap-6 px-3'>
           <div class='mt-4 flex items-center justify-start gap-4'>
             <span>Color</span>
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label
               for='color-input'
               class='size-[30px] rounded-md'
@@ -41,7 +42,7 @@ export default component$<ToolsProps>(() => {
               }}
             />
           </div>
-          {canvaContext.currentComponent.value?.name === 'main_frame' && (
+          {canvaContext.currentComponent.value.name === 'main_frame' && (
             <button
               class='button bg-slate-600 px-3'
               onClick$={() => canvaContext.removeBackground()}

@@ -13,15 +13,15 @@ export default component$<TransformWrapperProps>(({ id }) => {
       <>
         <div
           onMouseDown$={() => canvaContext.resizeElement(id)}
-          class='bg-green-600 absolute -bottom-1 -right-1 z-50 hidden size-2.5 cursor-nwse-resize group-hover:block'
+          class='absolute -bottom-1 -right-1 z-50 hidden size-2.5 cursor-nwse-resize bg-green-600 group-hover:block'
         ></div>
         <div
           onMouseDown$={() => canvaContext.resizeElement(id)}
-          class='bg-green-600 absolute -right-1 -top-1 z-50 hidden size-2.5 cursor-nesw-resize group-hover:block'
+          class='absolute -right-1 -top-1 z-50 hidden size-2.5 cursor-nesw-resize bg-green-600 group-hover:block'
         ></div>
         <div
           onMouseDown$={() => canvaContext.resizeElement(id)}
-          class='bg-green-600 absolute -bottom-1 -left-1 z-50 hidden size-2.5 cursor-nesw-resize group-hover:block'
+          class='absolute -bottom-1 -left-1 z-50 hidden size-2.5 cursor-nesw-resize bg-green-600 group-hover:block'
         ></div>
       </>
       <div

@@ -23,7 +23,7 @@ export default component$<MainFrameProps>(
           <img
             class='size-full'
             src={image}
-            alt='image'
+            alt='main canva'
             width={width}
             height={height}
           />
