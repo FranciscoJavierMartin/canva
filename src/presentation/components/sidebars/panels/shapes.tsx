@@ -16,7 +16,7 @@ export default component$(() => {
       opacity: 1,
       width: 200,
       height: 150,
-      zIndex: 2,
+      zIndex: 1,
       color: '#3c3c3d',
       rotation: 0,
       image: '',

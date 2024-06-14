@@ -22,6 +22,7 @@ export type ComponentData = {
   left: number;
   top: number;
   opacity: number;
+  zIndex: number;
 };
 
 export type ComponentsStore = {

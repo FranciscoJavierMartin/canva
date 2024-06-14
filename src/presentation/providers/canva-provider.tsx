@@ -30,6 +30,7 @@ export default component$(() => {
     left: 0,
     top: 0,
     opacity: 1,
+    zIndex: 0,
   });
 
   const currentComponentId = useSignal<string>(createId());
@@ -46,7 +47,7 @@ export default component$(() => {
         id: currentComponentId.value,
         height: 500,
         width: 650,
-        zIndex: 1,
+        zIndex: 0,
         color: '#fff',
         image: '',
       },
@@ -196,6 +197,7 @@ export default component$(() => {
       componentData.top,
       componentData.left,
       componentData.opacity,
+      componentData.zIndex,
     ]);
 
     if (currentComponent.value) {
@@ -222,6 +224,8 @@ export default component$(() => {
         ).top = componentData.top || currentComponent.value.top;
         (components[currentComponentId.value] as { opacity: number }).opacity =
           componentData.opacity || currentComponent.value.opacity;
+        components[currentComponentId.value].zIndex =
+          componentData.zIndex || currentComponent.value.zIndex;
       }
 
       components[currentComponentId.value].color =
@@ -234,6 +238,7 @@ export default component$(() => {
       componentData.left = 0;
       componentData.top = 0;
       componentData.opacity = 0;
+      componentData.zIndex = 0;
     }
   });
 

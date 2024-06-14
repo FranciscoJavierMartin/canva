@@ -51,7 +51,7 @@ export default component$<ToolsProps>(() => {
             </button>
           )}
           {canvaContext.currentComponent.value.name !== 'main_frame' && (
-            <div class='flex gap-6'>
+            <div class='flex flex-col gap-6'>
               <div class='flex items-center justify-start gap-1'>
                 <span class='text-md'>Opacity</span>
                 <input
@@ -65,6 +65,20 @@ export default component$<ToolsProps>(() => {
                     canvaContext.componentData.opacity = parseFloat(
                       element.value,
                     );
+                  }}
+                />
+              </div>
+              <div class='flex items-center justify-start gap-1'>
+                <span>Z-index</span>
+                <input
+                  type='number'
+                  step={1}
+                  class='remove-input-number-indicator w-full rounded-md border border-[#404040] bg-[#1b1a1a] bg-transparent px-2 py-1 text-right outline-none placeholder:text-left'
+                  min={0}
+                  max={9999}
+                  value={canvaContext.currentComponent.value.zIndex}
+                  onChange$={(event: Event, element: HTMLInputElement) => {
+                    canvaContext.componentData.zIndex = parseInt(element.value);
                   }}
                 />
               </div>
