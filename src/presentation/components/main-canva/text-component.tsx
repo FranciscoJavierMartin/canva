@@ -1,7 +1,8 @@
 import { component$, useContext } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
-import type { TextInfo } from '@/interfaces/components.interface';
 import Trash from '@/presentation/icons/trash';
+import TransformWrapper from '@/presentation/components/main-canva/shapes/transform-wrapper';
+import type { TextInfo } from '@/interfaces/components.interface';
 
 type TextComponentProps = TextInfo;
 
@@ -39,6 +40,7 @@ export default component$<TextComponentProps>(
         <h2 class='size-full' style={{ fontSize: `${fontSize}px`, fontWeight }}>
           {text}
         </h2>
+        <TransformWrapper id={id} />
         <button
           onClick$={() => canvaContext.removeElement(id)}
           class='absolute right-1 top-1 hidden cursor-pointer rounded-md bg-white p-1 text-red-500 group-hover:block'
