@@ -202,6 +202,7 @@ export default component$(() => {
       componentData.padding,
       componentData.fontSize,
       componentData.fontWeight,
+      componentData.text,
     ]);
 
     if (currentComponent.value) {
@@ -222,6 +223,8 @@ export default component$(() => {
           componentData.padding || currentComponent.value.padding;
         (components[currentComponentId.value] as TextInfo).fontWeight =
           componentData.fontWeight || currentComponent.value.fontWeight;
+        (components[currentComponentId.value] as TextInfo).text =
+          componentData.text || currentComponent.value.text;
       }
 
       if (currentComponent.value.name === 'main_frame' && componentData.image) {
@@ -256,6 +259,7 @@ export default component$(() => {
       componentData.fontSize = undefined;
       componentData.padding = undefined;
       componentData.fontWeight = undefined;
+      componentData.text = '';
     }
   });
 

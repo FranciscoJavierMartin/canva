@@ -26,6 +26,7 @@ export type ComponentData = {
   fontSize?: number;
   padding?: number;
   fontWeight?: number;
+  text?: string;
 };
 
 export type ComponentsStore = {

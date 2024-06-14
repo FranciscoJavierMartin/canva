@@ -132,6 +132,18 @@ export default component$<ToolsProps>(() => {
                       }}
                     />
                   </div>
+                  <div class='flex flex-col items-start justify-start gap-2'>
+                    <textarea
+                      class='rounded-md border border-gray-700 bg-transparent p-2 outline-none'
+                      value={canvaContext.currentComponent.value.text}
+                      onChange$={(
+                        event: Event,
+                        element: HTMLTextAreaElement,
+                      ) => {
+                        canvaContext.componentData.text = element.value;
+                      }}
+                    />
+                  </div>
                 </>
               )}
             </div>
