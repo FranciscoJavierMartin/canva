@@ -116,6 +116,22 @@ export default component$<ToolsProps>(() => {
                       }}
                     />
                   </div>
+                  <div class='flex items-center justify-start gap-1'>
+                    <span>Font weight</span>
+                    <input
+                      type='number'
+                      class='remove-input-number-indicator w-full rounded-md border border-[#404040] bg-[#1b1a1a] bg-transparent px-2 py-1 text-right outline-none placeholder:text-left'
+                      min={100}
+                      step={100}
+                      max={900}
+                      value={canvaContext.currentComponent.value.fontWeight}
+                      onChange$={(event: Event, element: HTMLInputElement) => {
+                        canvaContext.componentData.fontWeight = parseInt(
+                          element.value,
+                        );
+                      }}
+                    />
+                  </div>
                 </>
               )}
             </div>
