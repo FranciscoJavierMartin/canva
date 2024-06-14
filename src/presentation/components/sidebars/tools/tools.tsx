@@ -42,7 +42,7 @@ export default component$<ToolsProps>(() => {
               }}
             />
           </div>
-          {canvaContext.currentComponent.value?.name === 'main_frame' && (
+          {canvaContext.currentComponent.value.name === 'main_frame' && (
             <button
               class='button bg-slate-600 px-3'
               onClick$={() => canvaContext.removeBackground()}

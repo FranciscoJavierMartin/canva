@@ -12,6 +12,7 @@ export default component$(() => {
               <img
                 src='https://media.cntraveler.com/photos/56e20de2a69cef316dc99c9f/master/pass/neuschwanstein-castle-germany-cr-getty.jpg'
                 class='size-full overflow-hidden rounded-md'
+                alt='Castle'
                 width={205}
                 height={154}
               />
