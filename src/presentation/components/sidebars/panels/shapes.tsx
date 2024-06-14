@@ -1,7 +1,7 @@
 import { component$, $, useContext } from '@builder.io/qwik';
+import { createId } from '@paralleldrive/cuid2';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import type { ShapeInfo } from '@/interfaces/components.interface';
-import { createId } from '@paralleldrive/cuid2';
 
 export default component$(() => {
   const canvaContext = useContext(CanvaContext);
@@ -9,6 +9,7 @@ export default component$(() => {
   const createShape = $((type: 'rect' | 'circle' | 'triangle') => {
     const shape: ShapeInfo = {
       id: createId(),
+      type,
       name: 'shape',
       left: 10,
       top: 10,
@@ -19,10 +20,6 @@ export default component$(() => {
       color: '#3c3c3d',
       rotation: 0,
       image: '',
-      rotateElement: canvaContext.rotateElement,
-      moveElement: canvaContext.moveElement,
-      resizeElement: canvaContext.resizeElement,
-      type,
     };
 
     canvaContext.components[shape.id] = shape;
