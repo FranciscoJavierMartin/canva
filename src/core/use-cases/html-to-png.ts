@@ -95,6 +95,16 @@ type Options = Partial<{
   fetchRequestInit: RequestInit;
 }>;
 type Pseudo = ':before' | ':after';
+type Metadata ={
+  url: string
+  cssText: string
+}
+
+const URL_REGEX = /url\((['"]?)([^'"]+?)\1\)/g;
+const URL_WITH_FORMAT_REGEX = /url\([^)]+\)\s*format\((["']?)([^"']+)\1\)/g;
+const FONT_SRC_REGEX = /src:\s*(?:url\([^)]+\)\s*format\([^)]+\)[,;]\s*)+/g;
+
+const cssFetchCache: { [href: string]: Metadata } = {}
 
 function getPx(node: HTMLElement, styleProperty: string): number {
   const win = node.ownerDocument.defaultView || window;
@@ -360,11 +370,171 @@ async function cloneNode<T extends HTMLElement>(
         .catch(() => null);
 }
 
+async function fetchCSS(url: string) {
+  let cache = cssFetchCache[url]
+  if (cache != null) {
+    return cache
+  }
+
+  const res = await fetch(url)
+  const cssText = await res.text()
+  cache = { url, cssText }
+
+  cssFetchCache[url] = cache
+
+  return cache
+}
+
+async function getCSSRules(
+  styleSheets: CSSStyleSheet[],
+  options: Options,
+): Promise<CSSStyleRule[]> {
+  const ret: CSSStyleRule[] = [];
+  const deferreds: Promise<number | void>[] = [];
+
+  // First loop inlines imports
+  styleSheets.forEach((sheet) => {
+    if ('cssRules' in sheet) {
+      try {
+        toArray<CSSRule>(sheet.cssRules || []).forEach((item, index) => {
+          if (item.type === CSSRule.IMPORT_RULE) {
+            let importIndex = index + 1;
+            const url = (item as CSSImportRule).href;
+            const deferred = fetchCSS(url)
+              .then((metadata) => embedFonts(metadata, options))
+              .then((cssText) =>
+                parseCSS(cssText).forEach((rule) => {
+                  try {
+                    sheet.insertRule(
+                      rule,
+                      rule.startsWith('@import')
+                        ? (importIndex += 1)
+                        : sheet.cssRules.length,
+                    );
+                  } catch (error) {
+                    console.error('Error inserting rule from remote css', {
+                      rule,
+                      error,
+                    });
+                  }
+                }),
+              )
+              .catch((e) => {
+                console.error('Error loading remote css', e.toString());
+              });
+
+            deferreds.push(deferred);
+          }
+        });
+      } catch (e) {
+        const inline =
+          styleSheets.find((a) => a.href == null) || document.styleSheets[0];
+        if (sheet.href != null) {
+          deferreds.push(
+            fetchCSS(sheet.href)
+              .then((metadata) => embedFonts(metadata, options))
+              .then((cssText) =>
+                parseCSS(cssText).forEach((rule) => {
+                  inline.insertRule(rule, sheet.cssRules.length);
+                }),
+              )
+              .catch((err: unknown) => {
+                console.error('Error loading remote stylesheet', err);
+              }),
+          );
+        }
+        console.error('Error inlining remote css file', e);
+      }
+    }
+  });
+
+  return Promise.all(deferreds).then(() => {
+    // Second loop parses rules
+    styleSheets.forEach((sheet) => {
+      if ('cssRules' in sheet) {
+        try {
+          toArray<CSSStyleRule>(sheet.cssRules || []).forEach((item) => {
+            ret.push(item);
+          });
+        } catch (e) {
+          console.error(`Error while reading CSS rules from ${sheet.href}`, e);
+        }
+      }
+    });
+
+    return ret;
+  });
+}
+
+function shouldEmbed(url: string): boolean {
+  return url.search(URL_REGEX) !== -1;
+}
+
+function getWebFontRules(cssRules: CSSStyleRule[]): CSSStyleRule[] {
+  return cssRules
+    .filter((rule) => rule.type === CSSRule.FONT_FACE_RULE)
+    .filter((rule) => shouldEmbed(rule.style.getPropertyValue('src')));
+}
+
+async function parseWebFontRules<T extends HTMLElement>(
+  node: T,
+  options: Options,
+) {
+  if (node.ownerDocument === null) {
+    throw new Error('Provided element is not within a Document');
+  }
+
+  const styleSheets = toArray<CSSStyleSheet>(node.ownerDocument.styleSheets);
+  const cssRules = await getCSSRules(styleSheets, options);
+
+  return getWebFontRules(cssRules);
+}
+
+async function getWebFontCSS<T extends HTMLElement>(
+  node: TemplateStringsArray,
+  options: Options,
+): Promise<string> {
+  const rules = await parseWebFontRules(node, options);
+  const cssTexts = await Promise.all(
+    rules.map((rule) => {
+      // const baseUrl = rule
+    }),
+  );
+
+  return cssTexts.join('\n');
+}
+
+async function embedWebFonts<T extends HTMLElement>(
+  clonedNode: T,
+  options: Options,
+): Promise<string> {
+  const cssText =
+    options.fontEmbedCSS != null
+      ? options.fontEmbedCSS
+      : options.skipFonts
+        ? null
+        : await getWebFontCSS(clonedNode, options);
+
+  if (cssText) {
+    const styleNode = document.createElement('style');
+    const styleContent = document.createTextNode(cssText);
+
+    styleNode.appendChild(styleContent);
+
+    if (clonedNode.firstChild) {
+      clonedNode.insertBefore(styleNode, clonedNode.firstChild);
+    } else {
+      clonedNode.appendChild(styleNode);
+    }
+  }
+}
+
 async function toSvg<T extends HTMLElement>(
   node: T,
   options: Options = {},
 ): Promise<string> {
-  const clonedNode = (await cloneNode(node, options, true)) as HTMLElement;
+  const clonedNode = (await cloneNode<T>(node, options, true)) as HTMLElement;
+  await embedWebFonts(clonedNode, options);
 }
 
 async function toCanvas<T extends HTMLElement>(
