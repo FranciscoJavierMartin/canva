@@ -48,6 +48,7 @@
     "vite-tsconfig-paths": "^4.2.1"
   },
   "dependencies": {
-    "@paralleldrive/cuid2": "^2.2.2"
+    "@paralleldrive/cuid2": "^2.2.2",
+    "html2canvas": "^1.4.1"
   }
 }
