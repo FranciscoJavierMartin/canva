@@ -5,6 +5,7 @@ import ShapeRect from '@/presentation/components/main-canva/shapes/shape-rect';
 import ShapeCircle from '@/presentation/components/main-canva/shapes/shape-circle';
 import ShapeTriangle from '@/presentation/components/main-canva/shapes/shape-triangle';
 import TextComponent from '@/presentation/components/main-canva/text-component';
+import ImageComponent from '@/presentation/components/main-canva/image-component';
 
 type CanvaComponentProps = {
   info: ComponentInfo;
@@ -32,6 +33,9 @@ export default component$<CanvaComponentProps>(({ info }) => {
       break;
     case 'text':
       component = <TextComponent {...info} />;
+      break;
+    case 'image':
+      component = <ImageComponent {...info} />;
       break;
     default:
       component = <div />;
