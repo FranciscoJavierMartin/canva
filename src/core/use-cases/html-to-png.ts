@@ -121,12 +121,41 @@ function getImageSize(
   return { height, width };
 }
 
+async function cloneNode<T extends HTMLElement>(
+  node: T,
+  options: Options,
+  isRoot?: boolean,
+): Promise<T | null> {
+  return !isRoot && options.filter && !options.filter(node)
+    ? null
+    : Promise.resolve(node).then(
+        (clonedNode) => clonedNode.cloneNode(false) as T,
+      );
+  // .then(
+  //   (clonedNode) =>
+  //     cloneChildren(node, clonedNode, options) as Promise<T>,
+  // )
+  // .then((clonedNode) => decorate(node, clonedNode) as Promise<T>)
+  // .then(
+  //   (clonedNode) => ensureSVGSymbols(clonedNode, options) as Promise<T>,
+  // )
+  // .catch(() => null);
+}
+
+async function toSvg<T extends HTMLElement>(
+  node: T,
+  options: Options = {},
+): Promise<string> {
+  const clonedNode = (await cloneNode(node, options, true)) as HTMLElement;
+}
+
 async function toCanvas<T extends HTMLElement>(
   node: T,
   options: Options = {},
 ): Promise<HTMLCanvasElement> {
   const { width, height } = getImageSize(node, options);
-  console.log({ width, height });
+  const svg = await toSvg(node, { ...options, width, height });
+
   return undefined as any;
 }
 
