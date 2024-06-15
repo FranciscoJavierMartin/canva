@@ -26,6 +26,8 @@ export default component$<ImageComponentProps>(
         id={id}
         class='group absolute hover:border-2 hover:border-indigo-500'
         style={{
+          width: `${width}px`,
+          height: `${height}px`,
           left: `${left}px`,
           top: `${top}px`,
           zIndex,
@@ -35,15 +37,13 @@ export default component$<ImageComponentProps>(
         }}
       >
         <TransformWrapper id={id} />
-        <div
-          class='overflow-hidden'
-          style={{
-            width: `${width}px`,
-            height: `${height}px`,
-          }}
-        >
-          <img class='size-full' src={image} alt='Castle' />
-        </div>
+        <img
+          class='size-full'
+          src={image}
+          alt='Castle'
+          height={height}
+          width={width}
+        />
         <button
           onClick$={() => canvaContext.removeElement(id)}
           class='absolute right-1 top-1 hidden cursor-pointer rounded-md bg-white p-1 text-red-500 group-hover:block'
