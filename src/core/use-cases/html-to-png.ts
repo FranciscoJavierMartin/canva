@@ -121,6 +121,47 @@ function getImageSize(
   return { height, width };
 }
 
+function toArray<T>(arrayLike: any): T[] {
+  const arr: T[] = [];
+
+  for (let i = 0, l = arrayLike.length; i < l; i++) {
+    arr.push(arrayLike[i]);
+  }
+
+  return arr;
+}
+
+function isSlotElement(node: HTMLElement): node is HTMLSlotElement {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  return node.tagName != null && node.tagName.toUpperCase() === 'SLOT';
+}
+
+async function cloneChildren<T extends HTMLElement>(
+  nativeNode: T,
+  clonedNode: T,
+  options: Options,
+): Promise<T> {
+  let children: T[] = [];
+
+  if (isSlotElement(nativeNode) && nativeNode.assignedNodes) {
+    children = toArray<T>(nativeNode.assignedNodes());
+  }
+
+  await children.reduce(
+    (deferred, child) =>
+      deferred
+        .then(() => cloneNode(child, options))
+        .then((clonedChild: HTMLElement | null) => {
+          if (clonedChild) {
+            clonedNode.appendChild(clonedChild);
+          }
+        }),
+    Promise.resolve(),
+  );
+
+  return clonedNode;
+}
+
 async function cloneNode<T extends HTMLElement>(
   node: T,
   options: Options,
@@ -128,13 +169,12 @@ async function cloneNode<T extends HTMLElement>(
 ): Promise<T | null> {
   return !isRoot && options.filter && !options.filter(node)
     ? null
-    : Promise.resolve(node).then(
-        (clonedNode) => clonedNode.cloneNode(false) as T,
-      );
-  // .then(
-  //   (clonedNode) =>
-  //     cloneChildren(node, clonedNode, options) as Promise<T>,
-  // )
+    : Promise.resolve(node)
+        .then((clonedNode) => clonedNode.cloneNode(false) as T)
+        .then(
+          (clonedNode) =>
+            cloneChildren(node, clonedNode, options) as Promise<T>,
+        );
   // .then((clonedNode) => decorate(node, clonedNode) as Promise<T>)
   // .then(
   //   (clonedNode) => ensureSVGSymbols(clonedNode, options) as Promise<T>,
