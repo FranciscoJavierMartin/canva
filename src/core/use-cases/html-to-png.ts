@@ -296,6 +296,55 @@ async function decorate<T extends HTMLElement>(
   return clonedNode;
 }
 
+async function ensureSVGSymbols<T extends HTMLElement>(
+  cloned: T,
+  options: Options,
+): Promise<T> {
+  let clonedNode: T = cloned;
+  const uses: NodeListOf<SVGUseElement> = clonedNode.querySelectorAll('use');
+
+  if (uses.length) {
+    const processedDefs: { [key: string]: HTMLElement } = {};
+
+    uses.forEach(async (value) => {
+      const id = value.getAttribute('xlink:href');
+      if (id) {
+        const exist = clonedNode.querySelector(id);
+        const definition: HTMLElement | null = document.querySelector(id);
+        if (!exist && definition && !processedDefs[id]) {
+          processedDefs[id] = (await cloneNode(definition, options, true))!;
+        }
+      }
+    });
+
+    const nodes = Object.values(processedDefs);
+
+    if (nodes.length) {
+      const ns = 'http://www.w3.org/1999/xhtml';
+      const svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('xmlns', ns);
+      svg.style.position = 'absolute';
+      svg.style.width = '0';
+      svg.style.height = '0';
+      svg.style.overflow = 'hidden';
+      svg.style.display = 'none';
+
+      const defs = document.createElementNS(ns, 'defs');
+      svg.appendChild(defs);
+
+      for (let i = 0; i < nodes.length; i++) {
+        defs.appendChild(nodes[i]);
+      }
+
+      clonedNode.appendChild(svg);
+    }
+  } else {
+    clonedNode = cloned;
+  }
+
+  return clonedNode;
+}
+
 async function cloneNode<T extends HTMLElement>(
   node: T,
   options: Options,
@@ -306,11 +355,9 @@ async function cloneNode<T extends HTMLElement>(
     : Promise.resolve(node)
         .then((clonedNode) => clonedNode.cloneNode(false) as T)
         .then((clonedNode) => cloneChildren(node, clonedNode, options))
-        .then((clonedNode) => decorate(node, clonedNode));
-  // .then(
-  //   (clonedNode) => ensureSVGSymbols(clonedNode, options) as Promise<T>,
-  // )
-  // .catch(() => null);
+        .then((clonedNode) => decorate(node, clonedNode))
+        .then((clonedNode) => ensureSVGSymbols(clonedNode, options))
+        .catch(() => null);
 }
 
 async function toSvg<T extends HTMLElement>(
