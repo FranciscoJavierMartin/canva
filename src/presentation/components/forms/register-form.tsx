@@ -7,7 +7,7 @@ import {
   Link,
 } from '@builder.io/qwik-city';
 import InputForm from '@/presentation/ui/inputs/input-form';
-import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
+import { PortalCloseAPIContextId } from '@/presentation/contexts/portals/portal-close';
 import { registerSchema } from '@/core/validators/registerSchema';
 
 export const useRegisterUser = globalAction$(
@@ -18,7 +18,6 @@ export const useRegisterUser = globalAction$(
 
     return {
       message: 'Ups, something went wrong. Please try again.',
-      // errors: {},
     };
   },
   zod$(registerSchema),

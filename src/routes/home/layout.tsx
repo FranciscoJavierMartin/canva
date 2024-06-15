@@ -6,10 +6,10 @@ import Logout from '@/presentation/icons/logout';
 import {
   type NavLinkProps,
   default as NavLink,
-} from '@/presentation/components/sidebar/NavLink';
+} from '@/presentation/components/nav-links/nav-link-home';
 import HomeIcon from '@/presentation/icons/home';
-import Folder from '@/presentation/icons/folder';
-import TemplateIcon from '@/presentation/icons/template';
+import FolderIcon from '@/presentation/icons/folder';
+import LayoutIcon from '@/presentation/icons/layout';
 
 const navLinksSidebar: NavLinkProps[] = [
   {
@@ -20,12 +20,12 @@ const navLinksSidebar: NavLinkProps[] = [
   {
     text: 'Projects',
     href: '/home/projects',
-    Icon: Folder,
+    Icon: FolderIcon,
   },
   {
     text: 'Templates',
     href: '/home/templates',
-    Icon: TemplateIcon,
+    Icon: LayoutIcon,
   },
 ];
 
