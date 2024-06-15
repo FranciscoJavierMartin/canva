@@ -136,6 +136,29 @@ function isSlotElement(node: HTMLElement): node is HTMLSlotElement {
   return node.tagName != null && node.tagName.toUpperCase() === 'SLOT';
 }
 
+function isInstanceOfElement<
+  T extends typeof Element | typeof HTMLElement | typeof SVGImageElement,
+>(
+  node: Element | Element | SVGImageElement,
+  instance: T,
+): node is T['prototype'] {
+  let res: boolean;
+  if (node instanceof instance) {
+    res = true;
+  } else {
+    const nodePrototype = Object.getPrototypeOf(node);
+
+    if (nodePrototype) {
+      res =
+        nodePrototype.constructor.name === instance.name ||
+        isInstanceOfElement(nodePrototype, instance);
+    } else {
+      res = false;
+    }
+  }
+  return res;
+}
+
 async function cloneChildren<T extends HTMLElement>(
   nativeNode: T,
   clonedNode: T,
@@ -166,6 +189,13 @@ async function cloneChildren<T extends HTMLElement>(
   return clonedNode;
 }
 
+function decorate<T extends HTMLElement>(nativeNode: T, clonedNode: T): T {
+  if (isInstanceOfElement(clonedNode, Element)) {
+  }
+
+  return clonedNode;
+}
+
 async function cloneNode<T extends HTMLElement>(
   node: T,
   options: Options,
@@ -178,8 +208,8 @@ async function cloneNode<T extends HTMLElement>(
         .then(
           (clonedNode) =>
             cloneChildren(node, clonedNode, options) as Promise<T>,
-        );
-  // .then((clonedNode) => decorate(node, clonedNode) as Promise<T>)
+        )
+        .then((clonedNode) => decorate(node, clonedNode) as Promise<T>);
   // .then(
   //   (clonedNode) => ensureSVGSymbols(clonedNode, options) as Promise<T>,
   // )
