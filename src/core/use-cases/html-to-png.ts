@@ -1005,6 +1005,67 @@ async function nodeToDataURL(
   return svgToDataURL(svg);
 }
 
+function createImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.decode = () => resolve(img) as any;
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.crossOrigin = 'anonymous';
+    img.decoding = 'async';
+    img.src = url;
+  });
+}
+
+function getPixelRatio() {
+  let ratio;
+
+  let FINAL_PROCESS;
+  try {
+    FINAL_PROCESS = process;
+  } catch (e) {
+    // pass
+  }
+
+  const val =
+    FINAL_PROCESS && FINAL_PROCESS.env
+      ? FINAL_PROCESS.env.devicePixelRatio
+      : null;
+  if (val) {
+    ratio = parseInt(val, 10);
+    if (Number.isNaN(ratio)) {
+      ratio = 1;
+    }
+  }
+  return ratio || window.devicePixelRatio || 1;
+}
+
+function checkCanvasDimensions(canvas: HTMLCanvasElement) {
+  if (
+    canvas.width > canvasDimensionLimit ||
+    canvas.height > canvasDimensionLimit
+  ) {
+    if (
+      canvas.width > canvasDimensionLimit &&
+      canvas.height > canvasDimensionLimit
+    ) {
+      if (canvas.width > canvas.height) {
+        canvas.height *= canvasDimensionLimit / canvas.width;
+        canvas.width = canvasDimensionLimit;
+      } else {
+        canvas.width *= canvasDimensionLimit / canvas.height;
+        canvas.height = canvasDimensionLimit;
+      }
+    } else if (canvas.width > canvasDimensionLimit) {
+      canvas.height *= canvasDimensionLimit / canvas.width;
+      canvas.width = canvasDimensionLimit;
+    } else {
+      canvas.width *= canvasDimensionLimit / canvas.height;
+      canvas.height = canvasDimensionLimit;
+    }
+  }
+}
+
 async function toSvg<T extends HTMLElement>(
   node: T,
   options: Options = {},
@@ -1027,8 +1088,32 @@ async function toCanvas<T extends HTMLElement>(
 ): Promise<HTMLCanvasElement> {
   const { width, height } = getImageSize(node, options);
   const svg = await toSvg(node, { ...options, width, height });
+  const img = await createImage(svg);
 
-  return undefined as any;
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d')!;
+  const ratio = options.pixelRatio || getPixelRatio();
+  const canvasWidth = options.canvasWidth || width;
+  const canvasHeight = options.canvasHeight || height;
+
+  canvas.width = canvasWidth * ratio;
+  canvas.height = canvasHeight * ratio;
+
+  if (!options.skipAutoScale) {
+    checkCanvasDimensions(canvas);
+  }
+
+  canvas.style.width = `${canvasWidth}`;
+  canvas.style.height = `${canvasHeight}`;
+
+  if (options.backgroundColor) {
+    context.fillStyle = options.backgroundColor;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
+  context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+  return canvas;
 }
 
 export async function toPng<T extends HTMLElement>(
