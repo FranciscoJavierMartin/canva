@@ -1,3 +1,5 @@
+import { createId } from '@paralleldrive/cuid2';
+
 type Options = Partial<{
   /**
    * Width in pixels to be applied to node before rendering.
@@ -92,6 +94,7 @@ type Options = Partial<{
    */
   fetchRequestInit: RequestInit;
 }>;
+type Pseudo = ':before' | ':after';
 
 function getPx(node: HTMLElement, styleProperty: string): number {
   const win = node.ownerDocument.defaultView || window;
@@ -189,8 +192,105 @@ async function cloneChildren<T extends HTMLElement>(
   return clonedNode;
 }
 
-function decorate<T extends HTMLElement>(nativeNode: T, clonedNode: T): T {
+function cloneCSSStyle<T extends HTMLElement>(nativeNode: T, clonedNode: T) {
+  const targetStyle = clonedNode.style;
+
+  if (targetStyle) {
+    const sourceStyle = window.getComputedStyle(nativeNode);
+
+    if (sourceStyle.cssText) {
+      targetStyle.cssText = sourceStyle.cssText;
+      targetStyle.transformOrigin = sourceStyle.transformOrigin;
+    } else {
+      toArray<string>(sourceStyle).forEach((name) => {
+        let value = sourceStyle.getPropertyValue(name);
+
+        if (name === 'font-size' && value.endsWith('px')) {
+          const reducedFont =
+            Math.floor(parseFloat(value.substring(0, value.length - 2))) - 0.1;
+          value = `${reducedFont}px`;
+        }
+
+        if (name === 'd' && clonedNode.getAttribute('d')) {
+          value = `path(${clonedNode.getAttribute('d')})`;
+        }
+
+        targetStyle.setProperty(
+          name,
+          value,
+          sourceStyle.getPropertyPriority(name),
+        );
+      });
+    }
+  }
+}
+
+function formatCSSText(style: CSSStyleDeclaration) {
+  const content = style.getPropertyValue('content');
+  return `${style.cssText} content: '${content.replace(/'|"/g, '')}';`;
+}
+
+function formatCSSProperties(style: CSSStyleDeclaration) {
+  return toArray<string>(style)
+    .map((name) => {
+      const value = style.getPropertyValue(name);
+      const priority = style.getPropertyPriority(name);
+
+      return `${name}: ${value}${priority ? ' !important' : ''};`;
+    })
+    .join(' ');
+}
+
+function getPseudoElementStyle(
+  className: string,
+  pseudo: Pseudo,
+  style: CSSStyleDeclaration,
+) {
+  const selector = `.${className}:${pseudo}`;
+  const cssText = style.cssText
+    ? formatCSSText(style)
+    : formatCSSProperties(style);
+
+  return document.createTextNode(`${selector}{${cssText}}`);
+}
+
+function clonePseudoElement<T extends HTMLElement>(
+  nativeNode: T,
+  clonedNode: T,
+  pseudo: Pseudo,
+): void {
+  const style = window.getComputedStyle(nativeNode, pseudo);
+  const content = style.getPropertyValue('content');
+
+  if (!(content || content === 'none')) {
+    const className = createId();
+
+    try {
+      clonedNode.className = `${clonedNode.className} ${className}`;
+      const styleElement = document.createElement('style');
+      styleElement.appendChild(getPseudoElementStyle(className, pseudo, style));
+      clonedNode.append(styleElement);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+function clonePseudoElements<T extends HTMLElement>(
+  nativeNode: T,
+  clonedNode: T,
+): void {
+  clonePseudoElement(nativeNode, clonedNode, ':before');
+  clonePseudoElement(nativeNode, clonedNode, ':after');
+}
+
+async function decorate<T extends HTMLElement>(
+  nativeNode: T,
+  clonedNode: T,
+): Promise<T> {
   if (isInstanceOfElement(clonedNode, Element)) {
+    cloneCSSStyle(nativeNode, clonedNode);
+    clonePseudoElements(nativeNode, clonedNode);
   }
 
   return clonedNode;
@@ -205,11 +305,8 @@ async function cloneNode<T extends HTMLElement>(
     ? null
     : Promise.resolve(node)
         .then((clonedNode) => clonedNode.cloneNode(false) as T)
-        .then(
-          (clonedNode) =>
-            cloneChildren(node, clonedNode, options) as Promise<T>,
-        )
-        .then((clonedNode) => decorate(node, clonedNode) as Promise<T>);
+        .then((clonedNode) => cloneChildren(node, clonedNode, options))
+        .then((clonedNode) => decorate(node, clonedNode));
   // .then(
   //   (clonedNode) => ensureSVGSymbols(clonedNode, options) as Promise<T>,
   // )
