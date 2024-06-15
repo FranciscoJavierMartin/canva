@@ -95,16 +95,66 @@ type Options = Partial<{
   fetchRequestInit: RequestInit;
 }>;
 type Pseudo = ':before' | ':after';
-type Metadata ={
-  url: string
-  cssText: string
-}
+type Metadata = {
+  url: string;
+  cssText: string;
+};
 
 const URL_REGEX = /url\((['"]?)([^'"]+?)\1\)/g;
 const URL_WITH_FORMAT_REGEX = /url\([^)]+\)\s*format\((["']?)([^"']+)\1\)/g;
 const FONT_SRC_REGEX = /src:\s*(?:url\([^)]+\)\s*format\([^)]+\)[,;]\s*)+/g;
+// @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#maximum_canvas_size
+const canvasDimensionLimit: number = 16384;
+const cssFetchCache: { [href: string]: Metadata } = {};
+const cache: { [url: string]: string } = {};
 
-const cssFetchCache: { [href: string]: Metadata } = {}
+const WOFF = 'application/font-woff';
+const JPEG = 'image/jpeg';
+const mimes: { [key: string]: string } = {
+  woff: WOFF,
+  woff2: WOFF,
+  ttf: 'application/font-truetype',
+  eot: 'application/vnd.ms-fontobject',
+  png: 'image/png',
+  jpg: JPEG,
+  jpeg: JPEG,
+  gif: 'image/gif',
+  tiff: 'image/tiff',
+  svg: 'image/svg+xml',
+  webp: 'image/webp',
+};
+
+function resolveUrl(url: string, baseUrl: string | null): string {
+  // url is absolute already
+  if (url.match(/^[a-z]+:\/\//i)) {
+    return url;
+  }
+
+  // url is absolute already, without protocol
+  if (url.match(/^\/\//)) {
+    return window.location.protocol + url;
+  }
+
+  // dataURI, mailto:, tel:, etc.
+  if (url.match(/^[a-z]+:/i)) {
+    return url;
+  }
+
+  const doc = document.implementation.createHTMLDocument();
+  const base = doc.createElement('base');
+  const a = doc.createElement('a');
+
+  doc.head.appendChild(base);
+  doc.body.appendChild(a);
+
+  if (baseUrl) {
+    base.href = baseUrl;
+  }
+
+  a.href = url;
+
+  return a.href;
+}
 
 function getPx(node: HTMLElement, styleProperty: string): number {
   const win = node.ownerDocument.defaultView || window;
@@ -371,18 +421,119 @@ async function cloneNode<T extends HTMLElement>(
 }
 
 async function fetchCSS(url: string) {
-  let cache = cssFetchCache[url]
+  let cache = cssFetchCache[url];
   if (cache != null) {
-    return cache
+    return cache;
   }
 
-  const res = await fetch(url)
-  const cssText = await res.text()
-  cache = { url, cssText }
+  const res = await fetch(url);
+  const cssText = await res.text();
+  cache = { url, cssText };
 
-  cssFetchCache[url] = cache
+  cssFetchCache[url] = cache;
 
-  return cache
+  return cache;
+}
+
+async function fetchAsDataURL<T>(
+  url: string,
+  init: RequestInit | undefined,
+  process: (data: { result: string; res: Response }) => T,
+): Promise<T> {
+  const res = await fetch(url, init);
+  if (res.status === 404) {
+    throw new Error(`Resource "${res.url}" not found`);
+  }
+  const blob = await res.blob();
+  return new Promise<T>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onloadend = () => {
+      try {
+        resolve(process({ res, result: reader.result as string }));
+      } catch (error) {
+        reject(error);
+      }
+    };
+
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function embedFonts(data: Metadata, options: Options): Promise<string> {
+  let cssText = data.cssText;
+  const regexUrl = /url\(["']?([^"')]+)["']?\)/g;
+  const fontLocs = cssText.match(/url\([^)]+\)/g) || [];
+  const loadFonts = fontLocs.map(async (loc: string) => {
+    let url = loc.replace(regexUrl, '$1');
+    if (!url.startsWith('https://')) {
+      url = new URL(url, data.url).href;
+    }
+
+    return fetchAsDataURL<[string, string]>(
+      url,
+      options.fetchRequestInit,
+      ({ result }) => {
+        cssText = cssText.replace(loc, `url(${result})`);
+        return [loc, result];
+      },
+    );
+  });
+
+  return Promise.all(loadFonts).then(() => cssText);
+}
+
+function parseCSS(source: string) {
+  if (source == null) {
+    return [];
+  }
+
+  const result: string[] = [];
+  const commentsRegex = /(\/\*[\s\S]*?\*\/)/gi;
+  // strip out comments
+  let cssText = source.replace(commentsRegex, '');
+
+  // eslint-disable-next-line prefer-regex-literals
+  const keyframesRegex = new RegExp(
+    '((@.*?keyframes [\\s\\S]*?){([\\s\\S]*?}\\s*?)})',
+    'gi',
+  );
+
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const matches = keyframesRegex.exec(cssText);
+    if (matches === null) {
+      break;
+    }
+    result.push(matches[0]);
+  }
+  cssText = cssText.replace(keyframesRegex, '');
+
+  const importRegex = /@import[\s\S]*?url\([^)]*\)[\s\S]*?;/gi;
+  // to match css & media queries together
+  const combinedCSSRegex =
+    '((\\s*?(?:\\/\\*[\\s\\S]*?\\*\\/)?\\s*?@media[\\s\\S]' +
+    '*?){([\\s\\S]*?)}\\s*?})|(([\\s\\S]*?){([\\s\\S]*?)})';
+  // unified regex
+  const unifiedRegex = new RegExp(combinedCSSRegex, 'gi');
+
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    let matches = importRegex.exec(cssText);
+    if (matches === null) {
+      matches = unifiedRegex.exec(cssText);
+      if (matches === null) {
+        break;
+      } else {
+        importRegex.lastIndex = unifiedRegex.lastIndex;
+      }
+    } else {
+      unifiedRegex.lastIndex = importRegex.lastIndex;
+    }
+    result.push(matches[0]);
+  }
+
+  return result;
 }
 
 async function getCSSRules(
@@ -490,14 +641,191 @@ async function parseWebFontRules<T extends HTMLElement>(
   return getWebFontRules(cssRules);
 }
 
+function isDataUrl(url: string) {
+  return url.search(/^(data:)/) !== -1;
+}
+
+function toRegex(url: string): RegExp {
+  // eslint-disable-next-line no-useless-escape
+  const escaped = url.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
+  return new RegExp(`(url\\(['"]?)(${escaped})(['"]?\\))`, 'g');
+}
+
+function getExtension(url: string): string {
+  const match = /\.([^./]*?)$/g.exec(url);
+  return match ? match[1] : '';
+}
+
+function getMimeType(url: string): string {
+  const extension = getExtension(url).toLowerCase();
+  return mimes[extension] || '';
+}
+
+function parseURLs(cssText: string): string[] {
+  const urls: string[] = [];
+
+  cssText.replace(URL_REGEX, (raw, quotation, url) => {
+    urls.push(url);
+    return raw;
+  });
+
+  return urls.filter((url) => !isDataUrl(url));
+}
+
+function getCacheKey(
+  url: string,
+  contentType: string | undefined,
+  includeQueryParams: boolean | undefined,
+) {
+  let key = url.replace(/\?.*/, '');
+
+  if (includeQueryParams) {
+    key = url;
+  }
+
+  // font resource
+  if (/ttf|otf|eot|woff2?/i.test(key)) {
+    key = key.replace(/.*\//, '');
+  }
+
+  return contentType ? `[${contentType}]${key}` : key;
+}
+
+function makeDataUrl(content: string, mimeType: string) {
+  return `data:${mimeType};base64,${content}`;
+}
+
+function getContentFromDataUrl(dataURL: string) {
+  return dataURL.split(/,/)[1];
+}
+
+async function resourceToDataURL(
+  resourceUrl: string,
+  contentType: string | undefined,
+  options: Options,
+) {
+  const cacheKey = getCacheKey(
+    resourceUrl,
+    contentType,
+    options.includeQueryParams,
+  );
+
+  if (cache[cacheKey] != null) {
+    return cache[cacheKey];
+  }
+
+  // ref: https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#Bypassing_the_cache
+  if (options.cacheBust) {
+    // eslint-disable-next-line no-param-reassign
+    resourceUrl += (/\?/.test(resourceUrl) ? '&' : '?') + new Date().getTime();
+  }
+
+  let dataURL: string;
+  try {
+    const content = await fetchAsDataURL(
+      resourceUrl,
+      options.fetchRequestInit,
+      ({ res, result }) => {
+        if (!contentType) {
+          // eslint-disable-next-line no-param-reassign
+          contentType = res.headers.get('Content-Type') || '';
+        }
+        return getContentFromDataUrl(result);
+      },
+    );
+    dataURL = makeDataUrl(content, contentType!);
+  } catch (error) {
+    dataURL = options.imagePlaceholder || '';
+
+    let msg = `Failed to fetch resource: ${resourceUrl}`;
+    if (error) {
+      msg = typeof error === 'string' ? error : (error as any).message;
+    }
+
+    if (msg) {
+      console.warn(msg);
+    }
+  }
+
+  cache[cacheKey] = dataURL;
+  return dataURL;
+}
+
+async function embed(
+  cssText: string,
+  resourceURL: string,
+  baseURL: string | null,
+  options: Options,
+  getContentFromUrl?: (url: string) => Promise<string>,
+): Promise<string> {
+  try {
+    const resolvedURL = baseURL
+      ? resolveUrl(resourceURL, baseURL)
+      : resourceURL;
+    const contentType = getMimeType(resourceURL);
+    let dataURL: string;
+    if (getContentFromUrl) {
+      const content = await getContentFromUrl(resolvedURL);
+      dataURL = makeDataUrl(content, contentType);
+    } else {
+      dataURL = await resourceToDataURL(resolvedURL, contentType, options);
+    }
+    return cssText.replace(toRegex(resourceURL), `$1${dataURL}$3`);
+  } catch (error) {
+    // pass
+  }
+
+  return cssText;
+}
+
+function filterPreferredFontFormat(
+  str: string,
+  { preferredFontFormat }: Options,
+): string {
+  return !preferredFontFormat
+    ? str
+    : str.replace(FONT_SRC_REGEX, (match: string) => {
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+          const [src, , format] = URL_WITH_FORMAT_REGEX.exec(match) || [];
+          if (!format) {
+            return '';
+          }
+
+          if (format === preferredFontFormat) {
+            return `src: ${src};`;
+          }
+        }
+      });
+}
+
+async function embedResources(
+  cssText: string,
+  baseUrl: string | null,
+  options: Options,
+): Promise<string> {
+  if (!shouldEmbed(cssText)) {
+    return cssText;
+  }
+
+  const filteredCSSText = filterPreferredFontFormat(cssText, options);
+  const urls = parseURLs(filteredCSSText);
+  return urls.reduce(
+    (deferred, url) =>
+      deferred.then((css) => embed(css, url, baseUrl, options)),
+    Promise.resolve(filteredCSSText),
+  );
+}
+
 async function getWebFontCSS<T extends HTMLElement>(
-  node: TemplateStringsArray,
+  node: T,
   options: Options,
 ): Promise<string> {
   const rules = await parseWebFontRules(node, options);
   const cssTexts = await Promise.all(
     rules.map((rule) => {
-      // const baseUrl = rule
+      const baseUrl = rule.parentStyleSheet ? rule.parentStyleSheet.href : null;
+      return embedResources(rule.cssText, baseUrl, options);
     }),
   );
 
@@ -529,12 +857,33 @@ async function embedWebFonts<T extends HTMLElement>(
   }
 }
 
+async function embedChildren<T extends HTMLElement>(
+  clonedNode: T,
+  options: Options,
+) {
+  const children = toArray<HTMLElement>(clonedNode.childNodes);
+  const deferreds = children.map((child) => embedImages(child, options));
+  await Promise.all(deferreds).then(() => clonedNode);
+}
+
+async function embedImages<T extends HTMLElement>(
+  clonedNode: T,
+  options: Options,
+) {
+  if (isInstanceOfElement(clonedNode, Element)) {
+    await embedBackground(clonedNode, options);
+    await embedImageNode(clonedNode, options);
+    await embedChildren(clonedNode, options);
+  }
+}
+
 async function toSvg<T extends HTMLElement>(
   node: T,
   options: Options = {},
 ): Promise<string> {
   const clonedNode = (await cloneNode<T>(node, options, true)) as HTMLElement;
   await embedWebFonts(clonedNode, options);
+  await embedImages(clonedNode, options);
 }
 
 async function toCanvas<T extends HTMLElement>(

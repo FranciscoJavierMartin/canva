@@ -8,15 +8,21 @@ import { toPng } from '@/core/use-cases/html-to-png';
 
 export default component$(() => {
   const downloadImage = $(async () => {
-    const mainDesign = document.getElementById('main_frame');
+    // const mainDesign = document.getElementById('main_frame');
 
-    if (mainDesign) {
-      const dataUrl = await toPng(mainDesign, {
-        style: {
-          transform: 'scale(1)',
-        },
-      });
-    }
+    // if (mainDesign) {
+    //   const dataUrl = await toPng(mainDesign, {
+    //     style: {
+    //       transform: 'scale(1)',
+    //     },
+    //   });
+    // }
+
+    console.log((document.getElementById('main_frame') as HTMLCanvasElement).toDataURL())
+    // window.open(
+    //   '',
+    //   (document.getElementById('main_frame') as HTMLCanvasElement).toDataURL(),
+    // );
   });
 
   return (
