@@ -36,6 +36,7 @@ export default component$<ImageComponentProps>(
           color,
           transform: rotation ? `rotate(${rotation}deg)` : 'rotate(0deg)',
         }}
+        onClick$={() => canvaContext.setCurrentComponentId(id)}
       >
         <TransformWrapper id={id} />
         <img
