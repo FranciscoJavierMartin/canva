@@ -857,6 +857,36 @@ async function embedWebFonts<T extends HTMLElement>(
   }
 }
 
+async function embedProp(
+  propName: string,
+  node: HTMLElement,
+  options: Options,
+) {
+  const propValue = node.style?.getPropertyValue(propName);
+  if (propValue) {
+    const cssString = await embedResources(propValue, null, options);
+    node.style.setProperty(
+      propName,
+      cssString,
+      node.style.getPropertyPriority(propName),
+    );
+    return true;
+  }
+  return false;
+}
+
+async function embedBackground<T extends HTMLElement>(
+  clonedNode: T,
+  options: Options,
+) {
+  if (!(await embedProp('background', clonedNode, options))) {
+    await embedProp('background-image', clonedNode, options);
+  }
+  if (!(await embedProp('mask', clonedNode, options))) {
+    await embedProp('mask-image', clonedNode, options);
+  }
+}
+
 async function embedChildren<T extends HTMLElement>(
   clonedNode: T,
   options: Options,
@@ -864,6 +894,47 @@ async function embedChildren<T extends HTMLElement>(
   const children = toArray<HTMLElement>(clonedNode.childNodes);
   const deferreds = children.map((child) => embedImages(child, options));
   await Promise.all(deferreds).then(() => clonedNode);
+}
+
+async function embedImageNode<T extends HTMLElement | SVGImageElement>(
+  clonedNode: T,
+  options: Options,
+) {
+  const isImageElement = isInstanceOfElement(clonedNode, HTMLImageElement);
+
+  if (
+    !(isImageElement && !isDataUrl(clonedNode.src)) &&
+    !(
+      isInstanceOfElement(clonedNode, SVGImageElement) &&
+      !isDataUrl(clonedNode.href.baseVal)
+    )
+  ) {
+    return;
+  }
+
+  const url = isImageElement ? clonedNode.src : clonedNode.href.baseVal;
+
+  const dataURL = await resourceToDataURL(url, getMimeType(url), options);
+  await new Promise((resolve, reject) => {
+    clonedNode.onload = resolve;
+    clonedNode.onerror = reject;
+
+    const image = clonedNode as HTMLImageElement;
+    if (image.decode) {
+      image.decode = resolve as any;
+    }
+
+    if (image.loading === 'lazy') {
+      image.loading = 'eager';
+    }
+
+    if (isImageElement) {
+      clonedNode.srcset = '';
+      clonedNode.src = dataURL;
+    } else {
+      clonedNode.href.baseVal = dataURL;
+    }
+  });
 }
 
 async function embedImages<T extends HTMLElement>(
@@ -877,6 +948,63 @@ async function embedImages<T extends HTMLElement>(
   }
 }
 
+function applyStyle<T extends HTMLElement>(node: T, options: Options): T {
+  const { style } = node;
+
+  if (options.backgroundColor) {
+    style.backgroundColor = options.backgroundColor;
+  }
+
+  if (options.width) {
+    style.width = `${options.width}px`;
+  }
+
+  if (options.height) {
+    style.height = `${options.height}px`;
+  }
+
+  const manual = options.style;
+
+  if (manual != null) {
+    Object.keys(manual).forEach((key: any) => {
+      style[key] = manual[key] as string;
+    });
+  }
+
+  return node;
+}
+
+async function svgToDataURL(svg: SVGElement): Promise<string> {
+  return Promise.resolve()
+    .then(() => new XMLSerializer().serializeToString(svg))
+    .then(encodeURIComponent)
+    .then((html) => `data:image/svg+xml;charset=utf-8,${html}`);
+}
+
+async function nodeToDataURL(
+  node: HTMLElement,
+  width: number,
+  height: number,
+): Promise<string> {
+  const xmlns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(xmlns, 'svg');
+  const foreignObject = document.createElementNS(xmlns, 'foreignObject');
+
+  svg.setAttribute('width', `${width}`);
+  svg.setAttribute('height', `${height}`);
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+  foreignObject.setAttribute('width', '100%');
+  foreignObject.setAttribute('height', '100%');
+  foreignObject.setAttribute('x', '0');
+  foreignObject.setAttribute('y', '0');
+  foreignObject.setAttribute('externalResourcesRequired', 'true');
+
+  svg.appendChild(foreignObject);
+  foreignObject.appendChild(node);
+  return svgToDataURL(svg);
+}
+
 async function toSvg<T extends HTMLElement>(
   node: T,
   options: Options = {},
@@ -884,6 +1012,13 @@ async function toSvg<T extends HTMLElement>(
   const clonedNode = (await cloneNode<T>(node, options, true)) as HTMLElement;
   await embedWebFonts(clonedNode, options);
   await embedImages(clonedNode, options);
+  applyStyle(clonedNode, options);
+  const datauri = await nodeToDataURL(
+    clonedNode,
+    options.width || 0,
+    options.height || 0,
+  );
+  return datauri;
 }
 
 async function toCanvas<T extends HTMLElement>(
