@@ -207,7 +207,10 @@ export default component$(() => {
 
     if (currentComponent.value) {
       // TODO: Add support for text resize and rotate
-      if (currentComponent.value.name === 'shape') {
+      if (
+        currentComponent.value.name === 'shape' ||
+        currentComponent.value.name === 'image'
+      ) {
         (components[currentComponentId.value] as ShapeInfo).rotation =
           componentData.rotation || currentComponent.value.rotation;
         (components[currentComponentId.value] as ShapeInfo).width =
