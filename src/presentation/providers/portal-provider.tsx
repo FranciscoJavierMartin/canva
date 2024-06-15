@@ -7,9 +7,9 @@ import {
   type JSXOutput,
 } from '@builder.io/qwik';
 import type { ContextPair, Portal } from '@/interfaces/portal.interface';
-import { PortalsContextId } from '@/presentation/contexts/portal';
-import { PortalAPI } from '@/presentation/contexts/portal-api';
-import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
+import { PortalsContextId } from '@/presentation/contexts/portals/portal';
+import { PortalAPI } from '@/presentation/contexts/portals/portal-api';
+import { PortalCloseAPIContextId } from '@/presentation/contexts/portals/portal-close';
 
 export default component$(() => {
   const portals = useSignal<Portal[]>([]);

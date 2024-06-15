@@ -7,17 +7,18 @@ import {
   Link,
 } from '@builder.io/qwik-city';
 import InputForm from '@/presentation/ui/inputs/input-form';
-import { PortalCloseAPIContextId } from '@/presentation/contexts/portal-close';
+import { PortalCloseAPIContextId } from '@/presentation/contexts/portals/portal-close';
 import { loginSchema } from '@/core/validators/loginSchema';
 
 export const useLoginUser = globalAction$(
   async (data, { redirect }: RequestEventAction) => {
     console.log(data);
-    redirect(302, '/home');
-    // return {
-    //   message: 'Ups, something went wrong. Please try again.',
-    //   // errors: {},
-    // };
+
+    throw redirect(302, '/home');
+
+    return {
+      message: 'Ups, something went wrong. Please try again.',
+    };
   },
   zod$(loginSchema),
 );
