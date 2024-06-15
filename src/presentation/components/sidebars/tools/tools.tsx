@@ -82,6 +82,24 @@ export default component$<ToolsProps>(() => {
                   }}
                 />
               </div>
+              {canvaContext.currentComponent.value.name === 'image' && (
+                <div class='float-start items-center justify-start gap-1'>
+                  <span>Radius</span>
+                  <input
+                    type='number'
+                    step={1}
+                    class='remove-input-number-indicator w-full rounded-md border border-[#404040] bg-[#1b1a1a] bg-transparent px-2 py-1 text-right outline-none placeholder:text-left'
+                    min={0}
+                    max={100}
+                    value={canvaContext.currentComponent.value.radius}
+                    onChange$={(event: Event, element: HTMLInputElement) => {
+                      canvaContext.componentData.radius = parseInt(
+                        element.value,
+                      );
+                    }}
+                  />
+                </div>
+              )}
               {canvaContext.currentComponent.value.name === 'text' && (
                 <>
                   <div class='flex items-center justify-start gap-1'>

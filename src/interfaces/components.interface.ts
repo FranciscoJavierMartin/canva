@@ -33,6 +33,8 @@ export interface ShapeTriangleInfo extends ShapeCommonInfo {
   type: 'triangle';
 }
 
+export type ShapeInfo = ShapeRectInfo | ShapeCircleInfo | ShapeTriangleInfo;
+
 export interface TextInfo extends Omit<BaseComponent, 'height' | 'width'> {
   name: 'text';
   type: 'rect';
@@ -46,6 +48,15 @@ export interface TextInfo extends Omit<BaseComponent, 'height' | 'width'> {
   fontWeight: number;
 }
 
-export type ShapeInfo = ShapeRectInfo | ShapeCircleInfo | ShapeTriangleInfo;
+export interface ImageInfo extends BaseComponent {
+  type: 'image';
+  name: 'image';
+  opacity: number;
+  left: number;
+  top: number;
+  rotation: number;
+  image: string;
+  radius: number;
+}
 
-export type ComponentInfo = MainFrameInfo | ShapeInfo | TextInfo;
+export type ComponentInfo = MainFrameInfo | ShapeInfo | TextInfo | ImageInfo;

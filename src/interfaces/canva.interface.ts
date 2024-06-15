@@ -23,6 +23,7 @@ export type ComponentData = {
   top: number;
   opacity: number;
   zIndex: number;
+  radius: number;
   fontSize?: number;
   padding?: number;
   fontWeight?: number;
