@@ -145,19 +145,23 @@ async function cloneChildren<T extends HTMLElement>(
 
   if (isSlotElement(nativeNode) && nativeNode.assignedNodes) {
     children = toArray<T>(nativeNode.assignedNodes());
+  } else {
+    children = toArray<T>((nativeNode.shadowRoot ?? nativeNode).childNodes);
   }
 
-  await children.reduce(
-    (deferred, child) =>
-      deferred
-        .then(() => cloneNode(child, options))
-        .then((clonedChild: HTMLElement | null) => {
-          if (clonedChild) {
-            clonedNode.appendChild(clonedChild);
-          }
-        }),
-    Promise.resolve(),
-  );
+  if (children.length) {
+    await children.reduce(
+      (deferred, child) =>
+        deferred
+          .then(() => cloneNode(child, options))
+          .then((clonedChild: HTMLElement | null) => {
+            if (clonedChild) {
+              clonedNode.appendChild(clonedChild);
+            }
+          }),
+      Promise.resolve(),
+    );
+  }
 
   return clonedNode;
 }
