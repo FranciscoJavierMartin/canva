@@ -36,24 +36,27 @@ export default component$(() => {
     radius: 0,
   });
 
-  const currentComponentId = useSignal<string>(createId());
+  const currentComponentId = useSignal<string>('');
 
   const setCurrentComponentId = $((componentId: string): void => {
     currentComponentId.value = componentId;
   });
 
   const components = useStore<ComponentsStore>(
-    {
-      [currentComponentId.value]: {
-        name: 'main_frame',
-        type: 'rect',
-        id: currentComponentId.value,
-        height: 500,
-        width: 650,
-        zIndex: 0,
-        color: '#fff',
-        image: '',
-      },
+    () => {
+      const mainId = createId();
+      return {
+        [mainId]: {
+          name: 'main_frame',
+          type: 'rect',
+          id: mainId,
+          height: 500,
+          width: 650,
+          zIndex: 0,
+          color: '#fff',
+          image: '',
+        },
+      };
     },
     {
       deep: true,
