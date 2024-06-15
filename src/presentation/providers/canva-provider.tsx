@@ -12,6 +12,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import type {
   ComponentInfo,
+  ImageInfo,
   ShapeInfo,
   TextInfo,
 } from '@/interfaces/components.interface';
@@ -204,6 +205,7 @@ export default component$(() => {
       componentData.fontSize,
       componentData.fontWeight,
       componentData.text,
+      componentData.radius,
     ]);
 
     if (currentComponent.value) {
@@ -229,6 +231,11 @@ export default component$(() => {
           componentData.fontWeight || currentComponent.value.fontWeight;
         (components[currentComponentId.value] as TextInfo).text =
           componentData.text || currentComponent.value.text;
+      }
+
+      if (currentComponent.value.name === 'image') {
+        (components[currentComponentId.value] as ImageInfo).radius =
+          componentData.radius || currentComponent.value.radius;
       }
 
       if (currentComponent.value.name === 'main_frame' && componentData.image) {
