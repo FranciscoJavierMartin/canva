@@ -835,7 +835,7 @@ async function getWebFontCSS<T extends HTMLElement>(
 async function embedWebFonts<T extends HTMLElement>(
   clonedNode: T,
   options: Options,
-): Promise<string> {
+): Promise<void> {
   const cssText =
     options.fontEmbedCSS != null
       ? options.fontEmbedCSS
@@ -845,9 +845,9 @@ async function embedWebFonts<T extends HTMLElement>(
 
   if (cssText) {
     const styleNode = document.createElement('style');
-    const styleContent = document.createTextNode(cssText);
+    const sytleContent = document.createTextNode(cssText);
 
-    styleNode.appendChild(styleContent);
+    styleNode.appendChild(sytleContent);
 
     if (clonedNode.firstChild) {
       clonedNode.insertBefore(styleNode, clonedNode.firstChild);

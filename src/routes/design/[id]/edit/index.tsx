@@ -11,13 +11,23 @@ export default component$(() => {
     const mainDesign = document.getElementById('main_frame');
 
     if (mainDesign) {
-      const dataUrl = await toPng(mainDesign, {
-        style: {
-          transform: 'scale(1)',
-        },
-      });
-    }
+      try {
+        const dataUrl = await toPng(mainDesign, {
+          style: {
+            transform: 'scale(1)',
+          },
+        });
 
+        const link = document.createElement('a');
+        link.download = 'image';
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (error) {
+        console.log(error);
+      }
+    }
     // window.open(
     //   '',
     //   (document.getElementById('main_frame') as HTMLCanvasElement).toDataURL(),
