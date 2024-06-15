@@ -18,6 +18,7 @@ export default component$<ImageComponentProps>(
     color,
     height,
     width,
+    radius,
   }) => {
     const canvaContext = useContext(CanvaContext);
 
@@ -37,7 +38,13 @@ export default component$<ImageComponentProps>(
         }}
       >
         <TransformWrapper id={id} />
-        <img src={image} alt='Castle' height={height} width={width} />
+        <img
+          src={image}
+          alt='Castle'
+          height={height}
+          width={width}
+          style={{ borderRadius: `${radius}px` }}
+        />
         <button
           onClick$={() => canvaContext.removeElement(id)}
           class='absolute right-1 top-1 hidden cursor-pointer rounded-md bg-white p-1 text-red-500 group-hover:block'

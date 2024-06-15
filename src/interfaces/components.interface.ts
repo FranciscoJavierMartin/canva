@@ -56,6 +56,7 @@ export interface ImageInfo extends BaseComponent {
   top: number;
   rotation: number;
   image: string;
+  radius: number;
 }
 
 export type ComponentInfo = MainFrameInfo | ShapeInfo | TextInfo | ImageInfo;

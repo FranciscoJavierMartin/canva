@@ -32,6 +32,7 @@ export default component$(() => {
     top: 0,
     opacity: 1,
     zIndex: 0,
+    radius: 0,
   });
 
   const currentComponentId = useSignal<string>(createId());

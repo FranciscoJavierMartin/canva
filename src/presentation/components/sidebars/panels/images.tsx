@@ -20,6 +20,7 @@ export default component$(() => {
       rotation: 0,
       image: imageUrl,
       color: '#fff',
+      radius: 0,
     };
 
     canvaContext.components[image.id] = image;
