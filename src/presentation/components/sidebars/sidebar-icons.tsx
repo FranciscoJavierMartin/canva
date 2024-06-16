@@ -6,7 +6,6 @@ import LayoutIcon from '@/presentation/icons/layout';
 import PencilIcon from '@/presentation/icons/pencil';
 import ShapesIcon from '@/presentation/icons/shapes';
 import TransparencyIcon from '@/presentation/icons/transparency';
-import UploadIcon from '@/presentation/icons/upload';
 import type { IconProps } from '@/interfaces/types/icons';
 import type { SidebarPanelType } from '@/interfaces/types/sidebar';
 
@@ -26,29 +25,24 @@ const items: {
     Icon: ShapesIcon,
   },
   {
-    title: 'Upload',
-    type: 'uploadImage',
-    Icon: UploadIcon,
-  },
-  {
     title: 'Text',
     type: 'text',
     Icon: PencilIcon,
   },
   {
-    title: 'Project',
-    type: 'projects',
-    Icon: FolderIcon,
-  },
-  {
     title: 'Images',
-    type: 'initImage',
+    type: 'images',
     Icon: ImageIcon,
   },
   {
     title: 'Background',
     type: 'background',
     Icon: TransparencyIcon,
+  },
+  {
+    title: 'Project',
+    type: 'projects',
+    Icon: FolderIcon,
   },
 ];
 
