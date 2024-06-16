@@ -1,19 +1,32 @@
-import { type QRL, Slot, component$ } from '@builder.io/qwik';
+import type { Signal } from '@builder.io/qwik';
+import { type QRL, Slot, component$, useSignal, $ } from '@builder.io/qwik';
 import ArrowLeft from '@/presentation/icons/arrow-left';
+import { useClickOutside } from '@/presentation/hooks/use-click-outside';
 
 type SidebarFoldProps = {
-  isOpen: boolean;
+  isOpen: Readonly<Signal<boolean>>;
   closePanel: QRL<() => void>;
 };
 
 export default component$<SidebarFoldProps>(({ isOpen, closePanel }) => {
+  const ref = useSignal<HTMLDivElement>();
+
+  useClickOutside(
+    ref,
+    $(() => {
+      closePanel();
+    }),
+    { avoidClick: isOpen },
+  );
+
   return (
     <aside
+      ref={ref}
       class={[
         'absolute left-[85px] z-20 h-full w-[350px] bg-black-light p-5 transition-transform duration-300',
         {
-          '-translate-x-full': !isOpen,
-          'translate-x-0': isOpen,
+          '-translate-x-full': !isOpen.value,
+          'translate-x-0': isOpen.value,
         },
       ]}
     >
@@ -22,7 +35,7 @@ export default component$<SidebarFoldProps>(({ isOpen, closePanel }) => {
         class={[
           'center-elements absolute -right-2 top-[calc(50%-50px)] h-[100px] w-[15px] rounded-full bg-black-light text-slate-300 hover:text-gray-100',
           {
-            '!hidden': !isOpen,
+            '!hidden': !isOpen.value,
           },
         ]}
       >
