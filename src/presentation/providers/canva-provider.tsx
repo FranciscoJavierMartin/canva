@@ -20,6 +20,7 @@ import type {
   CanvaContextState,
   ComponentData,
   ComponentsStore,
+  TextComponentData,
 } from '@/interfaces/canva.interface';
 
 export default component$(() => {
@@ -34,6 +35,13 @@ export default component$(() => {
     opacity: 1,
     zIndex: 0,
     radius: 0,
+  });
+
+  const textComponentData = useStore<TextComponentData>({
+    fontSize: 22,
+    fontWeight: 400,
+    padding: 0,
+    text: '',
   });
 
   const currentComponentId = useSignal<string>('');
@@ -183,6 +191,7 @@ export default component$(() => {
   useContextProvider<CanvaContextState>(CanvaContext, {
     currentComponent,
     componentData,
+    textComponentData,
     components,
     setCurrentComponentId,
     rotateElement,
@@ -204,11 +213,11 @@ export default component$(() => {
       componentData.left,
       componentData.opacity,
       componentData.zIndex,
-      componentData.padding,
-      componentData.fontSize,
-      componentData.fontWeight,
-      componentData.text,
       componentData.radius,
+      textComponentData.padding,
+      textComponentData.fontSize,
+      textComponentData.fontWeight,
+      textComponentData.text,
     ]);
 
     if (currentComponent.value) {
@@ -227,13 +236,13 @@ export default component$(() => {
 
       if (currentComponent.value.name === 'text') {
         (components[currentComponentId.value] as TextInfo).fontSize =
-          componentData.fontSize || currentComponent.value.fontSize;
+          textComponentData.fontSize || currentComponent.value.fontSize;
         (components[currentComponentId.value] as TextInfo).padding =
-          componentData.padding || currentComponent.value.padding;
+          textComponentData.padding || currentComponent.value.padding;
         (components[currentComponentId.value] as TextInfo).fontWeight =
-          componentData.fontWeight || currentComponent.value.fontWeight;
+          textComponentData.fontWeight || currentComponent.value.fontWeight;
         (components[currentComponentId.value] as TextInfo).text =
-          componentData.text || currentComponent.value.text;
+          textComponentData.text || currentComponent.value.text;
       }
 
       if (currentComponent.value.name === 'image') {
@@ -270,10 +279,10 @@ export default component$(() => {
       componentData.top = 0;
       componentData.opacity = 0;
       componentData.zIndex = 0;
-      componentData.fontSize = undefined;
-      componentData.padding = undefined;
-      componentData.fontWeight = undefined;
-      componentData.text = '';
+      textComponentData.fontSize = 0;
+      textComponentData.padding = 0;
+      textComponentData.fontWeight = 0;
+      textComponentData.text = '';
     }
   });
 

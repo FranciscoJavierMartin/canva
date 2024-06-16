@@ -4,6 +4,7 @@ import type { ComponentInfo } from '@/interfaces/components.interface';
 export type CanvaContextState = {
   currentComponent: Signal<ComponentInfo | undefined>;
   componentData: ComponentData;
+  textComponentData: TextComponentData;
   components: ComponentsStore;
   setCurrentComponentId: QRL<(componentId: string) => void>;
   moveElement: QRL<(id: string) => void>;
@@ -24,10 +25,13 @@ export type ComponentData = {
   opacity: number;
   zIndex: number;
   radius: number;
-  fontSize?: number;
-  padding?: number;
-  fontWeight?: number;
-  text?: string;
+};
+
+export type TextComponentData = {
+  fontSize: number;
+  padding: number;
+  fontWeight: number;
+  text: string;
 };
 
 export type ComponentsStore = {

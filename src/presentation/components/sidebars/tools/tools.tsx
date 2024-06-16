@@ -112,7 +112,7 @@ export default component$<ToolsProps>(() => {
                       max={100}
                       value={canvaContext.currentComponent.value.padding}
                       onChange$={(event: Event, element: HTMLInputElement) => {
-                        canvaContext.componentData.padding = parseInt(
+                        canvaContext.textComponentData.padding = parseInt(
                           element.value,
                         );
                       }}
@@ -128,7 +128,7 @@ export default component$<ToolsProps>(() => {
                       max={72}
                       value={canvaContext.currentComponent.value.fontSize}
                       onChange$={(event: Event, element: HTMLInputElement) => {
-                        canvaContext.componentData.fontSize = parseInt(
+                        canvaContext.textComponentData.fontSize = parseInt(
                           element.value,
                         );
                       }}
@@ -144,7 +144,7 @@ export default component$<ToolsProps>(() => {
                       max={900}
                       value={canvaContext.currentComponent.value.fontWeight}
                       onChange$={(event: Event, element: HTMLInputElement) => {
-                        canvaContext.componentData.fontWeight = parseInt(
+                        canvaContext.textComponentData.fontWeight = parseInt(
                           element.value,
                         );
                       }}
@@ -158,7 +158,7 @@ export default component$<ToolsProps>(() => {
                         event: Event,
                         element: HTMLTextAreaElement,
                       ) => {
-                        canvaContext.componentData.text = element.value;
+                        canvaContext.textComponentData.text = element.value;
                       }}
                     />
                   </div>
