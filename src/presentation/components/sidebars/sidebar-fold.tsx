@@ -14,7 +14,7 @@ export default component$<SidebarFoldProps>(({ isOpen, closePanel }) => {
   useClickOutside(
     ref,
     $(() => {
-      console.log('Clicked outside');
+      closePanel();
     }),
     { avoidClick: isOpen },
   );
