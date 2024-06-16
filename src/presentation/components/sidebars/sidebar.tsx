@@ -5,6 +5,7 @@ import {
   $,
   type Component,
   useVisibleTask$,
+  useComputed$,
 } from '@builder.io/qwik';
 import type { SidebarPanelType } from '@/interfaces/types/sidebar';
 import SidebarIcons from './sidebar-icons';
@@ -27,6 +28,8 @@ export default component$(() => {
   const closePanel = $((): void => {
     selectedOption.value = undefined;
   });
+
+  const isOpen = useComputed$<boolean>(() => !!selectedOption.value);
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ track }) => {
@@ -63,7 +66,7 @@ export default component$(() => {
         selectOption={selectOption}
         selectedOption={selectedOption}
       />
-      <SidebarFold isOpen={!!selectedOption.value} closePanel={closePanel}>
+      <SidebarFold isOpen={isOpen} closePanel={closePanel}>
         {panel.value && <panel.value />}
       </SidebarFold>
     </>

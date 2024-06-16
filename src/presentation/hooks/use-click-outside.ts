@@ -11,11 +11,14 @@ import { $, useOnDocument } from '@builder.io/qwik';
 export const useClickOutside = (
   ref: Signal<HTMLElement | undefined>,
   onClickOut: QRL<() => void>,
+  options?: {
+    avoidClick: Readonly<Signal<boolean>>;
+  },
 ) => {
   useOnDocument(
     'click',
     $((event) => {
-      if (ref.value) {
+      if (ref.value && options?.avoidClick.value) {
         const target = event.target as HTMLElement;
         if (!ref.value.contains(target)) {
           onClickOut();
