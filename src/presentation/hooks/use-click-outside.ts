@@ -7,6 +7,7 @@ import { $, useOnDocument } from '@builder.io/qwik';
  *
  * @param {Signal<HTMLElement | undefined>} ref - The reference to the HTMLElement or undefined.
  * @param {QRL<() => void>} onClickOut - The QRL of the function to be called when clicked outside.
+ * @param {object} options - options to expand the fuctionalities.
  */
 export const useClickOutside = (
   ref: Signal<HTMLElement | undefined>,
