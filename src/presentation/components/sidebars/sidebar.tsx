@@ -11,7 +11,6 @@ import SidebarIcons from './sidebar-icons';
 import SidebarFold from './sidebar-fold';
 import design from './panels/design';
 import shapes from './panels/shapes';
-import upload from './panels/upload';
 import text from './panels/text';
 import projects from './panels/projects';
 import images from './panels/images';
@@ -40,20 +39,18 @@ export default component$(() => {
       case 'shape':
         panel.value = shapes;
         break;
-      case 'uploadImage':
-        panel.value = upload;
-        break;
+
       case 'text':
         panel.value = text;
         break;
-      case 'projects':
-        panel.value = projects;
-        break;
-      case 'initImage':
+      case 'images':
         panel.value = images;
         break;
       case 'background':
         panel.value = background;
+        break;
+      case 'projects':
+        panel.value = projects;
         break;
       default:
         panel.value = undefined;
