@@ -28,20 +28,20 @@ export default component$(() => {
   return (
     <div class='grid grid-cols-3 gap-2'>
       <button
-        class='h-[90px] bg-gray-dark'
+        class='size-[90px] bg-gray-dark transition-colors hover:bg-gray-mid'
         onClick$={() => createShape('rect')}
       >
         <span class='sr-only'>Square</span>
       </button>
       <button
-        class='h-[90px] rounded-full bg-gray-dark'
+        class='size-[90px] rounded-full bg-gray-dark transition-colors hover:bg-gray-mid'
         onClick$={() => createShape('circle')}
       >
         <span class='sr-only'>Circle</span>
       </button>
       <button
         style={{ clipPath: 'polygon(50% 0, 100% 100%, 0 100%' }}
-        class='h-[90px] bg-gray-dark'
+        class='size-[90px] bg-gray-dark transition-colors hover:bg-gray-mid'
         onClick$={() => createShape('triangle')}
       >
         <span class='sr-only'>Triangle</span>
