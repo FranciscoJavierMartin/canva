@@ -28,9 +28,12 @@ export default component$(() => {
 
   return (
     <div class='grid grid-cols-1 gap-2'>
-      <div class='cursor-pointer rounded-md bg-gray-dark p-3 text-center text-xl font-bold text-white'>
-        <button onClick$={createText}>Add text</button>
-      </div>
+      <button
+        onClick$={createText}
+        class='rounded-md bg-gray-dark p-3 text-center text-xl font-bold text-white'
+      >
+        Add text
+      </button>
     </div>
   );
 });
