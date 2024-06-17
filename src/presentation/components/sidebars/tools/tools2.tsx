@@ -25,24 +25,48 @@ export default component$<ToolsProps>(() => {
         <button class='button col-span-2 bg-slate-600 px-3'>
           Remove background
         </button>
-        <span>Opacity</span>
+        <span class='self-center'>Opacity</span>
         <input type='range' min={0.1} step={0.05} max={1} />
-        <span>Z index</span>
+        <span class='self-center'>Z index</span>
         <input
           type='number'
           step={1}
           min={0}
           max={9999}
-          class='remove-input-number-indicator'
+          class='remove-input-number-indicator input-sidebar'
         />
-        <span>Radius</span>
-        <input type='number' step={1} min={0} max={100} />
-        <span>Padding</span>
-        <input type='number' step={1} min={0} max={100} />
-        <span>Font size</span>
-        <input type='number' step={1} min={1} max={72} />
-        <span>Font weight</span>
-        <input type='number' step={100} min={100} max={900} />
+        <span class='self-center'>Radius</span>
+        <input
+          type='number'
+          step={1}
+          min={0}
+          max={100}
+          class='remove-input-number-indicator input-sidebar'
+        />
+        <span class='self-center'>Padding</span>
+        <input
+          type='number'
+          step={1}
+          min={0}
+          max={100}
+          class='remove-input-number-indicator input-sidebar'
+        />
+        <span class='self-center'>Font size</span>
+        <input
+          type='number'
+          step={1}
+          min={1}
+          max={72}
+          class='remove-input-number-indicator input-sidebar'
+        />
+        <span class='self-center'>Font weight</span>
+        <input
+          type='number'
+          step={100}
+          min={100}
+          max={900}
+          class='remove-input-number-indicator input-sidebar'
+        />
         <textarea class='col-span-2 mt-2 w-full rounded-md' rows={10} />
       </div>
     </aside>

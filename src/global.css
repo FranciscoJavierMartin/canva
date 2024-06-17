@@ -10,6 +10,10 @@
   .button {
     @apply rounded-md py-2 text-center font-medium text-white transition-all;
   }
+
+  .input-sidebar {
+    @apply w-full rounded-md border border-[#404040] bg-transparent px-2 py-1 text-right outline-none placeholder:text-left;
+  }
 }
 
 @layer utilities {
