@@ -39,7 +39,7 @@ export default component$<ToolsProps>(() => {
           step={1}
           min={0}
           max={9999}
-          class='remove-input-number-indicator input-sidebar'
+          class='remove-input-number-indicator input-numeric-sidebar'
         />
         <span class='self-center'>Radius</span>
         <input
@@ -47,7 +47,7 @@ export default component$<ToolsProps>(() => {
           step={1}
           min={0}
           max={100}
-          class='remove-input-number-indicator input-sidebar'
+          class='remove-input-number-indicator input-numeric-sidebar'
         />
         <span class='self-center'>Padding</span>
         <input
@@ -55,7 +55,7 @@ export default component$<ToolsProps>(() => {
           step={1}
           min={0}
           max={100}
-          class='remove-input-number-indicator input-sidebar'
+          class='remove-input-number-indicator input-numeric-sidebar'
         />
         <span class='self-center'>Font size</span>
         <input
@@ -63,7 +63,7 @@ export default component$<ToolsProps>(() => {
           step={1}
           min={1}
           max={72}
-          class='remove-input-number-indicator input-sidebar'
+          class='remove-input-number-indicator input-numeric-sidebar'
         />
         <span class='self-center'>Font weight</span>
         <input
@@ -71,7 +71,7 @@ export default component$<ToolsProps>(() => {
           step={100}
           min={100}
           max={900}
-          class='remove-input-number-indicator input-sidebar'
+          class='remove-input-number-indicator input-range'
           value={value.value}
           onChange$={(event: Event, element: HTMLInputElement) => {
             value.value = parseInt(element.value);
