@@ -20,6 +20,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "files": ["./.eslintrc.cjs"],
+  "files": ["./.eslintrc.cjs", "./commitlint.config.cjs"],
   "include": ["src", "./*.d.ts", "./*.config.ts"]
 }
