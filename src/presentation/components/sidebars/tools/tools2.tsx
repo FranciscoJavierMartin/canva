@@ -70,7 +70,7 @@ export default component$<ToolsProps>(() => {
         <textarea
           rows={1}
           placeholder='Enter text here...'
-          class='col-span-2 max-h-36 w-full rounded-md border border-[#404040] bg-transparent px-2 py-2 text-sm outline-none'
+          class='no-scrollbar col-span-2 max-h-44 w-full rounded-md border border-[#404040] bg-transparent px-2 py-2 text-sm outline-none'
           onInput$={(event: Event, element: HTMLTextAreaElement) => {
             element.style.height = `${element.scrollHeight}px`;
             // canvaContext.componentData.zIndex = parseInt(element.value);
