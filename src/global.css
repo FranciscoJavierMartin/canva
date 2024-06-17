@@ -32,9 +32,9 @@
       @apply -mt-1.5 size-4 appearance-none rounded-2xl bg-blue-700;
     }
 
-    &:focus::-webkit-slider-thumb {
-      outline: 3px solid theme('colors.blue.700');
-      outline-offset: 0.125rem;
+    &:focus::-webkit-slider-thumb,
+    &:hover::-webkit-slider-thumb {
+      @apply outline outline-2 outline-offset-2 outline-blue-500;
     }
 
     /*********** Firefox styles ***********/
@@ -49,9 +49,9 @@
       @apply -mt-1.5 size-4 appearance-none rounded-2xl bg-blue-700;
     }
 
-    &:focus::-moz-range-thumb {
-      outline: 3px solid theme('colors.blue.700');
-      outline-offset: 0.125rem;
+    &:focus::-moz-range-thumb,
+    &:hover::-moz-range-thumb {
+      @apply outline outline-2 outline-offset-2 outline-blue-500;
     }
   }
 }
