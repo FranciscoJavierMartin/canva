@@ -1,7 +1,7 @@
 import { $, component$ } from '@builder.io/qwik';
 import Navbar from '@/presentation/ui/Navbar';
 import Sidebar from '@/presentation/components/sidebars/sidebar';
-import Tools from '@/presentation/components/sidebars/tools/tools';
+import Tools from '@/presentation/components/sidebars/tools/tools2';
 import MainCanva from '@/presentation/components/main-canva/main-canva';
 import CanvaProvider from '@/presentation/providers/canva-provider';
 import html2canvas from 'html2canvas';

@@ -71,6 +71,9 @@ export default component$(() => {
     },
   );
 
+  // TODO: Remove before merge
+  setCurrentComponentId(Object.keys(components)[0]);
+
   const currentComponent = useComputed$<ComponentInfo | undefined>(
     () => components[currentComponentId.value],
   );
