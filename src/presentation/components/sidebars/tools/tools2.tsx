@@ -13,8 +13,8 @@ export default component$<ToolsProps>(() => {
         'absolute right-0 z-10 h-full w-[250px] translate-x-0 bg-black-light text-gray-300 transition-transform duration-300',
       ]}
     >
-      <div class='mt-4 grid grid-cols-2 justify-start gap-y-4 px-3'>
-        <span>Color</span>
+      <div class='mt-4 grid grid-cols-[auto_1fr] justify-start gap-x-3 gap-y-4 px-3'>
+        <span class='self-center'>Color</span>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label
           for='color-input'
@@ -43,7 +43,7 @@ export default component$<ToolsProps>(() => {
         <input type='number' step={1} min={1} max={72} />
         <span>Font weight</span>
         <input type='number' step={100} min={100} max={900} />
-        <textarea class='col-span-2 mt-3 w-full rounded-md' rows={10} />
+        <textarea class='col-span-2 mt-2 w-full rounded-md' rows={10} />
       </div>
     </aside>
   );
