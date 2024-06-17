@@ -26,6 +26,7 @@ export default {
           dark: '#4c76cf',
           steel: '#34569f',
           off: '#32769ead',
+          light: '#1678c2',
         },
       },
     },

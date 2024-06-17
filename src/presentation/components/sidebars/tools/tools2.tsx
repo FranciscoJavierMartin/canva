@@ -32,7 +32,7 @@ export default component$<ToolsProps>(() => {
           Remove background
         </button>
         <span class='self-center'>Opacity</span>
-        <input type='range' min={0.1} step={0.05} max={1} />
+        <input type='range' min={0.1} step={0.05} max={1} class='input-range' />
         <span class='self-center'>Z index</span>
         <input
           type='number'
