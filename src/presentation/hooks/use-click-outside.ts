@@ -19,7 +19,7 @@ export const useClickOutside = (
   useOnDocument(
     'click',
     $((event) => {
-      if (ref.value && options?.avoidClick.value) {
+      if (ref.value && (!options || options.avoidClick.value)) {
         const target = event.target as HTMLElement;
         if (!ref.value.contains(target)) {
           onClickOut();
