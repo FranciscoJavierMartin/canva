@@ -1,4 +1,9 @@
-import { component$, useComputed$, useContext } from '@builder.io/qwik';
+import {
+  component$,
+  useComputed$,
+  useContext,
+  useSignal,
+} from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 
 type ToolsProps = {};
@@ -6,6 +11,7 @@ type ToolsProps = {};
 export default component$<ToolsProps>(() => {
   const canvaContext = useContext(CanvaContext);
   const isOpen = useComputed$(() => !!canvaContext.currentComponent.value);
+  const value = useSignal<number>(100);
 
   return (
     <aside
@@ -61,11 +67,15 @@ export default component$<ToolsProps>(() => {
         />
         <span class='self-center'>Font weight</span>
         <input
-          type='number'
+          type='range'
           step={100}
           min={100}
           max={900}
           class='remove-input-number-indicator input-sidebar'
+          value={value.value}
+          onChange$={(event: Event, element: HTMLInputElement) => {
+            value.value = parseInt(element.value);
+          }}
         />
         <textarea
           rows={1}
