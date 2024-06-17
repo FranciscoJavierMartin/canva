@@ -23,9 +23,7 @@
     /******** Chrome, Safari, Opera and Edge Chromium styles ********/
     /* slider track */
     &::-webkit-slider-runnable-track {
-      background-color: theme('colors.blue.400');
-      border-radius: 0.5rem;
-      height: 0.25rem;
+      @apply h-1 rounded-lg bg-blue-400;
     }
 
     /* slider thumb */
@@ -47,9 +45,7 @@
     /*********** Firefox styles ***********/
     /* slider track */
     &::-moz-range-track {
-      background-color: theme('colors.blue.400');
-      border-radius: 0.5rem;
-      height: 0.25rem;
+      @apply h-1 rounded-lg bg-blue-400;
     }
 
     /* slider thumb */
