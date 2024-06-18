@@ -5,6 +5,7 @@ import {
   useSignal,
 } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
+import InputSlider from './input-slider';
 
 type ToolsProps = {};
 
@@ -31,14 +32,7 @@ export default component$<ToolsProps>(() => {
         <button class='button col-span-2 bg-slate-600 px-3'>
           Remove background
         </button>
-        <span class='self-center text-sm'>Opacity</span>
-        <input
-          type='range'
-          min={0.1}
-          step={0.05}
-          max={1}
-          class='input-range self-center'
-        />
+        <InputSlider />
         <span class='self-center'>Z index</span>
         <input
           type='number'
