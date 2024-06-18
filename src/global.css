@@ -19,26 +19,22 @@
     /* === css variables === */
     --thumb-height: 1em;
     --track-height: 0.125em;
-    --track-color: rgba(0, 0, 0, 0.2);
-    --brightness-hover: 180%;
+    --track-color: rgba(250, 250, 250, 0.9);
+    --brightness-hover: 120%;
     --brightness-down: 80%;
     --clip-edges: 0.125em;
 
     /* === range commons === */
 
-    @apply relative overflow-hidden bg-transparent text-blue-700 active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-30 disabled:grayscale;
+    -webkit-appearance: none;
+    @apply relative h-[var(--thumb-height)] overflow-hidden bg-transparent text-blue-500 transition-all active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-30 disabled:grayscale;
 
     /* === WebKit specific styles === */
-    &,
+
     &::-webkit-slider-runnable-track,
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
-      @apply h-[var(--thumb-height)] transition-all;
-    }
-
-    &::-webkit-slider-runnable-track,
-    &::-webkit-slider-thumb {
-      position: relative;
+      @apply relative h-[var(--thumb-height)] transition-all;
     }
 
     &::-webkit-slider-thumb {
@@ -102,7 +98,7 @@
     &::-moz-range-track,
     &::-moz-range-thumb,
     &::-moz-range-progress {
-      background: #fff0;
+      background: transparent;
     }
 
     &::-moz-range-thumb {
