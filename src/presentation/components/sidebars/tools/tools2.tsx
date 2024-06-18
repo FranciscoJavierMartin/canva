@@ -32,41 +32,62 @@ export default component$<ToolsProps>(() => {
         <button class='button col-span-2 bg-slate-600 px-3'>
           Remove background
         </button>
+        <span class='self-center text-sm'>Opacity</span>
         <InputSlider />
-        <span class='self-center'>Z index</span>
+        <label for='z-index-input' class='self-center text-sm'>
+          Z index
+        </label>
         <input
+          id='z-index-input'
+          name='z-index-input'
           type='number'
           step={1}
           min={0}
           max={9999}
           class='remove-input-number-indicator input-numeric-sidebar'
         />
-        <span class='self-center'>Radius</span>
+        <label for='radius-input' class='self-center text-sm'>
+          Radius
+        </label>
         <input
+          id='radius-input'
+          name='radius-input'
           type='number'
           step={1}
           min={0}
           max={100}
           class='remove-input-number-indicator input-numeric-sidebar'
         />
-        <span class='self-center'>Padding</span>
+        <label for='padding-input' class='self-center text-sm'>
+          Padding
+        </label>
         <input
+          id='padding-input'
+          name='padding-input'
           type='number'
           step={1}
           min={0}
           max={100}
           class='remove-input-number-indicator input-numeric-sidebar'
         />
-        <span class='self-center'>Font size</span>
+        <label for='font-size-input' class='self-center text-sm'>
+          Font size
+        </label>
         <input
+          id='font-size-input'
+          name='font-size-input'
           type='number'
           step={1}
           min={1}
           max={72}
           class='remove-input-number-indicator input-numeric-sidebar'
         />
-        <span class='self-center'>Font weight</span>
+        <label for='font-weight-input' class='self-center'>
+          Font weight
+        </label>
         <input
+          id='font-weight-input'
+          name='font-weight-input'
           type='range'
           step={100}
           min={100}
