@@ -25,7 +25,6 @@
     --clip-edges: 0.125em;
 
     /* === range commons === */
-
     position: relative;
     background: transparent;
     overflow: hidden;
@@ -96,7 +95,7 @@
 
     &::-webkit-slider-runnable-track {
       background: linear-gradient(var(--track-color) 0 0) scroll no-repeat
-        center / 100% calc(var(--track-height) + 1px);
+        center / 100% calc(var(--track-height) + 0px);
     }
 
     &:disabled::-webkit-slider-thumb {

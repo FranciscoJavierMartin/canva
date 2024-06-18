@@ -31,7 +31,7 @@ export default component$<ToolsProps>(() => {
         <button class='button col-span-2 bg-slate-600 px-3'>
           Remove background
         </button>
-        <span class='self-center'>Opacity</span>
+        <span class='self-center text-sm'>Opacity</span>
         <input
           type='range'
           min={0.1}
