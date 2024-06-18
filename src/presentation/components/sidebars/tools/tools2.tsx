@@ -49,75 +49,87 @@ export default component$<ToolsProps>(() => {
               Remove background
             </button>
           )}
-          <span class='self-center text-sm'>Opacity</span>
-          <InputSlider />
-          <label for='z-index-input' class='self-center text-sm'>
-            Z index
-          </label>
-          <input
-            id='z-index-input'
-            type='number'
-            step={1}
-            min={0}
-            max={9999}
-            class='remove-input-number-indicator input-numeric-sidebar'
-          />
-          <label for='radius-input' class='self-center text-sm'>
-            Radius
-          </label>
-          <input
-            id='radius-input'
-            name='radius-input'
-            type='number'
-            step={1}
-            min={0}
-            max={100}
-            class='remove-input-number-indicator input-numeric-sidebar'
-          />
-          <label for='padding-input' class='self-center text-sm'>
-            Padding
-          </label>
-          <input
-            id='padding-input'
-            name='padding-input'
-            type='number'
-            step={1}
-            min={0}
-            max={100}
-            class='remove-input-number-indicator input-numeric-sidebar'
-          />
-          <label for='font-size-input' class='self-center text-sm'>
-            Font size
-          </label>
-          <input
-            id='font-size-input'
-            name='font-size-input'
-            type='number'
-            step={1}
-            min={1}
-            max={72}
-            class='remove-input-number-indicator input-numeric-sidebar'
-          />
-          <label for='font-weight-input' class='self-center'>
-            Font weight
-          </label>
-          <input
-            id='font-weight-input'
-            name='font-weight-input'
-            type='range'
-            step={100}
-            min={100}
-            max={900}
-            class='remove-input-number-indicator input-range'
-          />
-          <textarea
-            rows={1}
-            placeholder='Enter text here...'
-            class='no-scrollbar col-span-2 max-h-44 w-full rounded-md border border-[#404040] bg-transparent px-2 py-2 text-sm outline-none'
-            onInput$={(event: Event, element: HTMLTextAreaElement) => {
-              element.style.height = `${element.scrollHeight}px`;
-            }}
-          />
+          {canvaContext.currentComponent.value.name !== 'main_frame' && (
+            <>
+              <span class='self-center text-sm'>Opacity</span>
+              <InputSlider />
+              <label for='z-index-input' class='self-center text-sm'>
+                Z index
+              </label>
+              <input
+                id='z-index-input'
+                type='number'
+                step={1}
+                min={0}
+                max={9999}
+                class='remove-input-number-indicator input-numeric-sidebar'
+              />
+              {canvaContext.currentComponent.value.name === 'image' && (
+                <>
+                  <label for='radius-input' class='self-center text-sm'>
+                    Radius
+                  </label>
+                  <input
+                    id='radius-input'
+                    name='radius-input'
+                    type='number'
+                    step={1}
+                    min={0}
+                    max={100}
+                    class='remove-input-number-indicator input-numeric-sidebar'
+                  />
+                </>
+              )}
+              {canvaContext.currentComponent.value.name === 'text' && (
+                <>
+                  <label for='padding-input' class='self-center text-sm'>
+                    Padding
+                  </label>
+                  <input
+                    id='padding-input'
+                    name='padding-input'
+                    type='number'
+                    step={1}
+                    min={0}
+                    max={100}
+                    class='remove-input-number-indicator input-numeric-sidebar'
+                  />
+                  <label for='font-size-input' class='self-center text-sm'>
+                    Font size
+                  </label>
+                  <input
+                    id='font-size-input'
+                    name='font-size-input'
+                    type='number'
+                    step={1}
+                    min={1}
+                    max={72}
+                    class='remove-input-number-indicator input-numeric-sidebar'
+                  />
+                  <label for='font-weight-input' class='self-center'>
+                    Font weight
+                  </label>
+                  <input
+                    id='font-weight-input'
+                    name='font-weight-input'
+                    type='range'
+                    step={100}
+                    min={100}
+                    max={900}
+                    class='remove-input-number-indicator input-range'
+                  />
+                  <textarea
+                    rows={1}
+                    placeholder='Enter text here...'
+                    class='no-scrollbar col-span-2 max-h-44 w-full rounded-md border border-[#404040] bg-transparent px-2 py-2 text-sm outline-none'
+                    onInput$={(event: Event, element: HTMLTextAreaElement) => {
+                      element.style.height = `${element.scrollHeight}px`;
+                    }}
+                  />
+                </>
+              )}
+            </>
+          )}
         </div>
       )}
     </aside>
