@@ -122,6 +122,12 @@ export default component$<ToolsProps>(() => {
                     min={1}
                     max={72}
                     class='remove-input-number-indicator input-numeric-sidebar'
+                    value={canvaContext.currentComponent.value.fontSize}
+                    onChange$={(event: Event, element: HTMLInputElement) => {
+                      canvaContext.textComponentData.fontSize = parseInt(
+                        element.value,
+                      );
+                    }}
                   />
                   <label for='font-weight-input' class='self-center'>
                     Font weight
