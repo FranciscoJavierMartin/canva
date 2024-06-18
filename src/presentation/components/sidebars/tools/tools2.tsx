@@ -66,6 +66,10 @@ export default component$<ToolsProps>(() => {
                 min={0}
                 max={9999}
                 class='remove-input-number-indicator input-numeric-sidebar'
+                value={canvaContext.currentComponent.value.zIndex}
+                onChange$={(event: Event, element: HTMLInputElement) => {
+                  canvaContext.componentData.zIndex = parseInt(element.value);
+                }}
               />
               {canvaContext.currentComponent.value.name === 'image' && (
                 <>
