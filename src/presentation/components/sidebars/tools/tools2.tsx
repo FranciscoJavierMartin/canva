@@ -140,6 +140,12 @@ export default component$<ToolsProps>(() => {
                     min={100}
                     max={900}
                     class='remove-input-number-indicator input-range'
+                    value={canvaContext.currentComponent.value.fontWeight}
+                    onChange$={(event: Event, element: HTMLInputElement) => {
+                      canvaContext.textComponentData.fontWeight = parseInt(
+                        element.value,
+                      );
+                    }}
                   />
                   <textarea
                     rows={1}
