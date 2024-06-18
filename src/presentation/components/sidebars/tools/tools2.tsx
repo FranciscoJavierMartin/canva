@@ -78,7 +78,6 @@ export default component$<ToolsProps>(() => {
                   </label>
                   <input
                     id='radius-input'
-                    name='radius-input'
                     type='number'
                     step={1}
                     min={0}
@@ -100,12 +99,17 @@ export default component$<ToolsProps>(() => {
                   </label>
                   <input
                     id='padding-input'
-                    name='padding-input'
                     type='number'
                     step={1}
                     min={0}
                     max={100}
                     class='remove-input-number-indicator input-numeric-sidebar'
+                    value={canvaContext.currentComponent.value.padding}
+                    onChange$={(event: Event, element: HTMLInputElement) => {
+                      canvaContext.textComponentData.padding = parseInt(
+                        element.value,
+                      );
+                    }}
                   />
                   <label for='font-size-input' class='self-center text-sm'>
                     Font size
