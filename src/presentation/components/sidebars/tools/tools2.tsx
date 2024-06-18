@@ -151,7 +151,9 @@ export default component$<ToolsProps>(() => {
                     rows={1}
                     placeholder='Enter text here...'
                     class='no-scrollbar col-span-2 max-h-44 w-full rounded-md border border-[#404040] bg-transparent px-2 py-2 text-sm outline-none'
+                    value={canvaContext.currentComponent.value.text}
                     onInput$={(event: Event, element: HTMLTextAreaElement) => {
+                      canvaContext.textComponentData.text = element.value;
                       element.style.height = `${element.scrollHeight}px`;
                     }}
                   />
