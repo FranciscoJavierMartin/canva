@@ -44,9 +44,11 @@ export default component$<ToolsProps>(() => {
               }}
             />
           </label>
-          <button class='button col-span-2 bg-slate-600 px-3'>
-            Remove background
-          </button>
+          {canvaContext.currentComponent.value.name === 'main_frame' && (
+            <button class='button col-span-2 bg-slate-600 px-3'>
+              Remove background
+            </button>
+          )}
           <span class='self-center text-sm'>Opacity</span>
           <InputSlider />
           <label for='z-index-input' class='self-center text-sm'>
