@@ -16,46 +16,24 @@
   }
 
   .input-range {
-    /* === range theme and appearance === */
-
-    color: #ef233c;
-    --thumb-height: 1.125em;
+    /* === css variables === */
+    --thumb-height: 1em;
     --track-height: 0.125em;
     --track-color: rgba(0, 0, 0, 0.2);
     --brightness-hover: 180%;
     --brightness-down: 80%;
     --clip-edges: 0.125em;
 
-    @media (prefers-color-scheme: dark) {
-      & {
-        color: #f07167;
-        --track-color: rgba(255, 255, 255, 0.1);
-      }
-    }
-
     /* === range commons === */
 
-    position: relative;
-    background: #fff0;
-    overflow: hidden;
-
-    &:active {
-      cursor: grabbing;
-    }
-
-    &:disabled {
-      filter: grayscale(1);
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
+    @apply relative overflow-hidden bg-transparent text-blue-700 active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-30 disabled:grayscale;
 
     /* === WebKit specific styles === */
     &,
     &::-webkit-slider-runnable-track,
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
-      transition: all ease 100ms;
-      height: var(--thumb-height);
+      @apply h-[var(--thumb-height)] transition-all;
     }
 
     &::-webkit-slider-runnable-track,
