@@ -12,7 +12,7 @@ export default component$<ToolsProps>(() => {
   const canvaContext = useContext(CanvaContext);
   const isOpen = useComputed$(() => !!canvaContext.currentComponent.value);
   const value = useSignal<number>(100);
-
+  // TODO: Use label instead of span
   return (
     <aside
       class={[
@@ -32,7 +32,13 @@ export default component$<ToolsProps>(() => {
           Remove background
         </button>
         <span class='self-center'>Opacity</span>
-        <input type='range' min={0.1} step={0.05} max={1} class='input-range' />
+        <input
+          type='range'
+          min={0.1}
+          step={0.05}
+          max={1}
+          class='input-range self-center'
+        />
         <span class='self-center'>Z index</span>
         <input
           type='number'
