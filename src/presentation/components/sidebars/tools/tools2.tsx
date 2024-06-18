@@ -84,6 +84,12 @@ export default component$<ToolsProps>(() => {
                     min={0}
                     max={100}
                     class='remove-input-number-indicator input-numeric-sidebar'
+                    value={canvaContext.currentComponent.value.radius}
+                    onChange$={(event: Event, element: HTMLInputElement) => {
+                      canvaContext.componentData.radius = parseInt(
+                        element.value,
+                      );
+                    }}
                   />
                 </>
               )}
