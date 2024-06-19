@@ -63,7 +63,6 @@ export default component$<ToolsProps>(() => {
                 step={0.1}
                 max={1}
                 value={canvaContext.currentComponent.value.opacity}
-                class='input-range peer w-full'
                 onInput$={(event: Event, element: HTMLInputElement) => {
                   canvaContext.componentData.opacity = parseFloat(
                     element.value,
@@ -146,14 +145,11 @@ export default component$<ToolsProps>(() => {
                   <label for='font-weight-input' class='self-center'>
                     Font weight
                   </label>
-                  <input
+                  <InputSlider
                     id='font-weight-input'
-                    name='font-weight-input'
-                    type='range'
                     step={100}
                     min={100}
                     max={900}
-                    class='remove-input-number-indicator input-range'
                     value={canvaContext.currentComponent.value.fontWeight}
                     onInput$={(event: Event, element: HTMLInputElement) => {
                       canvaContext.textComponentData.fontWeight = parseInt(
