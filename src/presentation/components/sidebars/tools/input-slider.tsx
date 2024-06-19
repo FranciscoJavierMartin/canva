@@ -24,12 +24,11 @@ export default component$<InputSliderProps>(({ ...props }) => {
         class='input-range peer w-full'
         onInput$={(event: Event, element: HTMLInputElement) => {
           canvaContext.componentData.opacity = parseFloat(element.value);
-          console.log(bubbleRef.value?.clientWidth);
         }}
       />
       <output
         ref={bubbleRef}
-        class='absolute -top-10 block w-8 bg-white p-1 text-center text-black peer-hover:block peer-active:block'
+        class='absolute -top-8 hidden w-8 justify-center rounded-md bg-white px-2 text-center text-black peer-hover:flex peer-active:flex'
         style={{
           left: `calc(${canvaContext.currentComponent.value.opacity * 100}% - 25px)`,
         }}
@@ -39,36 +38,3 @@ export default component$<InputSliderProps>(({ ...props }) => {
     </div>
   ) : null;
 });
-
-{
-  /* <div class='relative'>
-      <input
-        type='range'
-        min={0.1}
-        step={0.05}
-        max={1}
-        class='input-range peer self-center'
-        value={canvaContext.componentData.opacity}
-        onChange$={(event: Event, element: HTMLInputElement) => {
-          console.log(parseFloat(element.value));
-          canvaContext.componentData.opacity = parseFloat(element.value);
-
-          if (bubbleRef.value) {
-            const val = parseFloat(element.value || '0');
-            const min = parseFloat(element.min || '0');
-            const max = parseFloat(element.max || '100');
-            const range = max - min;
-            const position = ((val - min) / range) * 100;
-            const positionOffset = Math.round((20 * position) / 100) - 20 / 2;
-            bubbleRef.value.style.left = `calc(${position}% - ${positionOffset}px)`;
-          }
-        }}
-      />
-      <output
-        ref={bubbleRef}
-        class='absolute -top-8 hidden h-6 w-12 rounded bg-white text-center text-black peer-hover:block peer-hover:-translate-x-1/2 peer-active:block peer-active:-translate-x-1/2'
-      >
-        50
-      </output>
-    </div> */
-}
