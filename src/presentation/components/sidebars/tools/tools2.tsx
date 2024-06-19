@@ -55,7 +55,18 @@ export default component$<ToolsProps>(() => {
           {canvaContext.currentComponent.value.name !== 'main_frame' && (
             <>
               <span class='self-center text-sm'>Opacity</span>
-              <InputSlider />
+              <InputSlider
+                min={0.1}
+                step={0.1}
+                max={1}
+                value={canvaContext.currentComponent.value.opacity}
+                class='input-range peer w-full'
+                onInput$={(event: Event, element: HTMLInputElement) => {
+                  canvaContext.componentData.opacity = parseFloat(
+                    element.value,
+                  );
+                }}
+              />
               <label for='z-index-input' class='self-center text-sm'>
                 Z index
               </label>
