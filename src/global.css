@@ -25,18 +25,10 @@
     --clip-edges: 0.125em;
 
     /* === range commons === */
-    position: relative;
-    background: transparent;
-    overflow: hidden;
-
-    &:active {
-      cursor: grabbing;
-    }
+    @apply relative overflow-hidden bg-transparent active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-30;
 
     &:disabled {
       filter: grayscale(1);
-      opacity: 0.3;
-      cursor: not-allowed;
     }
 
     /* === WebKit specific styles === */
