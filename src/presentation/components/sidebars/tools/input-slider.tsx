@@ -1,23 +1,47 @@
-import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import {
-  type QwikIntrinsicElements,
   component$,
   useSignal,
   useContext,
+  type PropsOf,
 } from '@builder.io/qwik';
+import { CanvaContext } from '@/presentation/contexts/canva/canva';
 
-type InputSliderProps = Partial<
-  Omit<QwikIntrinsicElements['input'], 'type'> & {
-    type: 'range';
-  }
->;
+type InputSliderProps = Partial<PropsOf<'input'> & { type: 'range' }>;
 
-export default component$<InputSliderProps>(({ ...props }) => {
+export default component$<InputSliderProps>(({ type = 'range', ...props }) => {
   const bubbleRef = useSignal<HTMLOutputElement>();
   const canvaContext = useContext(CanvaContext);
 
-  return (
-    <div class='relative'>
+  return canvaContext.currentComponent.value &&
+    canvaContext.currentComponent.value.name !== 'main_frame' ? (
+    <div class='relative flex justify-center self-center'>
+      <input
+        type={type}
+        {...props}
+        min={0.1}
+        step={0.1}
+        max={1}
+        value={canvaContext.currentComponent.value.opacity}
+        class='input-range peer w-full'
+        onInput$={(event: Event, element: HTMLInputElement) => {
+          canvaContext.componentData.opacity = parseFloat(element.value);
+        }}
+      />
+      <output
+        ref={bubbleRef}
+        class='absolute -top-8 hidden text-center peer-hover:block peer-active:block'
+        style={{
+          left: `calc(${canvaContext.currentComponent.value.opacity * 100}% - 20px)`,
+        }}
+      >
+        {canvaContext.currentComponent.value.opacity}
+      </output>
+    </div>
+  ) : null;
+});
+
+{
+  /* <div class='relative'>
       <input
         type='range'
         min={0.1}
@@ -46,6 +70,5 @@ export default component$<InputSliderProps>(({ ...props }) => {
       >
         50
       </output>
-    </div>
-  );
-});
+    </div> */
+}

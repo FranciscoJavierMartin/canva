@@ -55,21 +55,7 @@ export default component$<ToolsProps>(() => {
           {canvaContext.currentComponent.value.name !== 'main_frame' && (
             <>
               <span class='self-center text-sm'>Opacity</span>
-              <div class='self-center'>
-                <input
-                  type='range'
-                  min={0.1}
-                  step={0.1}
-                  max={1}
-                  value={canvaContext.currentComponent.value.opacity}
-                  class='input-range peer w-full'
-                  onChange$={(event: Event, element: HTMLInputElement) => {
-                    canvaContext.componentData.opacity = parseFloat(
-                      element.value,
-                    );
-                  }}
-                />
-              </div>
+              <InputSlider />
               <label for='z-index-input' class='self-center text-sm'>
                 Z index
               </label>
@@ -155,7 +141,7 @@ export default component$<ToolsProps>(() => {
                     max={900}
                     class='remove-input-number-indicator input-range'
                     value={canvaContext.currentComponent.value.fontWeight}
-                    onChange$={(event: Event, element: HTMLInputElement) => {
+                    onInput$={(event: Event, element: HTMLInputElement) => {
                       canvaContext.textComponentData.fontWeight = parseInt(
                         element.value,
                       );
