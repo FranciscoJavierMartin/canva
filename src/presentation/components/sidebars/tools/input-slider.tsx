@@ -29,9 +29,9 @@ export default component$<InputSliderProps>(({ ...props }) => {
       />
       <output
         ref={bubbleRef}
-        class='absolute -top-10 block bg-white p-1 text-center text-black peer-hover:block peer-active:block'
+        class='absolute -top-10 block w-8 bg-white p-1 text-center text-black peer-hover:block peer-active:block'
         style={{
-          left: `calc(${canvaContext.currentComponent.value.opacity * 100}% - ${(bubbleRef.value?.clientWidth || 0) / 2 + 8}px)`,
+          left: `calc(${canvaContext.currentComponent.value.opacity * 100}% - 25px)`,
         }}
       >
         {canvaContext.currentComponent.value.opacity}
