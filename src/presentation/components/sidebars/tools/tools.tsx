@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { component$, useComputed$, useContext } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import InputSlider from '@/presentation/components/sidebars/tools/input-slider';
