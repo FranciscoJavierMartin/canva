@@ -53,6 +53,7 @@ export default component$(() => {
   const components = useStore<ComponentsStore>(
     () => {
       const mainId = createId();
+
       return {
         [mainId]: {
           name: 'main_frame',
