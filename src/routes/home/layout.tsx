@@ -27,6 +27,11 @@ const navLinksSidebar: NavLinkProps[] = [
     href: '/home/templates',
     Icon: LayoutIcon,
   },
+  {
+    text: 'Settings',
+    href: '/home/settings',
+    Icon: Settings,
+  },
 ];
 
 export default component$(() => {
