@@ -54,8 +54,11 @@ export default component$<ToolsProps>(() => {
           )}
           {canvaContext.currentComponent.value.name !== 'main_frame' && (
             <>
-              <span class='self-center text-sm'>Opacity</span>
+              <label for='opacity-input' class='self-center text-sm'>
+                Opacity
+              </label>
               <InputSlider
+                id='opacity-input'
                 min={0.1}
                 step={0.1}
                 max={1}
