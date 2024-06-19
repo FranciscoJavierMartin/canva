@@ -53,7 +53,6 @@ export default component$(() => {
   const components = useStore<ComponentsStore>(
     () => {
       const mainId = createId();
-      const squareId = createId();
 
       return {
         [mainId]: {
@@ -66,29 +65,12 @@ export default component$(() => {
           color: '#fff',
           image: '',
         },
-        [squareId]: {
-          id: squareId,
-          name: 'shape',
-          type: 'rect',
-          height: 200,
-          width: 200,
-          color: 'green',
-          left: 10,
-          top: 10,
-          opacity: 1,
-          rotation: 0,
-          zIndex: 10,
-          image: '',
-        },
       };
     },
     {
       deep: true,
     },
   );
-
-  // TODO: Remove before merge
-  setCurrentComponentId(Object.keys(components)[1]);
 
   const currentComponent = useComputed$<ComponentInfo | undefined>(
     () => components[currentComponentId.value],
