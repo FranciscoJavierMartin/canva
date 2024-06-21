@@ -60,3 +60,5 @@ export interface ImageInfo extends BaseComponent {
 }
 
 export type ComponentInfo = MainFrameInfo | ShapeInfo | TextInfo | ImageInfo;
+
+export type ShapeType = 'rect' | 'circle' | 'triangle';

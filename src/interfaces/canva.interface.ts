@@ -1,5 +1,8 @@
 import type { Signal, QRL } from '@builder.io/qwik';
-import type { ComponentInfo } from '@/interfaces/components.interface';
+import type {
+  ComponentInfo,
+  ShapeType,
+} from '@/interfaces/components.interface';
 
 export type CanvaContextState = {
   currentComponent: Signal<ComponentInfo | undefined>;
@@ -12,6 +15,8 @@ export type CanvaContextState = {
   rotateElement: QRL<(id: string) => void>;
   removeElement: QRL<(id: string) => void>;
   removeBackground: QRL<() => void>;
+  addImage: QRL<(imageUrl: string) => void>;
+  createShape: QRL<(shape: ShapeType) => void>;
 };
 
 export type ComponentData = {
