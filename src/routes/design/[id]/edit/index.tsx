@@ -5,7 +5,7 @@ import Tools from '@/presentation/components/sidebars/tools/tools';
 import MainCanva from '@/presentation/components/main-canva/main-canva';
 import CanvaProvider from '@/presentation/providers/canva-provider';
 import html2canvas from 'html2canvas';
-import { ThemeSwitch } from '@/presentation/ui/ThemeSwitch';
+import { ThemeSwitch } from '@/presentation/ui/theme-switch';
 
 export default component$(() => {
   const download = $(() => {

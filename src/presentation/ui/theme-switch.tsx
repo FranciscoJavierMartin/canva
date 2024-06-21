@@ -4,7 +4,7 @@ export const ThemeSwitch = component$(() => {
   return (
     <div class='flex items-center gap-3'>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label class='relative inline-block h-8 w-[52px] cursor-pointer rounded-[100px] bg-red-500'>
+      <label class='relative inline-block h-8 w-[52px] cursor-pointer rounded-[100px] bg-blue-500'>
         <input
           type='checkbox'
           id='hide-checkbox'
