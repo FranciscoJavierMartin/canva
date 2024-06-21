@@ -19,7 +19,7 @@ import background from './panels/background';
 
 export default component$(() => {
   const panel = useSignal<Component | undefined>();
-  const selectedOption = useSignal<SidebarPanelType | undefined>('design');
+  const selectedOption = useSignal<SidebarPanelType | undefined>('projects');
 
   const selectOption = $((option: SidebarPanelType): void => {
     selectedOption.value = selectedOption.value === option ? undefined : option;
