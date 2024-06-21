@@ -30,7 +30,7 @@ export default component$(() => {
     <div class='grid grid-cols-1 gap-2'>
       <button
         onClick$={createText}
-        class='rounded-md bg-gray-dark p-3 text-center text-xl font-bold text-white'
+        class='rounded-md bg-gray-mid p-3 text-center text-xl font-bold text-white dark:bg-gray-dark'
       >
         Add text
       </button>
