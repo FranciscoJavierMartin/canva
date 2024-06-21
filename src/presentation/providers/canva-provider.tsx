@@ -14,6 +14,7 @@ import type {
   ComponentInfo,
   ImageInfo,
   ShapeInfo,
+  ShapeType,
   TextInfo,
 } from '@/interfaces/components.interface';
 import type {
@@ -189,6 +190,45 @@ export default component$(() => {
     componentData.image = '';
   });
 
+  const addImage = $((imageUrl: string): void => {
+    const image: ImageInfo = {
+      id: createId(),
+      type: 'image',
+      name: 'image',
+      left: 10,
+      top: 10,
+      opacity: 1,
+      width: 200,
+      height: 150,
+      zIndex: 1,
+      rotation: 0,
+      image: imageUrl,
+      color: '#fff',
+      radius: 0,
+    };
+
+    components[image.id] = image;
+  });
+
+  const createShape = $((type: ShapeType): void => {
+    const shape: ShapeInfo = {
+      id: createId(),
+      type,
+      name: 'shape',
+      left: 10,
+      top: 10,
+      opacity: 1,
+      width: 200,
+      height: 150,
+      zIndex: 1,
+      color: '#3c3c3d',
+      rotation: 0,
+      image: '',
+    };
+
+    components[shape.id] = shape;
+  });
+
   useContextProvider<CanvaContextState>(CanvaContext, {
     currentComponent,
     componentData,
@@ -200,6 +240,8 @@ export default component$(() => {
     resizeElement,
     moveElement,
     removeBackground,
+    addImage,
+    createShape,
   });
 
   // eslint-disable-next-line qwik/no-use-visible-task

@@ -1,31 +1,9 @@
-import { $, component$, useContext } from '@builder.io/qwik';
-import { createId } from '@paralleldrive/cuid2';
+import { component$, useContext } from '@builder.io/qwik';
 import { CanvaContext } from '@/presentation/contexts/canva/canva';
 import Upload from '@/presentation/icons/upload';
-import type { ImageInfo } from '@/interfaces/components.interface';
 
 export default component$(() => {
   const canvaContext = useContext(CanvaContext);
-
-  const addImage = $((imageUrl: string): void => {
-    const image: ImageInfo = {
-      id: createId(),
-      type: 'image',
-      name: 'image',
-      left: 10,
-      top: 10,
-      opacity: 1,
-      width: 200,
-      height: 150,
-      zIndex: 1,
-      rotation: 0,
-      image: imageUrl,
-      color: '#fff',
-      radius: 0,
-    };
-
-    canvaContext.components[image.id] = image;
-  });
 
   return (
     <div>
@@ -48,7 +26,7 @@ export default component$(() => {
                 key={i}
                 class='h-[90px] w-full overflow-hidden rounded-md'
                 onClick$={() =>
-                  addImage(
+                  canvaContext.addImage(
                     'https://media.cntraveler.com/photos/56e20de2a69cef316dc99c9f/master/pass/neuschwanstein-castle-germany-cr-getty.jpg',
                   )
                 }
