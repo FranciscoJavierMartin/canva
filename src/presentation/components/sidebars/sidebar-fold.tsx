@@ -23,7 +23,7 @@ export default component$<SidebarFoldProps>(({ isOpen, closePanel }) => {
     <aside
       ref={ref}
       class={[
-        'absolute left-[85px] z-20 h-full w-[350px] bg-black-light p-5 transition-transform duration-300',
+        'absolute left-[85px] z-20 h-full w-[350px] bg-slate-100 p-5 transition-transform duration-300 dark:bg-black-light',
         {
           '-translate-x-full': !isOpen.value,
           'translate-x-0': isOpen.value,
@@ -33,7 +33,7 @@ export default component$<SidebarFoldProps>(({ isOpen, closePanel }) => {
       <button
         onClick$={closePanel}
         class={[
-          'center-elements absolute -right-2 top-[calc(50%-50px)] h-[100px] w-[15px] rounded-full bg-black-light text-slate-300 hover:text-gray-100',
+          'center-elements absolute -right-2 top-[calc(50%-50px)] h-[100px] w-[15px] rounded-full bg-slate-100 dark:bg-black-light dark:text-slate-300 dark:hover:text-gray-100',
           {
             '!hidden': !isOpen.value,
           },

@@ -5,6 +5,7 @@ import Tools from '@/presentation/components/sidebars/tools/tools';
 import MainCanva from '@/presentation/components/main-canva/main-canva';
 import CanvaProvider from '@/presentation/providers/canva-provider';
 import html2canvas from 'html2canvas';
+import { ThemeSwitch } from '@/presentation/ui/theme-switch';
 
 export default component$(() => {
   const download = $(() => {
@@ -29,9 +30,10 @@ export default component$(() => {
   });
 
   return (
-    <div class='min-w-screen h-screen bg-black'>
+    <div class='min-w-screen h-screen dark:bg-black'>
       <Navbar>
         <div class='center-elements gap-2 text-gray-200'>
+          <ThemeSwitch />
           <button class='button bg-purple-blue px-3'>Save</button>
           <button onClick$={download} class='button bg-purple-bright px-3'>
             Download
