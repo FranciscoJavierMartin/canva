@@ -51,13 +51,16 @@ export default component$<{
   selectOption: QRL<(option: SidebarPanelType) => void>;
 }>(({ selectOption, selectedOption }) => {
   return (
-    <aside class='z-30 flex h-full w-[85px] flex-col overflow-y-auto bg-black text-gray-400'>
+    <aside class='z-30 flex h-full w-[85px] flex-col overflow-y-auto bg-white shadow-md dark:bg-black dark:text-gray-400'>
       {items.map(({ title, Icon, type }) => (
         <button
           key={title}
           class={[
-            'center-elements h-[80px] flex-col gap-1 hover:text-gray-100',
-            { 'bg-black-light text-gray-200': type === selectedOption.value },
+            'center-elements h-[80px] flex-col gap-1 hover:text-gray-600 dark:hover:text-gray-100',
+            {
+              'bg-slate-100 dark:bg-black-light dark:text-gray-200':
+                type === selectedOption.value,
+            },
           ]}
           onClick$={$(() => selectOption(type))}
         >
