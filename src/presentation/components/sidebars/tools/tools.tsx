@@ -12,7 +12,7 @@ export default component$<ToolsProps>(() => {
   return (
     <aside
       class={[
-        'absolute right-0 z-10 h-full w-[250px] bg-black-light text-gray-300 transition-transform duration-300',
+        'absolute right-0 z-10 h-full w-[250px] bg-slate-100 transition-transform duration-300 dark:bg-black-light dark:text-gray-300',
         {
           'translate-x-full': !isOpen.value,
           'translate-x-0': !!isOpen.value,

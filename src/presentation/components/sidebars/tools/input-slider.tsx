@@ -27,7 +27,7 @@ export default component$<InputSliderProps>(
           class={['input-range', 'peer', 'w-full', props.class]}
         />
         <output
-          class='absolute -top-8 flex w-8 justify-center rounded-md bg-white px-2 text-center text-black peer-hover:flex peer-active:flex'
+          class='absolute -top-8 hidden w-8 justify-center rounded-md bg-white px-2 text-center text-black peer-hover:flex peer-active:flex'
           style={{
             left: left.value,
           }}
