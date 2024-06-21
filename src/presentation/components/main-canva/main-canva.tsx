@@ -6,7 +6,7 @@ export default component$(() => {
   const canvaContext = useContext(CanvaContext);
 
   return (
-    <div class='center-elements h-full w-[calc(100vw-85px)]'>
+    <div class='center-elements h-full w-[calc(100vw-85px)] bg-slate-200 dark:bg-black'>
       <main
         id='main_design'
         class='relative size-auto min-h-[500px] min-w-[650px] overflow-hidden'
