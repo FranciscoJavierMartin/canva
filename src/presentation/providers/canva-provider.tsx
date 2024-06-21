@@ -103,8 +103,8 @@ export default component$(() => {
       componentData.top = parseInt(currentDiv?.style.top || '0');
     }
 
-    window.addEventListener('mousemove', mouseMove);
-    window.addEventListener('mouseup', mouseUp);
+    window.onmousemove = mouseMove;
+    window.onmouseup = mouseUp;
   });
 
   const resizeElement = $((id: string): void => {
@@ -133,8 +133,8 @@ export default component$(() => {
       componentData.height = parseInt(currentDiv?.style.width || '0');
     }
 
-    window.addEventListener('mousemove', mouseMove);
-    window.addEventListener('mouseup', mouseUp);
+    window.onmousemove = mouseMove;
+    window.onmouseup = mouseUp;
   });
 
   const rotateElement = $((id: string): void => {
@@ -176,8 +176,8 @@ export default component$(() => {
       componentData.rotation = angle;
     }
 
-    window.addEventListener('mousemove', mouseMove);
-    window.addEventListener('mouseup', mouseUp);
+    window.onmousemove = mouseMove;
+    window.onmouseup = mouseUp;
   });
 
   const removeElement = $((id: string): void => {
